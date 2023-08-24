@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 11:41:34 by vcornill          #+#    #+#             */
-/*   Updated: 2023/08/17 11:43:52 by vcornill         ###   ########.fr       */
+/*   Created: 2023/08/24 17:11:20 by vcornill          #+#    #+#             */
+/*   Updated: 2023/08/24 17:11:32 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include <unistd.h>
 
 void	ft_putstr(char *str)
@@ -27,38 +28,34 @@ int	ft_strcmp(char *s1, char *s2)
 
 	i = 0;
 	while (s1[i] == s2[i])
-	{
-		if (s1[i] == 0)
-			return (0);
 		i++;
-	}
-	if (s1[i] < s2[i])
-		return (-1);
-	else
-		return (1);
+	return (s1[i] - s2[i]);
 }
 
 int	main(int argc, char **argv)
 {
 	char	*temp;
-	int		comp;
+	int		i;
 
 	argc = 0;
-	while (argv[++argc])
+	while (!argc)
 	{
-		if (!argv[argc + 1])
-			break ;
-		comp = ft_strcmp(argv[argc], argv[argc + 1]);
-		if (comp > 0)
+		argc = 1;
+		i = 0;
+		while (argv[i + 1])
 		{
-			temp = argv[argc];
-			argv[argc] = argv[argc + 1];
-			argv[argc + 1] = temp;
-			argc = 0;
+			if (ft_strcmp(argv[i], argv[i + 1]) > 0)
+			{
+				temp = argv[i];
+				argv[i] = argv[i + 1];
+				argv[i + 1] = temp;
+				argc = 0;
+			}
+			i++;
 		}
 	}
-	argc = 0;
-	while (argv[++argc])
-		ft_putstr(argv[argc]);
+	i = 0;
+	while (argv[++i])
+		ft_putstr(argv[i]);
 	return (0);
 }

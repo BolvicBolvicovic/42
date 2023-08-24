@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strs_to_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vcornill <vcornill@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 11:43:11 by vcornill          #+#    #+#             */
-/*   Updated: 2023/08/22 12:49:25 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:02:30 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,27 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+char	*ft_strdup(char *src, int size)
+{
+	int		i;
+	char	*tampon;
+
+	tampon = malloc(size + 1);
+	if (!tampon)
+		return (NULL);
+	i = -1;
+	while (src[++i])
+		tampon[i] = src[i];
+	tampon[i] = '\0';
+	return (tampon);
+}
+
 struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
 	t_stock_str	*stock;
-	int			j;
 	int			i;
-	char		*buffer;
 
-	stock = malloc(sizeof(t_stock_str) * ac);
+	stock = malloc(sizeof(t_stock_str) * (ac + 1));
 	if (!stock)
 		return (NULL);
 	i = -1;
@@ -38,13 +51,8 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 	{
 		stock[i].size = ft_strlen(av[i]);
 		stock[i].str = av[i];
-		buffer = malloc(stock[i].size + 1);
-		if (!buffer)
-			return (NULL);
-		j = -1;
-		while (stock[i].str[++j])
-			buffer[j] = stock[i].str[j];
-		stock[i].copy = buffer;
+		stock[i].copy = ft_strdup(stock[i].str, stock[i].size);
 	}
+	stock[i].str = 0; 
 	return (stock);
 }
