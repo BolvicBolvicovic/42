@@ -6,7 +6,7 @@
 /*   By: vcornill <vcornill@student.42.fr>              +#+  +:+       +#+    */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 21:50:53 by vcornill            #+#    #+#           */
-/*   Updated: 2023/08/24 21:50:53 by vcornill           ###   ########.fr     */
+/*   Updated: 2023/08/25 09:43:04 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,21 @@ int	ft_cat(int argc, char **argv)
 {
 	int	i;
 	char	tab[240000];
-	int	fd[240000];
+	int	fd;
 	ssize_t	bytes_read;
 
 	i = 0;
 	while (++i < argc)
 	{
-		fd[i - 1] = open(argv[i], O_RDONLY);
-		if (fd[i - 1] == -1)
-		{
-			write(2, "Cannot read file.\n", 18);
-			return (1);
+                fd = open(argv[i], O_RDONLY);
+                if (fd == -1)
+                {
+                        write(2, "Cannot read file.\n", 18);
+                        return (1);
 		}
-	}
-	i = 0;
-	while (++i < argc)
-	{
-		while ((bytes_read = read(fd[i - 1], tab, sizeof(tab))) > 0)
+		while ((bytes_read = read(fd, tab, sizeof(tab))) > 0)
 			write(1, tab, bytes_read);
-		close(fd[i - 1]);
+		close(fd);
 		write(1, "\n", 1);
 	}
 	return (0);
