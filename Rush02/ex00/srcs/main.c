@@ -14,18 +14,22 @@
 
 int	main(int argc, char **argv)
 {
+	int	counter_rows;
+
 	if (argc == 2)
 	{
 		if (error(argv[1]))
 			return (1);
-		if (algo("numbers.dict", argv[1]))
+		counter_rows = count_rows(read_dict("numbers.dict"));
+		if (algo("numbers.dict", argv[1], counter_rows))
 			return (1);
 	}
 	else if (argc == 3)
 	{
 		if (error(argv[2]))
 			return (1);
-		if (algo(argv[1], argv[2]))
+		counter_rows = count_rows(read_dict(argv[1]));
+		if (algo(argv[1], argv[2], counter_rows))
 			return (1);
 	}
 	else

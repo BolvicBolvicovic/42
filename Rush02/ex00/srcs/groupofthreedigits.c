@@ -48,25 +48,25 @@ void	third_digit(char **dict, char digit, int counter_rows)
 	write(1, " ", 1);
 }
 
-void	bignum(char **dict, int counter_rows, int max, int i)
+void	last_second_digit(char **dict, char *digits, int counter_rows)
 {
-	char	num[15];
-	int		o;
-	int		j;
+	char	buffer[3];
 
-	o = 0;
-	j = 1;
-	while (++o <= max - i)
-	{
-		num[0] = '1';
-		num[j++] = '0';
-		num[j++] = '0';
-		num[j++] = '0';
-		num[j] = '\0';
-	}
-	if (i != max)
-	{
-		read_words(ft_strstr(dict, counter_rows, num));
-		write(1, " ", 1);
-	}
+	buffer[0] = digits[1];
+	if (buffer[0] == '1')
+		buffer[1] = digits[2];
+	else
+		buffer[1] = '0';
+	buffer[2] = '\0';
+	read_words(ft_strstr(dict, counter_rows, buffer));
+}
+
+void	last_digit(char **dict, char digit, int counter_rows)
+{
+	char	buffer[3];
+
+	buffer[0] = digit;
+	buffer[1] = '\0';
+	write(1, " ", 1);
+	read_words(ft_strstr(dict, counter_rows, buffer));
 }

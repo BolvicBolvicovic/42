@@ -12,23 +12,48 @@
 
 #include "ourlib.h"
 
-char	*ft_strstr(char **str_array, int arr_len, char *to_find)
+void	bignum(char **dict, int counter_rows, int max, int i)
+{
+	char	num[15];
+	int		o;
+	int		j;
+
+	o = 0;
+	j = 1;
+	while (++o <= max - i)
+	{
+		num[0] = '1';
+		num[j++] = '0';
+		num[j++] = '0';
+		num[j++] = '0';
+		num[j] = '\0';
+	}
+	if (i != max)
+	{
+		read_words(ft_strstr(dict, counter_rows, num));
+		write(1, " ", 1);
+	}
+}
+
+char	*ft_strstr(char **dict, int arr_len, char *to_find)
 {
 	int	str_i;
 	int	find_i;
 	int	i;
+	int	bool1;
+	int	bool2;
 
 	str_i = -1;
 	i = 0;
 	find_i = 0;
 	while (++str_i < arr_len)
 	{
-		while (to_find[find_i] && (to_find[find_i] == str_array[str_i][i]))
+		while (to_find[find_i] && (to_find[find_i] == dict[str_i][i]))
 		{
 			find_i++;
 			i++;
-			if (str_array[str_i][i] == ':' && to_find[find_i] == '\0')
-				return (str_array[str_i]);
+			if (to_find[find_i] == '\0')
+				return (dict[str_i]);
 		}
 		find_i = 0;
 		i = 0;
@@ -40,18 +65,17 @@ int	read_words(char *str)
 {
 	unsigned int	i;
 	unsigned int	word_started;
-	unsigned int	min;
-	unsigned int	maj;
 
-	i = -1;
-	word_started = 0;
+	i = 0;
 	if (!str[0])
 		return (0);
-	while (str[++i])
+	while (str[i] != ':')
+		i++;
+	while (str[++i] && (str[i] == ' ' || str[i] == '\t'))
+		continue ;
+	while (str[i])
 	{
-		min = str[i] >= 'a' && str[i] <= 'z';
-		maj = str[i] >= 'A' && str[i] <= 'Z';
-		if (min || maj)
+		if (str[i] >= 32 && str[i] <= 126)
 		{
 			write(1, &str[i], 1);
 			word_started = 1;
@@ -61,6 +85,7 @@ int	read_words(char *str)
 			write(1, " ", 1);
 			word_started = 0;
 		}
+		i++;
 	}
 	return (0);
 }

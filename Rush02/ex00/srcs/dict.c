@@ -15,29 +15,29 @@
 char	*read_dict(char *dictionary)
 {
 	int		fd;
-	char	*buf;
+	char	*buffer;
 
-	buf = (char *)malloc(4096);
+	buffer = (char *)malloc(4096);
 	fd = open(dictionary, O_RDONLY);
 	if (fd == -1)
 	{
 		puterror("Read error\n");
 		return (0);
 	}
-	read(fd, buf, 1000);
+	read(fd, buffer, 4000);
 	close(fd);
-	return (buf);
+	return (buffer);
 }
 
-int	count_rows(char *buf)
+int	count_rows(char *buffer)
 {
 	int		j;
 	int		rows;
 
 	j = -1;
 	rows = 0;
-	while (buf[++j])
-		if (buf[j] == '\n')
+	while (buffer[++j])
+		if (buffer[j] == '\n')
 			rows++;
 	return (rows);
 }

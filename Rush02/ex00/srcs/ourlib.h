@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 //main_algo
-int		algo(char *dictionary, char *str);
+int		algo(char *dictionary, char *str, int counter_rows);
 void	algosheart(char *digits, char **dictionary, int counter_rows);
 //error
 int		error(char *str);
@@ -27,20 +27,22 @@ int		ft_strlen(char *str);
 char	*ft_strcpy(char *dest, char *src);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(char *src);
-//isnumber
+//checknumber
 int		is_number(char *str);
 int		modthree(char *str);
 //main_allocation
 char	**allocnum(char *arg);
 char	**populate(char *arg, char **arr, int arg_len, int first_slot);
 //find_read
+void	bignum(char **array, int counter_rows, int max, int i);
 char	*ft_strstr(char **str_array, int array_l, char *to_find);
 int		read_words(char *str);
-//triple
+//groupofthreedigits
 void	first_digit(char **array, char digit, int counter_rows);
 void	second_digit(char **array, char *digits, int counter_rows);
 void	third_digit(char **array, char digit, int counter_rows);
-void	bignum(char **array, int counter_rows, int max, int i);
+void	last_digit(char **dict, char digit, int counter_rows);
+void	last_second_digit(char **dict, char *digits, int counter_rows);
 //dict
 char	*read_dict(char *dictionary);
 int		count_rows(char *buf);
