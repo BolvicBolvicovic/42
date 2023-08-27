@@ -1,22 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <vcornill@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 12:07:26 by vcornill          #+#    #+#             */
+/*   Updated: 2023/08/27 12:25:40 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ourlib.h"
 
-void	ft_puterror(char *err)
+void	puterror(char *err)
 {
-	while (*err)
+	while (*err != 0)
 		write(2, err++, 1);
 }
 
-int		ft_error(char *str)
+int	error(char *str)
 {
-	if (!(ft_is_number(str)))
+	if (!is_number(str))
 	{
-		ft_puterror("Error\n");
+		puterror("Error\n");
 		return (1);
 	}
 	if (ft_strlen(str) > 12)
 	{
-		ft_puterror("Dict Error\n");
+		puterror("Dict Error\n");
 		return (1);
 	}
 	return (0);
