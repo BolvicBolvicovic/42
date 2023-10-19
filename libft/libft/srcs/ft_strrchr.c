@@ -23,7 +23,7 @@ char	*ft_strrchr(char *s, int c)
 		s--;
 		len--;
 	}
-	if (!len)
+	if (!len && *s != c)
 		return (0);
 	return (s);
 }

@@ -21,11 +21,8 @@ char	*mydup(char *src, int len)
 	if (tampon == NULL)
 		return (NULL);
 	i = -1;
-	while (src[++i] || len)
-	{
+	while (++i < len)
 		tampon[i] = src[i];
-		len--;
-	}
 	tampon[i] = '\0';
 	return (tampon);
 }
@@ -41,20 +38,21 @@ char	**ft_split(char *s, char c)
 	if (!s || !c)
 		return (0);
 	i = 0;
+	count = 1;
 	while (s[i++])
 		if (s[i] == c)
 			count++;
-	split = malloc(sizeof(char*) * (count + 2));
+	split = malloc(sizeof(char *) * (count + 1));
 	i = 0;
-	k = i;
+	k = 0;
 	while (s[i])
 	{
 		j = i;
 		while (s[i] && s[i] != c)
 			i++;
-		split[k] = mydup(&s[j], i- j);
+		split[k] = mydup(&s[j], i - j);
 		k++;
 	}
 	split[k] = NULL;
-	return (split);	
+	return (split);
 }

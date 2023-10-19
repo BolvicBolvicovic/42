@@ -12,5 +12,5 @@
 
 int	ft_isprint(char c)
 {
-	return (c != ' ' && !(c >= '\r' && c <= '\t'));
+	return (c >= 32 && c <= 126);
 }

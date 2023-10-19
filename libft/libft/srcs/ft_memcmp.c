@@ -16,12 +16,13 @@ int	ft_memcmp(void *s1, void *s2, int n)
 	unsigned char	*two;
 	unsigned int	i;
 	unsigned int	g;
-	
+
 	one = s1;
 	two = s2;
-	i = 0;
+	i = -1;
 	g = n;
-	while (one[i] != two[i] && i < g)
-		i++;
-	return (one[i] - two[i]);
+	while (++i < g)
+		if (one[i] != two[i])
+			return (one[i] - two[i]);
+	return (0);
 }

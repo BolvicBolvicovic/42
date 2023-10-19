@@ -25,7 +25,7 @@ char	*ft_strtrim(char *s1, char *set)
 		start++;
 	end = ft_strlen(s1) - 1;
 	while (end >= 0 && ft_strchr(set, s1[end]))
-        	end--;
+		end--;
 	if (end - start + 1 <= 0)
 	{
 		trimmed = (char *)malloc(1);
@@ -36,7 +36,6 @@ char	*ft_strtrim(char *s1, char *set)
 	trimmed = (char *)malloc(end - start + 2);
 	if (!trimmed)
 		return (0);
-	ft_strlcpy(trimmed, s1 + start, end - start +1);
-	trimmed[end - start + 1] = '\0';
+	ft_strlcpy(trimmed, s1 + start, end - start + 2);
 	return (trimmed);
 }

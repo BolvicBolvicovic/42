@@ -14,10 +14,14 @@
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char	*substring;
+	char			*substring;
 	unsigned int	i;
-	
-	substring = malloc(len);
+	unsigned int	slen;
+
+	slen = ft_strlen(s);
+	if (len > slen - start)
+		len = slen - start;
+	substring = malloc(len + 1);
 	if (!substring)
 		return (0);
 	i = 0;

@@ -34,7 +34,7 @@ void	*ft_memmove(void *dest, void *src, int n)
 	if (!dest && !src)
 		return (dest);
 	if (overlap(dest, src, n))
-		while (--n > 0)
+		while (n-- > 0)
 			d[n] = s[n];
 	else
 		ft_memcpy(dest, src, n);

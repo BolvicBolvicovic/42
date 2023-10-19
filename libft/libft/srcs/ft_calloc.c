@@ -14,7 +14,12 @@
 
 void	*ft_calloc(unsigned int nmemb, unsigned int size)
 {
+	void	*new;
+
 	if (!nmemb || !size || nmemb * size > 2147483647)
 		return (0);
-	return (malloc(nmemb * size));
+	new = (malloc(nmemb * size));
+	if (new)
+		ft_bzero(new, nmemb * size);
+	return (new);
 }
