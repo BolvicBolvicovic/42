@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-int	overlap(void *dest, const void *src, int n)
+int	overlap(void *dest, void *src, int n)
 {
 	int		overlapping;
 	void	*src_end;
@@ -24,13 +24,18 @@ int	overlap(void *dest, const void *src, int n)
 	return (overlapping);
 }
 
-void	*ft_memmove(void *dest, const void *src, int n)
+void	*ft_memmove(void *dest, void *src, int n)
 {
+	unsigned char	*d;
+	unsigned char	*s;
+
+	d = dest;
+	s = src;
 	if (!dest && !src)
 		return (dest);
 	if (overlap(dest, src, n))
-		while (--n > 0)
-			dest[n] = src[n];
+		while (n-- > 0)
+			d[n] = s[n];
 	else
 		ft_memcpy(dest, src, n);
 	return (dest);

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	char	*trimmed;
 	int		start;
@@ -21,14 +21,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (0);
 	start = 0;
-	while (s1[start] && strchr(set, s1[start]))
+	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;
-	end = strlen(s1) - 1;
-	while (end >= 0 && strchr(set, s1[end]))
-        	end--;
+	end = ft_strlen(s1) - 1;
+	while (end >= 0 && ft_strchr(set, s1[end]))
+		end--;
 	if (end - start + 1 <= 0)
 	{
-		*trimmed = (char *)malloc(1);
+		trimmed = (char *)malloc(1);
 		if (trimmed)
 			trimmed[0] = '\0';
 		return (trimmed);
@@ -36,7 +36,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	trimmed = (char *)malloc(end - start + 2);
 	if (!trimmed)
 		return (0);
-	ft_strncpy(trimmed, s1 + start, end - start +1);
-	trimmed[trimmed_length] = '\0';
+	ft_strlcpy(trimmed, s1 + start, end - start + 2);
 	return (trimmed);
 }

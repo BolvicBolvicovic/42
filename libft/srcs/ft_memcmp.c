@@ -10,16 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_memcmp(const void *s1, const void *s2, int n)
+int	ft_memcmp(void *s1, void *s2, int n)
 {
 	unsigned char	*one;
 	unsigned char	*two;
 	unsigned int	i;
+	unsigned int	g;
 
 	one = s1;
 	two = s2;
-	i = 0;
-	while (one[i] != two[i] && i < n)
-		i++;
-	return (one[i] - two[i]);
+	i = -1;
+	g = n;
+	while (++i < g)
+		if (one[i] != two[i])
+			return (one[i] - two[i]);
+	return (0);
 }

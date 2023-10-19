@@ -10,22 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	char	*substring;
-	unsigned int	i;
-	
-	substring = malloc(len);
+	size_t	slen;
+
+	if (!s)
+		return (0);
+	slen = ft_strlen(s);
+	if (start >= slen)
+		return (ft_strdup(""));
+	if (len > slen - start)
+		len = slen - start;
+	substring = malloc(len + 1);
 	if (!substring)
 		return (0);
-	i = 0;
-	while (s[start + i] && i < len)
-	{
-		substring[i] = s[start + i];
-		i++;
-	}
-	substring[i] = '\0';
+	ft_strlcpy(substring, s + start, len + 1);
 	return (substring);
 }

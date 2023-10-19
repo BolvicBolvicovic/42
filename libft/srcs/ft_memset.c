@@ -12,10 +12,12 @@
 
 void	*ft_memset(void *s, int c, int n)
 {
-	int	i;
+	int		i;
+	char	*set;
 
+	set = s;
 	i = -1;
 	while (++i < n)
-		s[i] = c;
+		set[i] = c;
 	return (s);
 }

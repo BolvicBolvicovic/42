@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 17:00:54 by vcornill          #+#    #+#             */
-/*   Updated: 2023/08/12 17:01:28 by vcornill         ###   ########.fr       */
+/*   Created: 2023/10/19 18:29:44 by vcornill          #+#    #+#             */
+/*   Updated: 2023/10/19 18:29:47 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	size_t	i;
+	t_list	*next;
+	t_list	*current;
 
-	i = 0;
-	if (n <= 0)
-		return (0);
-	while ((unsigned char)s1[i] == (unsigned char)s2[i])
+	current = *lst;
+	while (current)
 	{
-		if ((unsigned char)s1[i] == 0 || i == n - 1)
-			return (0);
-		i++;
+		next = current->next;
+		ft_lstdelone(current, del);
+		current = next;
 	}
-	if ((unsigned char)s1[i] < (unsigned char)s2[i])
-		return (-1);
-	return (1);
+	*lst = 0;
 }

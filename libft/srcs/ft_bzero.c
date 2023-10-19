@@ -12,9 +12,11 @@
 
 void	ft_bzero(void *s, int n)
 {
-	int	i;
+	int		i;
+	char	*ss;
 
+	ss = s;
 	i = -1;
 	while (++i < n)
-		s[i] = 0;
+		ss[i] = 0;
 }

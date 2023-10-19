@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-	while (*s != c && *s)
+	while (*s != (unsigned char)c && *s)
 		s++;
+	if (*s != (unsigned char)c)
+		return (0);
 	return (s);
 }

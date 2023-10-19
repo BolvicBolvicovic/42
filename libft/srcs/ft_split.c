@@ -6,55 +6,64 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:39:57 by vcornill          #+#    #+#             */
-/*   Updated: 2023/10/17 16:22:17 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:52:21 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*mydup(char *src, int len)
+void	ft_allocate(char **tab, char const *s, char sep)
 {
-	int		i;
-	char	*tampon;
+	char		**tab_p;
+	char const	*tmp;
 
-	tampon = malloc(len + 1);
-	if (tampon == NULL)
-		return (NULL);
-	i = -1;
-	while (src[++i] || len)
+	tmp = s;
+	tab_p = tab;
+	while (*tmp)
 	{
-		tampon[i] = src[i];
-		len--;
+		while (*s == sep)
+			++s;
+		tmp = s;
+		while (*tmp && *tmp != sep)
+			++tmp;
+		if (*tmp == sep || tmp > s)
+		{
+			*tab_p = ft_substr(s, 0, tmp - s);
+			s = tmp;
+			++tab_p;
+		}
 	}
-	tampon[i] = '\0';
-	return (tampon);
+	*tab_p = NULL;
+}
+
+int	ft_count_words(char const *s, char sep)
+{
+	int	word_count;
+
+	word_count = 0;
+	while (*s)
+	{
+		while (*s == sep)
+			++s;
+		if (*s)
+			++word_count;
+		while (*s && *s != sep)
+			++s;
+	}
+	return (word_count);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	int		ccount;
-	int		j;
-	int		i;
-	int		k;
+	char	**new;
+	int		size;
 
-	if (!s || !c)
-		return (0);
-	i = 0;
-	while (s[i++])
-		if (s[i] == c)
-			count++;
-	split = malloc(sizeof(char*) * (count + 2));
-	i = 0;
-	k = i;
-	while (s[i])
-	{
-		j = i;
-		while (s[i] && s[i] != c)
-			i++;
-		split[k] = mydup(s[j], i- j);
-		k++;
-	}
-	split[k] = NULL;
-	return (split);	
+	if (!s)
+		return (NULL);
+	size = ft_count_words(s, c);
+	new = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!new)
+		return (NULL);
+	ft_allocate(new, s, c);
+	return (new);
 }

@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memchr(const void *s, int c, int n)
+void	*ft_memchr(void *s, int c, int n)
 {
-	unsigned char	*ss;
+	unsigned char	*p;
+	unsigned int	i;
 
-	ss = s;
-	while (*s && n && *s != c)
-	{
-		n--;
-		s++;
-	}
-	if (!n || !*s)
-		return (0);
-	return (s);
+	p = (unsigned char *)s;
+	i = -1;
+	while (++i < (unsigned int)n)
+		if (p[i] == (unsigned char)c)
+			return ((void *)&p[i]);
+	return (0);
 }

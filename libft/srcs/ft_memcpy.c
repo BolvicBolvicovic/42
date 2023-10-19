@@ -12,10 +12,16 @@
 
 void	*ft_memcpy(void *dest, const void *src, int n)
 {
-	int	i;
+	unsigned int		i;
+	unsigned int		g;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	i = 0;
-	while (i++ < n)
-		dest[i] = src[i];
+	d = dest;
+	s = src;
+	g = n;
+	i = -1;
+	while (++i < g)
+		d[i] = s[i];
 	return (dest);
 }

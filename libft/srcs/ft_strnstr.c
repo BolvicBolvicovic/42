@@ -10,28 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
+	size_t	lillen;
 
-	i = 0;
-	if (!little)
-		return (big);
-	while (big[i++] && len)
+	lillen = ft_strlen(little);
+	i = -1;
+	if (!little || !*little)
+		return ((char *)big);
+	while (big[++i] && i < len)
 	{
 		j = 0;
-		while (little[j] && big[j + i])
+		while (little[j] && big[j + i] && j + i < len)
 		{
 			if (little[j] != big[j + i])
 				break ;
 			j++;
 		}
-		if (little[j] - big[j + i] == 0)
-			return (big + j + i);
-		len--;
+		if (lillen == j)
+			return ((char *)big + i);
 	}
 	return (0);
 }

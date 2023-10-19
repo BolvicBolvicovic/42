@@ -10,30 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
+
+char	*int_min(void)
+{
+	char	*min;
+
+	min = malloc(13);
+	ft_strlcpy(min, "-2147483648", 20);
+	return (min);
+}
+
+int	negneg(int n, int *neg)
+{
+	if (n < 0)
+	{
+		*neg = 1;
+		return (-n);
+	}
+	*neg = 0;
+	return (n);
+}
+
+int	testtest(int n)
+{
+	int	i;
+
+	i = 1;
+	while (n > 9)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_itoa(int n)
 {
-	int		test;
+	int		neg;
 	int		i;
 	char	*nb;
 
-	i = 1;
-	if (n < 0)
-		i++;
-	test = n;
-	while (test > 9)
-	{
-		test /= 10;
-		i++;
-	}
-	nb = malloc(i + 1);
+	if (n == -2147483648)
+		return (int_min());
+	n = negneg(n, &neg);
+	i = testtest(n);
+	nb = malloc(i + 2 + neg);
 	if (!nb)
-		return (NULL);
-	nb[i] = '\0'; 
-	while (n)
+		return (0);
+	if (neg)
+		nb[0] = '-';
+	nb[i + neg] = '\0';
+	while (i-- > 0)
 	{
-		nb[--i] = n%10 + '0';
+		nb[i + neg] = n % 10 + '0';
 		n /= 10;
 	}
 	return (nb);
