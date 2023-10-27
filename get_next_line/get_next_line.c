@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
 	if (!lines[0] || !ft_strchr(lines[0], '\n'))
 	{
 		buffer = malloc(BUFFER_SIZE);
-		if (!buffer);
+		if (!buffer)
 			return (NULL);
 		read_size = read(fd, buffer, BUFFER_SIZE);
 		if (!read_size)
@@ -98,6 +98,8 @@ char	*get_next_line(int fd)
 			temp = free_lines(count, lines);
 		count = count_lines(buffer);
 		lines = malloc(sizeof(char *) * count);
+		if (!lines)
+			return (NULL);
 		if (temp)
 			*lines = ft_strdup(temp);
 		free(temp);
