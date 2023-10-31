@@ -1,111 +1,109 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/30 12:58:05 by vcornill          #+#    #+#             */
+/*   Updated: 2023/10/31 16:13:23 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char	*free_lines(size_t count, static char **lines)
+char	*ft_next_lines(char *lines)
+{
+	int	i;
+	int	j;
+	char	*next;
+
+	i = 0;
+	while (lines[i] && lines[i] != '\n')
+		i++;
+	if (!lines[i])
+	{
+		free(lines);
+		return (NULL);
+	}
+	next = malloc(ft_strlen(lines) - i + 1);
+	if (!next)
+		return (NULL);
+	i++;
+	j = 0;
+	while (lines[i])
+		next[j++] = lines[i++];
+	free(lines);
+	return (next);
+}
+
+char	*ft_update_line(char *lines, char *buffer)
 {
 	char	*temp;
 
-	temp = NULL;
-	if (*lines)
-		temp = ft_strdup(*lines);
-	while (count--)
-		free(*lines--);
+	temp = ft_strjoin(lines, buffer);
+	free(lines);
 	return (temp);
 }
 
-char	*return_line(static char ***lines)
+char	*the_line(char *lines)
 {
-	char	*line;
+	char	*my_line;
+	int		i;
 
-	line = ft_strdup(*lines[0]);
-	free(*lines[0]);
-	*lines += 1;
-	return (line);
-}
-
-void	add_line(char *buffer, static char **lines)
-{
-	char	*temp;
-	char	*newline;
-	int	i;
-	int	j;
-	int	k;
-
+	if (!lines[0])
+		return (NULL);
 	i = 0;
-	j = 0;
-	temp = NULL;
-	while (buffer[j])
+	while (lines[i] && lines[i] != '\n')
+		i++;
+	my_line = malloc(i + 2);
+	i = 0;
+	while (lines[i] && lines[i] != '\n')
 	{
-		k = j;
-		while (buffer[j] && buffer[j] != '\n')
-			j++;
-		if (j > k)
-			newline = ft_substr(buffer, k, j - k);
-		if (lines[i])
-		{
-			temp = ft_strdup(lines[i]);
-			free(lines[i]);
-			lines[i] = ft_strjoin(temp, newline);
-			free(temp);
-			i++;
-		}
-		else
-			lines[i] = ft_strdup(newline);
-		free(newline);
-		if (buffer[j] == '\n')
-		{
-			j++;
-			i++;
-		}
-		
+		my_line[i] = lines[i];
+		i++;
 	}
+	if (lines[i] && lines[i] == '\n')
+		my_line[i++] = '\n';
+	return (my_line);
 }
 
-static size_t	count_lines(char *str)
+char	*ft_read_lines(int fd, char *lines)
 {
-	static	size_t	count;
-	int	i;
+	int	chr_read;
+	char	*buffer;
 
-	i = -1;
-	count = 1;
-	while (str[++i])
-		if (str[i] == '\n')
-			count++;
-	return (count);
+	if (!lines)
+		lines = ft_strdup("");
+	chr_read = 1;
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	while (chr_read && !ft_strchr(lines, '\n'))
+	{
+		chr_read = read(fd, buffer, BUFFER_SIZE);
+		if (chr_read < 0)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[chr_read] = '\0';
+		lines = ft_update_line(lines, buffer);
+	}
+	free(buffer);
+	return (lines);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	**lines = {NULL};
-	char	*buffer;
-	char	*temp;
-	static size_t 	count;
-	size_t	read_size;
-
-	if (!lines[0] || !ft_strchr(lines[0], '\n'))
-	{
-		buffer = malloc(BUFFER_SIZE);
-		if (!buffer)
-			return (NULL);
-		read_size = read(fd, buffer, BUFFER_SIZE);
-		if (!read_size)
-		{
-			free(buffer);
-			buffer = return_line(&lines);
-			free(lines);
-			return (buffer);
-		}
-		if (*lines)
-			temp = free_lines(count, lines);
-		count = count_lines(buffer);
-		lines = malloc(sizeof(char *) * count);
-		if (!lines)
-			return (NULL);
-		if (temp)
-			*lines = ft_strdup(temp);
-		free(temp);
-		add_line(buffer, lines);
-		free(buffer);
-		return (return_line(&lines));
-	}
-	return (return_line(&lines));
+	static char	*lines[1024];
+	char		*line;
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0))
+		return (NULL);
+	lines[fd] = ft_read_lines(fd, lines[fd]);
+	if (!lines[fd])
+		return (NULL);
+	line = the_line(lines[fd]);
+	lines[fd] = ft_next_lines(lines[fd]);
+	return (line);
 }
