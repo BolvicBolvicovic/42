@@ -33,20 +33,12 @@ char	*ft_next_lines(char *lines)
 	j = 0;
 	while (lines[i])
 		next[j++] = lines[i++];
+	next[j] = '\0';
 	free(lines);
 	return (next);
 }
 
-char	*ft_update_line(char *lines, char *buffer)
-{
-	char	*temp;
-
-	temp = ft_strjoin(lines, buffer);
-	free(lines);
-	return (temp);
-}
-
-char	*the_line(char *lines)
+char	*get_the_line(char *lines)
 {
 	char	*my_line;
 	int		i;
@@ -56,15 +48,21 @@ char	*the_line(char *lines)
 	i = 0;
 	while (lines[i] && lines[i] != '\n')
 		i++;
-	my_line = malloc(i + 2);
+	my_line = (char *)malloc(i + 2);
+	if (!my_line)
+		return (NULL);
 	i = 0;
 	while (lines[i] && lines[i] != '\n')
 	{
 		my_line[i] = lines[i];
 		i++;
 	}
-	if (lines[i] && lines[i] == '\n')
-		my_line[i++] = '\n';
+	if (lines[i] == '\n')
+	{
+		my_line[i] = '\n';
+		i++;
+	}
+	my_line[i] = '\0';
 	return (my_line);
 }
 
@@ -73,22 +71,20 @@ char	*ft_read_lines(int fd, char *lines)
 	int	chr_read;
 	char	*buffer;
 
-	if (!lines)
-		lines = ft_strdup("");
 	chr_read = 1;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (chr_read && !ft_strchr(lines, '\n'))
+	while (chr_read != 0 && !ft_strchr(lines, '\n'))
 	{
 		chr_read = read(fd, buffer, BUFFER_SIZE);
-		if (chr_read < 0)
+		if (chr_read == -1)
 		{
 			free(buffer);
 			return (NULL);
 		}
 		buffer[chr_read] = '\0';
-		lines = ft_update_line(lines, buffer);
+		lines = ft_strjoin(lines, buffer);
 	}
 	free(buffer);
 	return (lines);
@@ -98,12 +94,13 @@ char	*get_next_line(int fd)
 {
 	static char	*lines[1024];
 	char		*line;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0))
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	lines[fd] = ft_read_lines(fd, lines[fd]);
 	if (!lines[fd])
 		return (NULL);
-	line = the_line(lines[fd]);
+	line = get_the_line(lines[fd]);
 	lines[fd] = ft_next_lines(lines[fd]);
 	return (line);
 }
