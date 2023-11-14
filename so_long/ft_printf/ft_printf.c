@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	test(va_list ap, int *i, int *j, const char *str)
+void	test_chr(va_list ap, int *i, int *j, const char *str)
 {
 	if (str[*j + 1] == 'c')
 		c_print(va_arg(ap, int), i);
@@ -55,7 +55,7 @@ int	ft_printf(const char *str, ...)
 			i++;
 		}
 		else
-			test(ap, &i, &j, str);
+			test_chr(ap, &i, &j, str);
 	}
 	va_end(ap);
 	return (i);

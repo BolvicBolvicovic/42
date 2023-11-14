@@ -6,20 +6,11 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:00:18 by vcornill          #+#    #+#             */
-/*   Updated: 2023/11/08 17:05:41 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:44:10 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	on_destroy(t_game *data)
-{
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	exit(0);
-	return (0);
-}
  
 int	on_keypress(int keysym, t_game *data)
 {
@@ -32,15 +23,13 @@ int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	(void)argc;
-	(void)argv;
 	game = malloc(sizeof(t_game));
-	game->mlx_ptr = mlx_init();
-	if (!game->mlx_ptr)
-		return (1);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, 600, 400, "SO_DEEEEEP");
-	if (!game->win_ptr)
-		return (free(game->mlx_ptr), 1);
+	ft_check_command_line_arguments(argc, argv, game);
+	ft_init_map(game, argv[1]);
+	ft_init_vars(game);
+	//ft_check_map(game);
+	ft_init_mlx(game);
+	ft_init_sprites(game);
 	// Register key release hook
 	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &game);
  

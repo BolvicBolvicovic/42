@@ -6,14 +6,14 @@
 #    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2023/11/07 20:07:19 by vcornill         ###   ########.fr        #
+#    Updated: 2023/11/14 17:38:24 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 MLX_DIR = mlx
-LIBFT_DIR = libft
+LIBFT_DIR = ft_printf/libft
 FT_PRINTF_DIR = ft_printf
 
 MLX = $(MLX_DIR)/libmlx.a
@@ -30,7 +30,7 @@ LFLAGS =	-L$(MLX_DIR) \
 			-L$(FT_PRINTF_DIR) \
 			-lmlx -lXext -lX11 -lm -lz -lft -lftprintf
 
-FILES = main
+FILES = main ft_check_map ft_utils window_handler ft_free ft_init_map ft_init_game
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

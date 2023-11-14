@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:31:57 by vcornill          #+#    #+#             */
-/*   Updated: 2023/11/08 16:59:48 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/11/14 17:37:53 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@
 # define LEFT				2
 # define RIGHT				3
 # define BACK				4
-
-# define GREEN				"\033[0;32m"
-# define RED 				"\033[1;31m"
-# define GREY 				"\033[0;90m"
-# define CYAN				"\033[1;96m"
-# define RESET 				"\033[0m"
 
 typedef enum e_bool
 {
@@ -112,5 +106,35 @@ typedef struct s_game
 # define PLAYER_BACK_XPM	"assets/"
 # define OPEN_EXIT_XPM		"assets/"
 # define EXIT_CLOSED_XPM	"assets/"
+
+//Window Handler
+int     on_destroy(t_game *data);
+int     ft_win(t_game *game);
+int     ft_error(char *message, t_game *game);
+
+//Map Checker
+void    ft_check_map(t_game *game);
+void    ft_check_rows(t_game *game);
+void    ft_check_columns(t_game *game);
+void    ft_count_map_parameters(t_game *game);
+void    ft_verify_map_parameters(t_game *game);
+
+//Utils
+void    ft_check_command_line_arguments(int argc, char **argv, t_game *game);
+char	*ft_strappend(char **s1, const char *s2);
+
+//Free
+void    ft_free_all_allocated_memory(t_game *game);
+void    ft_destroy_images(t_game *game);
+void    ft_free_map(t_game *game);
+
+//Init Map
+void    ft_init_map(t_game *game, char *argv);
+void    ft_check_for_empty_line(char *map, t_game *game);
+
+//Init Game
+void	ft_init_vars(t_game *game);
+void	ft_init_mlx(t_game *game);
+void	ft_init_sprites(t_game *game);
 
 #endif
