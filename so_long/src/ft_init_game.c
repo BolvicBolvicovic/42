@@ -6,13 +6,13 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 17:34:24 by vcornill          #+#    #+#             */
-/*   Updated: 2023/11/14 17:35:12 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:44:00 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_image	ft_new_sprite(void *mlx, char *path, t_game *game);
+//t_image	ft_new_sprite(void *mlx, char *path, t_game *game);
 
 void	ft_init_vars(t_game *game)
 {
@@ -21,27 +21,20 @@ void	ft_init_vars(t_game *game)
 	game->map.players = 0;
 	game->movements = 0;
 	game->map.columns = ft_strlen(game->map.full[0]) - 1;
-	game->player_sprite = RIGHT;
+//	game->player_sprite = RIGHT;
 }
 
 void	ft_init_mlx(t_game *game)
 {
-	game->mlx_ptr = mlx_init();
+	game->mlx_ptr = mlx_init(666, 666, "DEMON", true);
 	if (game->mlx_ptr == NULL)
 	{
 		free(game->mlx_ptr);
 		ft_error("Couldn't find mlx pointer. Try it using a VNC.", game);
 	}
-	game->win_ptr = mlx_new_window(game->mlx_ptr, \
-	game->map.columns * IMG_WIDTH, game->map.rows * IMG_HEIGHT, "so_long");
-	if (game->win_ptr == NULL)
-	{
-		free(game->mlx_ptr);
-		ft_error("Couldn't create the Window.", game);
-	}
 }
 
-void	ft_init_sprites(t_game *game)
+/*void	ft_init_sprites(t_game *game)
 {
 	void	*mlx;
 
@@ -56,7 +49,6 @@ void	ft_init_sprites(t_game *game)
 	game->open_exit = ft_new_sprite(mlx, OPEN_EXIT_XPM, game);
 	game->exit_closed = ft_new_sprite(mlx, EXIT_CLOSED_XPM, game);
 }
-
 t_image	ft_new_sprite(void *mlx, char *path, t_game *game)
 {
 	t_image	sprite;
@@ -65,4 +57,4 @@ t_image	ft_new_sprite(void *mlx, char *path, t_game *game)
 	if (sprite.xpm_ptr == NULL)
 		ft_error("Couldn't find a sprite. Does it exist?", game);
 	return (sprite);
-}
+}*/

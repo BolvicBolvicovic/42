@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window-handler.c                                   :+:      :+:    :+:   */
+/*   window_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:37:05 by vcornill          #+#    #+#             */
-/*   Updated: 2023/11/14 12:35:55 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:56:55 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int     on_destroy(t_game *data)
-{
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-        mlx_destroy_display(data->mlx_ptr);
-        free(data->mlx_ptr);
-        exit(0);
-        return (0);
-}
 
 int	ft_error(char *message, t_game *game)
 {

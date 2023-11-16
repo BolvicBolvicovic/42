@@ -6,29 +6,29 @@
 #    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2023/11/14 17:38:24 by vcornill         ###   ########.fr        #
+#    Updated: 2023/11/16 13:19:15 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-MLX_DIR = mlx
+MLX_DIR = MLX42
 LIBFT_DIR = ft_printf/libft
 FT_PRINTF_DIR = ft_printf
 
-MLX = $(MLX_DIR)/libmlx.a
+MLX = $(MLX_DIR)/build/libmlx42.a
 LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 CC = cc
 CFLAGS =	-Wall -Wextra -Werror \
-			-I$(MLX_DIR) \
+			-I$(MLX_DIR)/include/MLX42 \
 			-I$(LIBFT_DIR) \
 			-I$(FT_PRINTF_DIR)
-LFLAGS =	-L$(MLX_DIR) \
+LFLAGS =	-L$(MLX_DIR)/build \
 			-L$(LIBFT_DIR) \
 			-L$(FT_PRINTF_DIR) \
-			-lmlx -lXext -lX11 -lm -lz -lft -lftprintf
+			-lmlx42 -lft -lftprintf -lglfw -ldl
 
 FILES = main ft_check_map ft_utils window_handler ft_free ft_init_map ft_init_game
 

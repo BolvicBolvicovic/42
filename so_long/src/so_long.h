@@ -6,20 +6,19 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:31:57 by vcornill          #+#    #+#             */
-/*   Updated: 2023/11/14 17:37:53 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:57:11 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <stdbool.h>
 # include "ft_printf.h"
 # include <unistd.h>
 # include <fcntl.h>
-# include "mlx.h"
+# include "MLX42.h"
 # include <stdlib.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include "libft.h"
 
 # define IMG_HEIGHT			32
@@ -31,42 +30,11 @@
 # define PLAYER				'P'
 # define MAP_EXIT 		 	'E'
 
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
-
-# define KEY_UP  			65362
-# define KEY_LEFT  			65361
-# define KEY_RIGHT 			65363
-# define KEY_DOWN  			65364
-
-# define KEY_Q				113
-# define KEY_ESC  			65307
-
-# define FRONT				1
-# define LEFT				2
-# define RIGHT				3
-# define BACK				4
-
-typedef enum e_bool
-{
-	false,
-	true
-}	t_bool;
-
 typedef struct s_position
 {
 	int	x;
 	int	y;
 }	t_positon;
-
-typedef struct s_image
-{
-	void	*xpm_ptr;
-	int		x;
-	int		y;
-}	t_image;
 
 typedef struct s_map
 {
@@ -82,20 +50,19 @@ typedef struct s_map
 typedef struct s_game
 {
 	void		*mlx_ptr;
-	void		*win_ptr;
 	int			movements;
 	int			player_sprite;
-	t_map		map;
-	t_bool		map_alloc;
-	t_image		wall;
-	t_image		floor;
-	t_image		coins;
-	t_image		open_exit;
-	t_image		exit_closed;
-	t_image		player_front;
-	t_image		player_left;
-	t_image		player_right;
-	t_image		player_back;
+	t_map			map;
+	bool			map_alloc;
+	mlx_image_t		wall;
+	mlx_image_t		floor;
+	mlx_image_t		coins;
+	mlx_image_t		open_exit;
+	mlx_image_t		exit_closed;
+	mlx_image_t		player_front;
+	mlx_image_t		player_left;
+	mlx_image_t		player_right;
+	mlx_image_t		player_back;
 }	t_game;
 # define WALL_XPM			"assets/"
 # define FLOOR_XPM			"assets/"
@@ -108,7 +75,6 @@ typedef struct s_game
 # define EXIT_CLOSED_XPM	"assets/"
 
 //Window Handler
-int     on_destroy(t_game *data);
 int     ft_win(t_game *game);
 int     ft_error(char *message, t_game *game);
 

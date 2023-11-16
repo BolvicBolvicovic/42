@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:00:18 by vcornill          #+#    #+#             */
-/*   Updated: 2023/11/14 17:44:10 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:43:13 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,10 @@ int	main(int argc, char **argv)
 	ft_init_vars(game);
 	//ft_check_map(game);
 	ft_init_mlx(game);
-	ft_init_sprites(game);
-	// Register key release hook
-	mlx_hook(game->win_ptr, KeyRelease, KeyReleaseMask, &on_keypress, &game);
+	//ft_init_sprites(game);
  
-	// Register destroy hook
-	mlx_hook(game->win_ptr, DestroyNotify, StructureNotifyMask, &on_destroy, &game);
- 
-	// Loop over the MLX pointer
 	mlx_loop(game->mlx_ptr);
+	mlx_terminate(game->mlx_ptr);
 	free(game);
 	return (0);
 }
