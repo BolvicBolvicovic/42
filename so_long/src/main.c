@@ -29,7 +29,8 @@ int	main(int argc, char **argv)
 	ft_init_vars(game);
 	//ft_check_map(game);
 	ft_init_mlx(game);
-	//ft_init_sprites(game);
+	ft_init_sprites(game);
+	ft_init_image(game);
  
 	mlx_loop(game->mlx_ptr);
 	mlx_terminate(game->mlx_ptr);

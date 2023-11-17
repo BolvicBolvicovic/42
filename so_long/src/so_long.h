@@ -47,6 +47,20 @@ typedef struct s_map
 	t_positon	player;
 }	t_map;
 
+typedef struct	images
+{
+	mlx_image_t		*wall;
+        mlx_image_t		*floor1;
+        mlx_image_t		*floor2;
+        mlx_image_t		*coins;
+        mlx_image_t		*open_exit;
+        mlx_image_t		*exit_closed;
+        mlx_image_t		*player_front;
+        mlx_image_t		*player_left;
+        mlx_image_t		*player_right;
+        mlx_image_t		*player_back;
+}	t_images;
+
 typedef struct s_game
 {
 	void		*mlx_ptr;
@@ -54,25 +68,28 @@ typedef struct s_game
 	int			player_sprite;
 	t_map			map;
 	bool			map_alloc;
-	mlx_image_t		wall;
-	mlx_image_t		floor;
-	mlx_image_t		coins;
-	mlx_image_t		open_exit;
-	mlx_image_t		exit_closed;
-	mlx_image_t		player_front;
-	mlx_image_t		player_left;
-	mlx_image_t		player_right;
-	mlx_image_t		player_back;
+	t_images			*images;
+	xpm_t		*wall;
+	xpm_t		*floor1;
+	xpm_t		*floor2;
+	xpm_t		*coins;
+	xpm_t		*open_exit;
+	xpm_t		*exit_closed;
+	xpm_t		*player_front;
+	xpm_t		*player_left;
+	xpm_t		*player_right;
+	xpm_t		*player_back;
 }	t_game;
-# define WALL_XPM			"assets/"
-# define FLOOR_XPM			"assets/"
-# define COINS_XPM			"assets/"
-# define PLAYER_FRONT_XPM	"assets/"
-# define PLAYER_LEFT_XPM	"assets/"
-# define PLAYER_RIGHT_XPM	"assets/"
-# define PLAYER_BACK_XPM	"assets/"
-# define OPEN_EXIT_XPM		"assets/"
-# define EXIT_CLOSED_XPM	"assets/"
+# define WALL_XPM			"assets/ground/tileset_1bit-5.png.xpm42"
+# define FLOOR1_XPM			"assets/ground/tileset_1bit-64.png.xpm42"
+# define FLOOR2_XPM			"assets/ground/tileset_1bit-37.png.xpm42"
+# define COINS_XPM			"assets/ground/tileset_1bit-48.png.xpm42"
+# define PLAYER_FRONT_XPM	"assets/characters/front-1.png.xpm42"
+# define PLAYER_LEFT_XPM	"assets/characters/left-37.png.xpm42"
+# define PLAYER_RIGHT_XPM	"assets/characters/right-25.png.xpm42"
+# define PLAYER_BACK_XPM	"assets/characters/back-13.png.xpm42"
+# define OPEN_EXIT_XPM		"assets/ground/tileset_1bit-51.png.xpm42"
+# define EXIT_CLOSED_XPM	"assets/ground/tileset_1bit-50.png.xpm42"
 
 //Window Handler
 int     ft_win(t_game *game);
@@ -102,5 +119,6 @@ void    ft_check_for_empty_line(char *map, t_game *game);
 void	ft_init_vars(t_game *game);
 void	ft_init_mlx(t_game *game);
 void	ft_init_sprites(t_game *game);
+void    ft_init_image(t_game *game);
 
 #endif

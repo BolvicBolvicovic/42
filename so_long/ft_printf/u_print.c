@@ -17,5 +17,5 @@ void	u_print(unsigned int ap, int *i)
 	long int	test;
 
 	test = ap;
-	i_print(ap, i);
+	i_print(test, i);
 }

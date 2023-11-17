@@ -56,14 +56,7 @@ void	ft_putnbr_base(unsigned long long int nbr, char *base, int *nbchar)
 	size_base = ft_strlen(base);
 	if (viable_base(base) == 0 || size_base <= 1)
 		return ;
-	if (nbr < 0)
-	{
-		ft_putchar('-');
-		*nbchar = *nbchar + 1;
-		recur_base(-nbrbis, base, size_base, nbchar);
-	}
-	else
-		recur_base(nbrbis, base, size_base, nbchar);
+	recur_base(nbrbis, base, size_base, nbchar);
 }
 
 void	ft_putptr(void *ptr, int *nbchar)
