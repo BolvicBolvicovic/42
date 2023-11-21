@@ -21,10 +21,8 @@ int	ft_error(char *message, t_game *game)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_win(t_game *game)
+int	ft_win(void)
 {
-	ft_printf("Movements: %d\n", ++game->movements);
-	ft_free_all_allocated_memory(game);
 	ft_printf("\n\
 ██████████████████████████████████████████████████████████████████\n\
 ██                                                              ██\n\
@@ -35,5 +33,5 @@ int	ft_win(t_game *game)
 ██     ██     ██████    ████        ███  ███  ██ ██   ███   ██  ██\n\
 ██                                                              ██\n\
 ██████████████████████████████████████████████████████████████████\n\n");
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }

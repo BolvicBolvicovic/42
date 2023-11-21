@@ -31,9 +31,11 @@ int	main(int argc, char **argv)
 	ft_init_mlx(game);
 	ft_init_sprites(game);
 	ft_init_image(game);
- 
+	draw_map(game, game->images);
+	mlx_key_hook(game->mlx_ptr, &my_key_hook, game); 
 	mlx_loop(game->mlx_ptr);
 	mlx_terminate(game->mlx_ptr);
-	free(game);
+	ft_win();
+	ft_free_all_allocated_memory(game);
 	return (0);
 }

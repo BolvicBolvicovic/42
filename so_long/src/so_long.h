@@ -64,8 +64,9 @@ typedef struct	images
 typedef struct s_game
 {
 	void		*mlx_ptr;
-	int			movements;
-	int			player_sprite;
+	int			move_count;
+	int			n_collec;
+	int			count_collec;
 	t_map			map;
 	bool			map_alloc;
 	t_images			*images;
@@ -88,11 +89,11 @@ typedef struct s_game
 # define PLAYER_LEFT_XPM	"assets/characters/left-37.png.xpm42"
 # define PLAYER_RIGHT_XPM	"assets/characters/right-25.png.xpm42"
 # define PLAYER_BACK_XPM	"assets/characters/back-13.png.xpm42"
-# define OPEN_EXIT_XPM		"assets/ground/tileset_1bit-51.png.xpm42"
-# define EXIT_CLOSED_XPM	"assets/ground/tileset_1bit-50.png.xpm42"
+# define OPEN_EXIT_XPM		"assets/ground/tileset_1bit-50.png.xpm42"
+# define EXIT_CLOSED_XPM	"assets/ground/tileset_1bit-51.png.xpm42"
 
 //Window Handler
-int     ft_win(t_game *game);
+int     ft_win(void);
 int     ft_error(char *message, t_game *game);
 
 //Map Checker
@@ -117,8 +118,18 @@ void    ft_check_for_empty_line(char *map, t_game *game);
 
 //Init Game
 void	ft_init_vars(t_game *game);
+int		total_collec(t_game *game);
 void	ft_init_mlx(t_game *game);
 void	ft_init_sprites(t_game *game);
 void    ft_init_image(t_game *game);
+
+//Draw
+
+void    draw_map(t_game *game, t_images *image);
+
+//KeyHook
+
+void    my_key_hook(mlx_key_data_t keydata, void *param);
+void    collec_keys(t_game *game);
 
 #endif

@@ -30,7 +30,7 @@ LFLAGS =	-L$(MLX_DIR)/build \
 			-L$(FT_PRINTF_DIR) \
 			-lmlx42 -lft -lftprintf -lglfw -ldl
 
-FILES = main ft_check_map ft_utils window_handler ft_free ft_init_map ft_init_game ft_init_image
+FILES = main ft_check_map ft_utils window_handler ft_free ft_init_map ft_init_game ft_init_image ft_movement ft_collector
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

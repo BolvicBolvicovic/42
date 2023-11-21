@@ -19,9 +19,9 @@ void	ft_init_vars(t_game *game)
 	game->map.coins = 0;
 	game->map.exit = 0;
 	game->map.players = 0;
-	game->movements = 0;
+	game->move_count = 0;
 	game->map.columns = ft_strlen(game->map.full[0]) - 1;
-//	game->player_sprite = RIGHT;
+	game->n_collec = total_collec(game);
 }
 
 void	ft_init_mlx(t_game *game)

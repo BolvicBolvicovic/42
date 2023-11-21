@@ -13,14 +13,37 @@ void	draw_floor(t_game *game, t_images *image)
 		x = 0;
 		while (game->map.full[y][x])
 		{
-			mlx_image_to_window(game->mlx_ptr, image->floor1, x * 32, y * 32);
+			mlx_image_to_window(game->mlx_ptr, image->floor1, x * 16, y * 16);
 			if (game->map.full[y][x] == WALL)
-				mlx_image_to_window(game->mlx_ptr, image->wall, x * 32, y * 32);
+				mlx_image_to_window(game->mlx_ptr, image->wall, x * 16, y * 16);
 			if (game->map.full[y][x] == MAP_EXIT)
 			{
-				mlx_image_to_window(game->mlx_ptr, image->exit_closed, x * 32, y * 32);
-				mlx_image_to_window(game->mlx_ptr, image->open_exit, x * 32, y * 32);
+				mlx_image_to_window(game->mlx_ptr, image->exit_closed, x * 16, y * 16);
+				mlx_image_to_window(game->mlx_ptr, image->open_exit, x * 16, y * 16);
 			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_map(t_game *game, t_images *image)
+{
+	int	x;
+	int	y;
+
+	draw_floor(game, image);
+	y = 0;
+	while (game->map.full[y])
+	{
+		x = 0;
+		while (game->map.full[y][x])
+		{
+			if (game->map.full[y][x] == COINS)
+				mlx_image_to_window(game->mlx_ptr, image->coins, x * 16, y * 16);
+
+			if (game->map.full[y][x] == PLAYER)
+				mlx_image_to_window(game->mlx_ptr, image->player_front, x * 16, y * 16);
 			x++;
 		}
 		y++;
@@ -40,6 +63,5 @@ void	ft_init_image(t_game *game)
         game->images->player_back = mlx_texture_to_image(game->mlx_ptr, &game->player_back->texture);
 	game->images->open_exit = mlx_texture_to_image(game->mlx_ptr, &game->open_exit->texture);
 	game->images->exit_closed = mlx_texture_to_image(game->mlx_ptr, &game->exit_closed->texture);
-	draw_floor(game, game->images);
 }
 
