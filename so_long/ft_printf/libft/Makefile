@@ -11,18 +11,18 @@ NAME = libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 %.o: %.c
-	$(CC) $(INC) $(FLAGS) -c $< -o $@
+	@$(CC) $(INC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(OBONUS)
+	@rm -f $(OBJS) $(OBONUS)
 
 bonus: $(OBJS) $(OBONUS)
-	$(AR) $(NAME) $^
+	@$(AR) $(NAME) $^
 fclean: clean
-	rm -f $(NAME) libft.so
+	@rm -f $(NAME) libft.so
 
 re: fclean all
 

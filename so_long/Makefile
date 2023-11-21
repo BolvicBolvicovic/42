@@ -38,26 +38,27 @@ OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))
 all: $(NAME)
 
 clean :
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
+	@make fclean -C $(FT_PRINTF_DIR)
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
 
 $(NAME): $(MLX) $(LIBFT) $(FT_PRINTF) $(OBJS)
-	$(CC) -o $@ $(OBJS) $(LFLAGS)
+	@$(CC) -o $@ $(OBJS) $(LFLAGS)
 
 $(MLX):
-	$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(MLX_DIR)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(FT_PRINTF):
-	$(MAKE) -C $(FT_PRINTF_DIR)
+	@$(MAKE) -C $(FT_PRINTF_DIR)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
