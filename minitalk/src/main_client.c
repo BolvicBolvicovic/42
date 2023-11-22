@@ -1,28 +1,65 @@
 //METS TON HEADER
 
-#include "minitalk_c.h"
+#include "minitalk.h"
 
-void send_char_to_server(pid_t server_pid, char c)
+void	args_check(int argc, char **argv)
 {
-	for (int i = 0; i < 8; ++i)
+	int	i;
+
+	i = 0;
+	if (argc != 3)
+		sig_error("Invalid number of arguments");
+	while (argv[1][i])
+		if (!ft_isdigit(argv[1][i++]))
+			sig_error("Invalid PID");
+	if (*argv[2] == 0)
+		sig_error("Invalid message (empty)");
+}
+
+void	confirm_msg(int signal)
+{
+	if (signal == SIGUSR2)
+		ft_printf("Message recieved!\n");
+}
+
+void	send_char_to_server(pid_t pid, char c)
+{
+	int	bit;
+
+	bit = 8;
+	while (bit--)
 	{
-		if (c & (1 << i))
-			kill(server_pid, SIGUSR1);
+		if (c & 0b10000000)
+			kill(pid, SIGUSR1);
 		else
-			sleep(10000);
+			kill(pid, SIGUSR2);
+		usleep(50);
+		c <<= 1;
 	}
+}
+
+void	config_signals(void)
+{
+	struct sigaction	sa_newsig;
+
+	sa_newsig.sa_handler = &confirm_msg;
+	sa_newsig.sa_flags = SA_SIGINFO;
+	if (sigaction(SIGUSR1, &sa_newsig, NULL) == -1)
+		sig_error("Failed to change SIGUSR1's behavior");
+	if (sigaction(SIGUSR2, &sa_newsig, NULL) == -1)
+		sig_error("Failed to change SIGUSR2's behavior");
 }
 
 int	main(int argc, char **argv)
 {
 	int	pid;
+	int	i;
 
-	if (argc != 3)
-		return (ft_error("Wrong number of arguments.\n \
-					It should be <Message PID>"));
-	pid = ft_atoi(argv[2]);
-	for (int i = 0; argv[1][i]; ++i)
-		send_char_to_server(pid, argv[1][i]);
-	send_char_to_server(pid, '\0');
+	i = -1;
+	args_check(argc, argv);
+	pid = ft_atoi(argv[1]);
+	config_signals();
+	while (argv[2][++i])
+		send_char_to_server(pid, argv[2][i]);
 	return (0);
 }

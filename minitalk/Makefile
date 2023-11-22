@@ -20,8 +20,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 CC = cc
-CFLAGS =	-Wall -Wextra -Werror -pedantic \
-		-std=c99 -pthread \
+CFLAGS =	-Wall -Wextra -Werror \
 		-I$(LIBFT_DIR) \
 		-I$(FT_PRINTF_DIR)
 LFLAGS =	-L$(LIBFT_DIR) \

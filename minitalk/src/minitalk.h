@@ -8,10 +8,8 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-pid_t	client_pid;
-pid_t	server_pid;
-
 //Error Handler
 int     ft_error(char *str);
+void     sig_error(char *str);
 
 #endif

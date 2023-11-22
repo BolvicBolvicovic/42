@@ -2,37 +2,50 @@
 
 #include "minitalk.h"
 
-void	sigusr_handler(int signo)
+void	sigusr_handler(int signo, siginfo_t *info, void *context)
 {
+	static int				bit = -1;
+	static unsigned char	i;
+
+	(void)context;
+	if (bit < 0)
+		bit = 7;
 	if (signo == SIGUSR1)
+		i |= (0x01 << bit);
+	bit--;
+	if (bit < 0 && i)
 	{
-		ft_printf("Server received SIGUSR1 from client\n");
+		ft_printf("%c", i);
+		i = 0;	
+		if (kill(info->si_pid, SIGUSR2) == -1)
+			sig_error("Server failed to send SIGUSR2.\n");
 	}
-	if (signo == SIGUSR2)
-	{
-		ft_printf("Server received SIGUSR2 from client\n");
-	}
+	if (kill(info->si_pid, SIGUSR1) == -1)
+		sig_error("Failed to send SIGUSR1");
 }
 
-int	start_serv(struct sigaction sa)
+void	config_signals(void)
 {
-	sa.sa_handler = sigusr_handler;
-	sa.sa_flags = 0;
-	sigaction(SIGUSR1, &sa, NULL);
-	return (0);
+	struct sigaction	sa_newsig;
+
+	sa_newsig.sa_sigaction = &sigusr_handler;
+	sa_newsig.sa_flags = SA_SIGINFO;
+	if (sigaction(SIGUSR1, &sa_newsig, NULL) == -1)
+		sig_error("Failed to change SIGUSR1's behavior");
+	if (sigaction(SIGUSR2, &sa_newsig, NULL) == -1)
+		sig_error("Failed to change SIGUSR2's behavior");
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
-	struct sigaction	sa;
+	pid_t   server_pid;
 
-	if (start_serv(sa))
-		return (ft_error("Server could not start !"));
+	(void)argv;
+	if (argc != 1)
+		return (ft_error("Error: do not put any argument!\n"));
 	server_pid = getpid();
 	ft_printf("Server is running !\nServer PID: %d\n", server_pid);
-	while(1)
-	{
-		continue ;
-	}
+	while(argc == 1)
+		config_signals();
 	return (0);
 }
