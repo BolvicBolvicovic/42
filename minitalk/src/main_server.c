@@ -21,7 +21,7 @@ void	sigusr_handler(int signo, siginfo_t *info, void *context)
 			sig_error("Server failed to send SIGUSR2.\n");
 	}
 	if (kill(info->si_pid, SIGUSR1) == -1)
-		sig_error("Failed to send SIGUSR1");
+		sig_error("Server failed to send SIGUSR1.\n");
 }
 
 void	config_signals(void)
@@ -31,9 +31,9 @@ void	config_signals(void)
 	sa_newsig.sa_sigaction = &sigusr_handler;
 	sa_newsig.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa_newsig, NULL) == -1)
-		sig_error("Failed to change SIGUSR1's behavior");
+		sig_error("Failed to change SIGUSR1's behavior.\n");
 	if (sigaction(SIGUSR2, &sa_newsig, NULL) == -1)
-		sig_error("Failed to change SIGUSR2's behavior");
+		sig_error("Failed to change SIGUSR2's behavior.\n");
 }
 
 int	main(int argc, char **argv)

@@ -8,18 +8,18 @@ void	args_check(int argc, char **argv)
 
 	i = 0;
 	if (argc != 3)
-		sig_error("Invalid number of arguments");
+		sig_error("Invalid number of arguments.\n");
 	while (argv[1][i])
 		if (!ft_isdigit(argv[1][i++]))
-			sig_error("Invalid PID");
+			sig_error("Invalid PID.");
 	if (*argv[2] == 0)
-		sig_error("Invalid message (empty)");
+		sig_error("Invalid message (empty).\n");
 }
 
 void	confirm_msg(int signal)
 {
 	if (signal == SIGUSR2)
-		ft_printf("Message recieved!\n");
+		ft_printf("Character recieved!\n");
 }
 
 void	send_char_to_server(pid_t pid, char c)
@@ -45,9 +45,9 @@ void	config_signals(void)
 	sa_newsig.sa_handler = &confirm_msg;
 	sa_newsig.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa_newsig, NULL) == -1)
-		sig_error("Failed to change SIGUSR1's behavior");
+		sig_error("Failed to change SIGUSR1's behavior.\n");
 	if (sigaction(SIGUSR2, &sa_newsig, NULL) == -1)
-		sig_error("Failed to change SIGUSR2's behavior");
+		sig_error("Failed to change SIGUSR2's behavior.\n");
 }
 
 int	main(int argc, char **argv)
@@ -61,5 +61,6 @@ int	main(int argc, char **argv)
 	config_signals();
 	while (argv[2][++i])
 		send_char_to_server(pid, argv[2][i]);
+	send_char_to_server(pid, '\n');
 	return (0);
 }
