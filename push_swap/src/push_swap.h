@@ -7,22 +7,26 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-typedef struct	finder_s
+typedef struct	s_node
 {
-	char	**path;
-	int		*list_a;
-	int		*list_b;
-}	finder_t;
+	int		num;
+	struct s_node	*next;
+	struct s_node	*previous;
+}	t_node;
 
 //Error handle
-void    ft_error(char *error);
-void    ft_error_free(char *error, finder_t *finder);
-void    full_free(finder_t *finder);
+void	ft_error(char *error);
+void	ft_error_free(char *error, char **argv, int flag);
+void	ft_free_matrix(char **m);
+
+//Check Arguments
+void	ft_check_args(int argc, char **argvi, int new_av_flag);
+
 
 //Init
-void    creat_new_lists(int argc, char **argv, finder_t *finder);
+void	init_stack(char **argv, t_node **stack, int new_av_flag);
 
 //Finder
-void    find_path(finder_t *finder);
+int		find_path(t_node *finder);
 
 #endif

@@ -19,13 +19,13 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 CC = cc
-CFLAGS =	-Wall -Wextra -Werror \
+CFLAGS =	-Wall -Wextra -Werror -g \
 		-I$(LIBFT_DIR) \
 		-I$(FT_PRINTF_DIR)
 LFLAGS =	-L$(LIBFT_DIR) \
 		-L$(FT_PRINTF_DIR) \
 		-lft -lftprintf
-FILES = main find_path init_list 
+FILES = main find_path init_list error check_args
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

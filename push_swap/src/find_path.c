@@ -1,8 +1,8 @@
 //mets ton header
 #include "push_swap.h"
 
-void	find_path(finder_t *finder)
+int	find_path(t_node *finder)
 {
-	finder->path = ft_calloc(sizeof(char *), 1);
-	return ;
+	(void)finder;
+	return (1);
 }

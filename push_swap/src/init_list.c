@@ -2,16 +2,33 @@
 
 #include "push_swap.h"
 
-void	creat_new_lists(int argc, char **argv, finder_t *finder)
+void	init_stack(char **argv, t_node **node, int new_av_flag)
 {
-        int     i;
+	int	i;
+	t_node	*headnode;
+	t_node	*new_node;
 
-        i = -1;
-	finder->list_a = ft_calloc(sizeof(int), argc);
-	finder->list_b = ft_calloc(sizeof(int), argc);
-	if (!finder->list_a || !finder->list_b)
-		ft_error_free("Lists allocation failed.", finder);
+	i = -1;
 	while (argv[++i])
-		finder->list_a[i] = ft_atoi(argv[i]);
+	{
+		new_node = ft_calloc(sizeof(t_node), 1);
+		new_node->num = ft_atoi(argv[i]);
+		if (node == NULL)
+		{
+			new_node->next = NULL;
+			new_node->previous = NULL;
+			*node = new_node;
+			headnode = *node;
+		}
+		else
+		{
+			new_node->next = NULL;
+			*node->next = new_node;
+			new_node->previous = *node;
+		}
+	}
+	if (new_av_flag)
+		ft_free_matrix(argv);
+	*node = headnode;
 }
 
