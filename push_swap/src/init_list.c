@@ -2,33 +2,34 @@
 
 #include "push_swap.h"
 
-void	init_stack(char **argv, t_node **node, int new_av_flag)
+int	*addnum(int num, char** argv, int new_av_flag)
 {
-	int	i;
-	t_node	*headnode;
-	t_node	*new_node;
+	int	*ptr_num;
 
-	i = -1;
+	ptr_num = ft_calloc(sizeof(int), 1);
+	if (!ptr_num)
+		ft_error_free("Error.", argv, new_av_flag);
+	*ptr_num = num;
+	return (ptr_num);
+}
+
+void	init_stack(char **argv, t_list **list, int new_av_flag)
+{
+	t_list	*new_node;
+	int		i;
+
+	i = 0;
+	if (new_av_flag)
+		i--;
 	while (argv[++i])
 	{
-		new_node = ft_calloc(sizeof(t_node), 1);
-		new_node->num = ft_atoi(argv[i]);
-		if (node == NULL)
-		{
-			new_node->next = NULL;
-			new_node->previous = NULL;
-			*node = new_node;
-			headnode = *node;
-		}
+		new_node = ft_lstnew(addnum(ft_atoi(argv[i]), argv, new_av_flag));
+		if (list)
+			ft_lstadd_back(list, new_node);
 		else
-		{
-			new_node->next = NULL;
-			*node->next = new_node;
-			new_node->previous = *node;
-		}
+			*list = new_node;
 	}
 	if (new_av_flag)
 		ft_free_matrix(argv);
-	*node = headnode;
 }
 

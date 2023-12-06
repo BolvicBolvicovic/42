@@ -45,8 +45,8 @@ void	ft_check_args(int argc, char **argv, int new_av_flag)
 	i = 0;
 	if (argc < 2)
 		ft_error("No argument.");
-	if (argc == 2 && argv[1][0])
-		argv = ft_split(argv[1], ' ');
+	if (new_av_flag)
+		i--;
 	while (argv[++i])
 	{
 		j = -1;

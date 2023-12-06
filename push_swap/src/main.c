@@ -2,27 +2,19 @@
 
 #include "push_swap.h"
 
-int	stack_sorted(t_node *a)
-{
-	if (a->next && a->next->num > a->num)
-		return (0);
-	else if (a->next)
-		return (stack_sorted(a->next));
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
-	t_node	*a;
-//	t_node	*b;
+	t_list	*a;
+	t_list	*b;
 
 	a = NULL;
-//	b = NULL;
+	b = NULL;
+	(void)b;
+	if (argc == 2)
+		argv = ft_split(argv[1], ' ');
 	ft_check_args(argc, argv, argc == 2);
 	init_stack(argv, &a, argc == 2);
-	if (!stack_sorted(a))
-		ft_printf("Stack not sorted.\n");
-	else
-		ft_printf("Stack sorted.\n");
+	if (!find_path(a, b))
+		ft_error_free("Error.", argv, argc == 2);
 	return (0);
 }

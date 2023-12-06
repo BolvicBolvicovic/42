@@ -2,6 +2,11 @@
 
 #include "push_swap.h"
 
+void	free_node(void *content)
+{
+	free(content);
+}
+
 void	ft_error(char *error)
 {
 	ft_printf("%s\n", error);

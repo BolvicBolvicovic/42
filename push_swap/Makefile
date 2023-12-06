@@ -25,7 +25,7 @@ CFLAGS =	-Wall -Wextra -Werror -g \
 LFLAGS =	-L$(LIBFT_DIR) \
 		-L$(FT_PRINTF_DIR) \
 		-lft -lftprintf
-FILES = main find_path init_list error check_args
+FILES = main find_path init_list error check_args rotate swap reverse_rotate
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

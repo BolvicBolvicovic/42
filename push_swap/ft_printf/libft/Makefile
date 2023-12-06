@@ -8,7 +8,7 @@ BONUS = ft_lstadd_back.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstsize.c ft_
 OBONUS = $(BONUS:.c=.o)
 NAME = libft.a
 
-all: $(NAME)
+all: bonus
 
 $(NAME): $(OBJS)
 	@$(AR) $@ $^
