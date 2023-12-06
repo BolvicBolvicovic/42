@@ -54,21 +54,14 @@ void	sort_three(t_list **a)
 		sa(a);
 }
 
-void	sort_five(t_list **a, t_list **b)
-{
-	(void)b;
-	if (is_sorted(*a))
-		return ;
-}
-
 int	find_path(t_list *a, t_list *b)
 {
 	int	*content;
 
 	if (ft_lstsize(a) == 3)
 		sort_three(&a);
-	else if (ft_lstsize(a) == 5)
-		sort_five(&a, &b);
+	else
+		quicksort(&a, &b);
 	while (a)
 	{
 		content = (int *)a->content;

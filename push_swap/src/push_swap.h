@@ -21,6 +21,7 @@ void	init_stack(char **argv, t_list **stack, int new_av_flag);
 
 //Finder
 int		find_path(t_list *a, t_list *b);
+void	quicksort(t_list **a, t_list **b);
 
 //Commands
 void	rra(t_list **a);
@@ -32,5 +33,7 @@ void	rr(t_list **a, t_list **b);
 void	sa(t_list **a);
 void	sb(t_list **b);
 void	ss(t_list **a, t_list **b);
+void	pa(t_list **a, t_list **b);
+void	pb(t_list **b, t_list **a);
 
 #endif
