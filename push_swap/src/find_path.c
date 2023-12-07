@@ -65,9 +65,16 @@ int	find_path(t_list *a, t_list *b)
 	while (a)
 	{
 		content = (int *)a->content;
-		ft_printf("%d\n", *content);
+		ft_printf("A: %d\n", *content);
 		a = a->next;
 	}
+	while (b)
+        {
+                content = (int *)b->content;
+                ft_printf("B: %d\n", *content);
+                b = b->next;
+        }
+	ft_lstclear(&b, &free_node);
 	ft_lstclear(&a, &free_node);
 	return (1);
 }

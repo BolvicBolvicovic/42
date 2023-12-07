@@ -16,12 +16,12 @@ void	push(t_list **a, t_list **b)
 
 void	pa(t_list **a, t_list **b)
 {
-	push(a, b);
+	push(b, a);
 	ft_printf("pa\n");
 }
 
 void	pb(t_list **b, t_list **a)
 {
-	push(b, a);
+	push(a, b);
 	ft_printf("pb\n");
 }

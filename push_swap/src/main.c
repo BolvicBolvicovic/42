@@ -9,7 +9,6 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	(void)b;
 	if (argc == 2)
 		argv = ft_split(argv[1], ' ');
 	ft_check_args(argc, argv, argc == 2);

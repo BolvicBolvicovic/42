@@ -16,11 +16,14 @@ void	reverse_rotate(t_list **a)
 	t_list	*tail;
 	t_list	*pre_tail;
 	
-	tmp = *a;
-	get_tails(*a, &tail, &pre_tail);
-	*a = tail;
-	(*a)->next = tmp;
-	pre_tail->next = NULL;
+	if (*a && (*a)->next)
+	{
+		tmp = *a;
+		get_tails(*a, &tail, &pre_tail);
+		*a = tail;
+		(*a)->next = tmp;
+		pre_tail->next = NULL;
+	}
 }
 
 void	rra(t_list **a)
@@ -41,4 +44,3 @@ void    rrr(t_list **a, t_list **b)
 	reverse_rotate(b);
         ft_printf("rrr\n");
 }
-

@@ -22,6 +22,11 @@ void	init_stack(char **argv, t_list **stack, int new_av_flag);
 //Finder
 int		find_path(t_list *a, t_list *b);
 void	quicksort(t_list **a, t_list **b);
+void	sort_three(t_list **a);
+int		is_sorted(t_list *a);
+void	do_best_move(t_list **a, t_list **b);
+void	move_node(t_list **a, t_list **b, t_list *target, t_list *bullet);
+int		get_cost(t_list *a, t_list *target);
 
 //Commands
 void	rra(t_list **a);
