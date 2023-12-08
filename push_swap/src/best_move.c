@@ -36,38 +36,43 @@ t_list	*get_target(t_list *a, t_list *b)
 	return (target);
 }
 
-int	get_best_cost(t_list *a, t_list *b, t_list *target)
+int	get_best_cost(t_list *a, t_list *b, t_list *bullet, t_list *target)
 {
-	int	cost;
-
-	(void)a;
-	(void)b;
-	(void)target;
-	cost = 0;
-	return (cost);
+	int	cost_a;
+	int	cost_b;
+	
+	cost_a = get_cost(a, target);
+	cost_b = get_cost(b, bullet);
+	if (cost_a < 0)
+		cost_a = -cost_a;
+	if (cost_b < 0)
+		cost_b = -cost_b;
+	return (cost_a + cost_b);
 }
 
 t_list	*get_best_node(t_list *a, t_list *b, t_list **node_bullet)
 {
 	t_list	*target;
 	t_list	*current;
+	t_list	*tmp;
 	int		current_cost;
 	int		*best_cost;
 	
+	tmp = b;
 	best_cost = NULL;
-	while (b)
+	while (tmp)
 	{
-		current = get_target(a, b);
-		current_cost = get_best_cost(a, b, current);
+		current = get_target(a, tmp);
+		current_cost = get_best_cost(a, b, tmp, current);
 		if (!best_cost || current_cost < *best_cost)
 		{
 			if (!best_cost)
 				best_cost = ft_calloc(sizeof(int), 1);
 			target = current;
-			*node_bullet = b;
+			*node_bullet = tmp;
 			*best_cost = current_cost;
 		}
-		b = b->next;
+		tmp = tmp->next;
 	}
 	free(best_cost);
 	return (target);
