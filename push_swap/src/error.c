@@ -2,6 +2,24 @@
 
 #include "push_swap.h"
 
+void	free_list(t_list *a)
+{
+	t_list *tmp;
+
+	tmp = a;
+	while (tmp)
+	{
+		free(tmp->content);
+		tmp = tmp->next;
+	}
+	while (a)
+	{
+		tmp = a->next;
+		free(a);
+		a = tmp;
+	}
+}
+
 void	free_node(void *content)
 {
 	free(content);

@@ -13,7 +13,7 @@ int	main(int argc, char **argv)
 		argv = ft_split(argv[1], ' ');
 	ft_check_args(argc, argv, argc == 2);
 	init_stack(argv, &a, argc == 2);
-	if (!find_path(a, b))
-		ft_error_free("Error.", argv, argc == 2);
+	find_path(a, b);
+	free_list(a);
 	return (0);
 }

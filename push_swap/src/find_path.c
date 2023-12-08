@@ -54,7 +54,7 @@ void	sort_three(t_list **a)
 		sa(a);
 }
 
-int	find_path(t_list *a, t_list *b)
+void	find_path(t_list *a, t_list *b)
 {
 	int	*content;
 
@@ -74,7 +74,5 @@ int	find_path(t_list *a, t_list *b)
                 ft_printf("B: %d\n", *content);
                 b = b->next;
         }
-	ft_lstclear(&b, &free_node);
-	ft_lstclear(&a, &free_node);
 	return (1);
 }
