@@ -56,23 +56,8 @@ void	sort_three(t_list **a)
 
 void	find_path(t_list *a, t_list *b)
 {
-	int	*content;
-
 	if (ft_lstsize(a) == 3)
 		sort_three(&a);
 	else
 		quicksort(&a, &b);
-	while (a)
-	{
-		content = (int *)a->content;
-		ft_printf("A: %d\n", *content);
-		a = a->next;
-	}
-	while (b)
-        {
-                content = (int *)b->content;
-                ft_printf("B: %d\n", *content);
-                b = b->next;
-        }
-	return (1);
 }

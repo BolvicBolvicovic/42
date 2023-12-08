@@ -9,7 +9,7 @@
 # include "ft_printf.h"
 
 //Error Handler
-int     ft_error(char *str);
-void     sig_error(char *str);
+int		ft_error(char *str);
+void	sig_error(char *str);
 
 #endif

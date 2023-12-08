@@ -80,25 +80,23 @@ void	save_three(t_list **a, t_list **b)
 	}
 }
 
-int	get_low_pos(t_list **a)
+int	get_low_pos(t_list *a)
 {
-	t_list	**list;
 	int		i;
 	int		lowest;
 	int		low_pos;
 	i = 0;
 	low_pos = 0;
-	list = a;
-	lowest = *(int *)(*list)->content;
-	while (*list)
+	lowest = *(int *)a->content;
+	while (a)
 	{
-		if (*(int *)(*list)->content < lowest)
+		if (*(int *)a->content < lowest)
 		{
-			lowest = *(int *)(*list)->content;
+			lowest = *(int *)a->content;
 			low_pos = i;
 		}
 		i++;
-		*list = (*list)->next;
+		a = a->next;
 	}
 	return (low_pos);
 }
@@ -109,7 +107,7 @@ void	shift_stack(t_list **a)
 	int	stack_size;
 
 	stack_size = ft_lstsize(*a);
-	low_pos = get_low_pos(a);
+	low_pos = get_low_pos(*a);
 	if (low_pos > stack_size / 2)
 	{
 		while (low_pos < stack_size)

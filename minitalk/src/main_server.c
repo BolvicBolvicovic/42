@@ -1,5 +1,4 @@
 //METS UN HEADER
-
 #include "minitalk.h"
 
 void	sigusr_handler(int signo, siginfo_t *info, void *context)
@@ -16,7 +15,7 @@ void	sigusr_handler(int signo, siginfo_t *info, void *context)
 	if (bit < 0 && i)
 	{
 		ft_printf("%c", i);
-		i = 0;	
+		i = 0;
 		if (kill(info->si_pid, SIGUSR2) == -1)
 			sig_error("Server failed to send SIGUSR2.\n");
 	}
@@ -38,14 +37,14 @@ void	config_signals(void)
 
 int	main(int argc, char **argv)
 {
-	pid_t   server_pid;
+	pid_t	server_pid;
 
 	(void)argv;
 	if (argc != 1)
 		return (ft_error("Error: do not put any argument!\n"));
 	server_pid = getpid();
 	ft_printf("Server is running !\nServer PID: %d\n", server_pid);
-	while(argc == 1)
+	while (argc == 1)
 		config_signals();
 	return (0);
 }

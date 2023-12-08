@@ -24,7 +24,7 @@ void	init_stack(char **argv, t_list **list, int new_av_flag)
 	while (argv[++i])
 	{
 		new_node = ft_lstnew(addnum(ft_atoi(argv[i]), argv, new_av_flag));
-		if (list)
+		if (*list)
 			ft_lstadd_back(list, new_node);
 		else
 			*list = new_node;

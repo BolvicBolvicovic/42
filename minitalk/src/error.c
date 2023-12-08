@@ -1,15 +1,14 @@
 //METS TON HEADER
-# include "minitalk.h"
+#include "minitalk.h"
 
-void     sig_error(char *str)
+void	sig_error(char *str)
 {
-        ft_printf("%s\n", str);
-        exit(EXIT_FAILURE);
+	ft_printf("%s\n", str);
+	exit(EXIT_FAILURE);
 }
 
-int     ft_error(char *str)
+int	ft_error(char *str)
 {
-        ft_printf("%s\n", str);
-        return (1);
+	ft_printf("%s\n", str);
+	return (1);
 }
-

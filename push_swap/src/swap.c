@@ -4,14 +4,16 @@
 
 void	swap(t_list **a)
 {
-	void	*tmp;
+	int	*tmp;
 
+	tmp = ft_calloc(sizeof(int), 1);
 	if (ft_lstsize(*a) > 1)
 	{
-		tmp = (*a)->content;
-		(*a)->content = (*a)->next->content;
-		(*a)->next->content = tmp;
+		*tmp = *(int *)(*a)->content;
+		*(int *)(*a)->content = *(int *)(*a)->next->content;
+		*(int *)(*a)->next->content = *tmp;
 	}
+	free(tmp);
 }
 
 void	sa(t_list **a)
