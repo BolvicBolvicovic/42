@@ -20,7 +20,7 @@ void	ft_check_args(int argc, char **argv, int new_av_flag);
 void	init_stack(char **argv, t_list **stack, int new_av_flag);
 
 //Finder
-void	find_path(t_list *a, t_list *b);
+void	find_path(t_list **a, t_list **b);
 void	quicksort(t_list **a, t_list **b);
 void	sort_three(t_list **a);
 int		is_sorted(t_list *a);

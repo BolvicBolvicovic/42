@@ -54,10 +54,10 @@ void	sort_three(t_list **a)
 		sa(a);
 }
 
-void	find_path(t_list *a, t_list *b)
+void	find_path(t_list **a, t_list **b)
 {
-	if (ft_lstsize(a) == 3)
-		sort_three(&a);
+	if (ft_lstsize(*a) == 3)
+		sort_three(a);
 	else
-		quicksort(&a, &b);
+		quicksort(a, b);
 }
