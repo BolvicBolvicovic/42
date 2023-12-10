@@ -2,6 +2,13 @@
 
 #include "philo.h"
 
+void	free_data(t_data *data)
+{
+	free(data->tid);
+	free(data->forks);
+	free(data->philos);
+}
+
 int	ft_error(char *str)
 {
 	printf("%s", str);
@@ -10,13 +17,11 @@ int	ft_error(char *str)
 
 int	main(int argc, char **argv)
 {
-	t_args	*args;
+	t_data	data;
 
 	if (!check_args(argc, argv))
 		return (ft_error("Error:\nWrong arguments.\n"));
-	args = init_args(argc, argv);
-	if (!args)
-		return (ft_error("Error:\nAllocation failed.\n"));
-	free(args);
+	if (!init_data(argc, argv, &data))
+		return (ft_error("Error:\nInitialization failed.\n"));
 	return (0);
 }
