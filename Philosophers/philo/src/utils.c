@@ -10,6 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philo.h"
+
+void	messages(char *msg, t_philo *philo)
+{
+	int	time;
+
+	pthread_mutex_lock(&philo->data->write);
+	time = get_time() - philo->data->start_time;
+	if (msg[0] == 'd' && philo->data->is_dead == 0)
+	{
+		printf("%d %d %s\n", time, philo->id, msg);
+		philo->data->is_dead = 1;
+	}
+	if (!philo->data->is_dead)
+		printf("%d %d %s\n", time, philo->id, msg);
+	pthread_mutex_unlock(&philo->data->write);
+}
+
+int	ft_usleep(useconds_t time)
+{
+	u_int64_t	start;
+
+	start = get_time();
+	while ((get_time() - start) < time)
+		usleep(time / 10);
+	return (0);
+}
+
 int	init_forks(t_data *data)
 {
 	int	i;
@@ -40,7 +68,7 @@ void	init_philos(t_data *data)
 		data->philos[i].data = data;
 		data->philos[i].id = i + 1;
 		data->philos[i].time_to_die = data->death_time;
-		data->philos[i].eat_cont = 0;
+		data->philos[i].eat_count = 0;
 		data->philos[i].eating = 0;
 		data->philos[i].status = 0;
 		pthread_mutex_init(&data->philos[i].lock, NULL);

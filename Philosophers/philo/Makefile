@@ -14,7 +14,7 @@ NAME	=	philo
 
 CC 	=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g -pthread
-FILES	=	main check_args utils
+FILES	=	main check_args utils routine eat
 
 SRCS	=	$(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS	=	$(addprefix src/, $(addsuffix .o, $(FILES)))

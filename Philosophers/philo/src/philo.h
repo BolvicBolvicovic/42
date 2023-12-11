@@ -9,6 +9,12 @@
 # include <sys/time.h>
 # include <stdio.h>
 
+# define TAKE_FORKS "has taken a fork"
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define EAT "is eating"
+# define DIED "died"
+
 typedef struct	s_args
 {
 	int		number_of_philosophers;
@@ -57,19 +63,12 @@ int		ft_atoi(const char *nptr);
 int		init_forks(t_data *data);
 void	init_philos(t_data *data);
 void	free_data(t_data *data);
+void	messages(char *msg, t_philo *philo);
+int		get_time(void);
+int		ft_usleep(useconds_t time);
 
 //Routine
-void	*routine(void *data);
-
-
-
-
-
-
-
-
-
-
-
+int		init_thread(t_data *data);
+void	eat(t_philo *philo);
 
 #endif
