@@ -38,6 +38,21 @@ void	end_all(t_data *data)
 	free_data(data);	
 }
 
+int	case_one(t_data *data)
+{
+	data->start_time = get_time();
+	if (pthread_create(&data->tid[0], NULL, &routine, &data->philos[0]))
+	{
+		end_all(data);
+		return (ft_error("Error:\nCould not create thread.\n"));
+	}
+	pthread_detach(data->tid[0]);
+	while (!data->is_dead)
+		ft_usleep(0);
+	end_all(data);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -49,6 +64,8 @@ int	main(int argc, char **argv)
 		free_data(&data);
 		return (ft_error("Error:\nInitialization failed.\n"));
 	}
+	if (data.philo_num == 1)
+		return (case_one(&data));
 	if (!init_thread(&data))
 	{
 		end_all(&data);

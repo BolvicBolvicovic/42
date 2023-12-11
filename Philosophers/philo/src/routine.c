@@ -8,7 +8,7 @@ void	*monitor(void *philo_ptr)
 
 	philo = (t_philo *)philo_ptr;
 	pthread_mutex_lock(&philo->data->write);
-	printf("data val: %d", philo->data->is_dead);
+	printf("data val: %d\n", philo->data->is_dead);
 	pthread_mutex_unlock(&philo->data->write);
 	while (!philo->data->is_dead)
 	{
@@ -55,6 +55,8 @@ void	*routine(void *philo_ptr)
 		eat(philo);
 		messages(THINK, philo);
 	}
+	if (pthread_join(philo->t1, NULL))
+		return ((void *)1);
 	return ((void *)0);
 }
 
@@ -70,7 +72,7 @@ int	init_thread(t_data *data)
 			return (0);
 	while (++i < data->philo_num)
 	{
-		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[0]))
+		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (0);
 		ft_usleep(1);
 	}

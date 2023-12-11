@@ -1,15 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 17:14:41 by vcornill          #+#    #+#             */
-/*   Updated: 2023/10/16 17:39:43 by vcornill         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+//mets un header
 #include "philo.h"
 
 void	messages(char *msg, t_philo *philo)
@@ -45,15 +34,13 @@ int	init_forks(t_data *data)
 	i = -1;
 	while (++i < data->philo_num)
 		pthread_mutex_init(&data->forks[i], NULL);
-	i = 0;
 	data->philos[0].l_fork = &data->forks[0];
 	data->philos[0].r_fork = &data->forks[data->philo_num - 1];
-	i = 1;
-	while (i < data->philo_num)
+	i = 0;
+	while (++i < data->philo_num)
 	{
 		data->philos[i].l_fork = &data->forks[i];
 		data->philos[i].r_fork = &data->forks[i - 1];
-		i++;
 	}
 	return (0);
 }
@@ -62,8 +49,8 @@ void	init_philos(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (i < data->philo_num)
+	i = -1;
+	while (++i < data->philo_num)
 	{
 		data->philos[i].data = data;
 		data->philos[i].id = i + 1;
@@ -72,7 +59,6 @@ void	init_philos(t_data *data)
 		data->philos[i].eating = 0;
 		data->philos[i].status = 0;
 		pthread_mutex_init(&data->philos[i].lock, NULL);
-		i++;
 	}
 }
 

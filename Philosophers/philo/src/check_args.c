@@ -56,7 +56,7 @@ int	init_data(int argc, char **argv, t_data *data)
 	if (!data->tid || !data->forks || !data->philos)
 		return (0);
 	if (init_forks(data))
-		return (1);
+		return (0);
 	init_philos(data);
 	return (1);
 }

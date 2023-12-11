@@ -15,15 +15,6 @@
 # define EAT "is eating"
 # define DIED "died"
 
-typedef struct	s_args
-{
-	int		number_of_philosophers;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		number_of_times_each_philosopher_must_eat;
-}		t_args;
-
 typedef struct	s_philo
 {
 	struct s_data	*data;
@@ -69,6 +60,7 @@ int		ft_usleep(useconds_t time);
 
 //Routine
 int		init_thread(t_data *data);
+void	*routine(void *philo_ptr);
 void	eat(t_philo *philo);
 
 #endif
