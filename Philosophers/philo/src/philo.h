@@ -1,5 +1,14 @@
-// mets un header
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 12:41:15 by vcornill          #+#    #+#             */
+/*   Updated: 2023/12/12 12:44:40 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
@@ -15,15 +24,15 @@
 # define EAT "is eating"
 # define DIED "died"
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	struct s_data	*data;
-	pthread_t	t1;
-	int		id;
-	int		eat_count;
-	int		status;
-	int		eating;
-	int		time_to_die;
+	pthread_t		t1;
+	int				id;
+	int				eat_count;
+	int				status;
+	int				eating;
+	int				time_to_die;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
@@ -31,16 +40,16 @@ typedef struct	s_philo
 
 typedef struct s_data
 {
-        pthread_t	*tid;
-	int		philo_num;
-        int		number_of_meals;
-        int		is_dead;
-        int		is_finished;
-        t_philo		*philos;
-	int		death_time;
-	int		eat_time;
-	int		sleep_time;
-	int		start_time;
+	pthread_t		*tid;
+	int				philo_num;
+	int				number_of_meals;
+	int				is_dead;
+	int				is_finished;
+	t_philo			*philos;
+	int				death_time;
+	int				eat_time;
+	int				sleep_time;
+	int				start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;

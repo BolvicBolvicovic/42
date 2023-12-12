@@ -1,4 +1,14 @@
-//Mets un header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 12:39:20 by vcornill          #+#    #+#             */
+/*   Updated: 2023/12/12 12:39:52 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -8,13 +18,6 @@ int	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	free_data(t_data *data)
-{
-	free(data->tid);
-	free(data->forks);
-	free(data->philos);
 }
 
 int	ft_error(char *str)
@@ -35,7 +38,7 @@ void	end_all(t_data *data)
 	}
 	pthread_mutex_destroy(&data->write);
 	pthread_mutex_destroy(&data->lock);
-	free_data(data);	
+	free_data(data);
 }
 
 int	case_one(t_data *data)

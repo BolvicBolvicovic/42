@@ -1,10 +1,20 @@
-//mets un header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 12:38:50 by vcornill          #+#    #+#             */
+/*   Updated: 2023/12/12 12:38:52 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
 void	*monitor(void *philo_ptr)
 {
-        t_philo	*philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)philo_ptr;
 	pthread_mutex_lock(&philo->data->write);
@@ -62,7 +72,7 @@ void	*routine(void *philo_ptr)
 
 int	init_thread(t_data *data)
 {
-	int		i;
+	int			i;
 	pthread_t	t_monitor;
 
 	i = -1;

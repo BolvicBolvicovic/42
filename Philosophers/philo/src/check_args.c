@@ -1,4 +1,14 @@
-//mets un header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 12:37:13 by vcornill          #+#    #+#             */
+/*   Updated: 2023/12/12 12:37:46 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
@@ -52,7 +62,7 @@ int	init_data(int argc, char **argv, t_data *data)
 	pthread_mutex_init(&data->lock, NULL);
 	data->tid = malloc(sizeof(pthread_t) * data->philo_num);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_num);
-	data->philos =malloc(sizeof(t_philo) * data->philo_num);
+	data->philos = malloc(sizeof(t_philo) * data->philo_num);
 	if (!data->tid || !data->forks || !data->philos)
 		return (0);
 	if (init_forks(data))

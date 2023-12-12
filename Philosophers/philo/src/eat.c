@@ -1,6 +1,23 @@
-//mets un header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eat.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/12 12:39:06 by vcornill          #+#    #+#             */
+/*   Updated: 2023/12/12 12:39:09 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
+
+void	free_data(t_data *data)
+{
+	free(data->tid);
+	free(data->forks);
+	free(data->philos);
+}
 
 void	take_forks(t_philo *philo)
 {
