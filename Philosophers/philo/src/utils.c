@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:37:57 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/12 12:38:04 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:41:20 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ void	messages(char *msg, t_philo *philo)
 	if (!philo->data->is_dead)
 		printf("%d %d %s\n", time, philo->id, msg);
 	pthread_mutex_unlock(&philo->data->write);
-}
-
-int	ft_usleep(useconds_t time)
-{
-	u_int64_t	start;
-
-	start = get_time();
-	while ((get_time() - start) < time)
-		usleep(time / 10);
-	return (0);
 }
 
 int	init_forks(t_data *data)

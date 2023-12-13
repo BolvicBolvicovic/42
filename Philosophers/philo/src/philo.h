@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:41:15 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/12 12:44:40 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:41:43 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	init_philos(t_data *data);
 void	free_data(t_data *data);
 void	messages(char *msg, t_philo *philo);
 int		get_time(void);
-int		ft_usleep(useconds_t time);
 
 //Routine
 int		init_thread(t_data *data);

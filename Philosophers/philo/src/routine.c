@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:38:50 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/12 12:38:52 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:37:11 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	init_thread(t_data *data)
 	{
 		if (pthread_create(&data->tid[i], NULL, &routine, &data->philos[i]))
 			return (0);
-		ft_usleep(1);
+		usleep(1);
 	}
 	i = -1;
 	while (++i < data->philo_num)

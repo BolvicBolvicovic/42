@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:39:20 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/12 12:39:52 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:22:49 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	case_one(t_data *data)
 	}
 	pthread_detach(data->tid[0]);
 	while (!data->is_dead)
-		ft_usleep(0);
+		usleep(0);
 	end_all(data);
 	return (0);
 }

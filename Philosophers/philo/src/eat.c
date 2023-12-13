@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:39:06 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/12 12:39:09 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:35:09 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	drop_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 	messages(SLEEP, philo);
-	ft_usleep(philo->data->sleep_time);
+	usleep(philo->data->sleep_time * 1000);
 }
 
 void	eat(t_philo *philo)
@@ -43,7 +43,7 @@ void	eat(t_philo *philo)
 	philo->time_to_die = get_time() + philo->data->death_time;
 	messages(EAT, philo);
 	philo->eat_count++;
-	ft_usleep(philo->data->eat_time);
+	usleep(philo->data->eat_time * 1000);
 	philo->eating = 0;
 	pthread_mutex_unlock(&philo->lock);
 	drop_forks(philo);
