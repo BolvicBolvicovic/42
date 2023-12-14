@@ -6,53 +6,54 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/13 18:39:42 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/14 14:49:04 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	size_of_av(char	**argv)
+token	*tokenize(char *argv)
 {
-	int	size;
-	int	i;
-
-	size = 0;
-	i = 0;
-	while (argv[++i])
-		size += ft_strlen(argv[i]);
-	return (size);
-}
-
-token	*tokenize(const char **argv)
-{
-	char	*j_av;
 	char	**av;
-	int		size;
 	int		num_of_words;
 	int		i;
 	token	*array;
 	
-	size = size_of_av(argv);
-	j_av = ft_join(size, argv, " ");
-	num_of_words = ft_count_words(j_av, ' ');
-	array = malloc(sizeof(token * num_of_words + 1));
-	av = ft_split(j_av);
-	free(j_av);
+	num_of_words = ft_count_words(argv, ' ');
+	array = malloc(sizeof(token) * (num_of_words + 1));
+	av = ft_split(argv, ' ');
 	i = -1;
 	while (av[++i])
 	{
-		array->type = find_type(av[i]);
-		array->value = av[i];
+		array[i].type = find_type(av[i]);
+		array[i].value = av[i];
 	}
+	array[i].value = NULL;
 	return (array);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	Token	*t_argv;
+	token	*t_argv;
+	int		i;
+	char	*input;
 
-	t_argv = tokenize(argv);
-	free(t_argv);
+	while (1)
+	{
+		i = -1;
+		t_argv = NULL;
+		input = readline("minishell$ ");
+		if (ft_strlen(input) > 0)
+		{
+			t_argv = tokenize(input);
+			while (t_argv[++i].value)
+			{
+				printf("Value: %s Token: %d\n", t_argv[i].value, t_argv[i].type);
+				free(t_argv[i].value);
+			}
+		}
+		free(t_argv);
+		free(input);
+	}
 	return (0);
 }

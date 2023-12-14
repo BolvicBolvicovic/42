@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini.h                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/13 18:33:08 by vcornill         ###   ########.fr       */
+/*   Created: 2023/10/19 19:26:41 by vcornill          #+#    #+#             */
+/*   Updated: 2023/10/19 19:26:43 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_H
-# define MINI_H
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
+#include "libft.h"
 
-typedef enum
+void	ft_putnbr_fd(int n, int fd)
 {
-	T_WORD,
-	T_PIPE,
-	T_REDIRECT_IN,
-	T_REDIRECT_OUT,
-}	token_type;
-
-typedef struct
-{
-	token_type	type;
-	char		*value;
+	if (n == 0)
+	{
+		write(fd, "0", 1);
+		return ;
+	}
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		n = -n;
+		write(fd, "-", 1);
+	}
+	if (n / 10)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
 }
-
-int		ft_strlen(char *str);
-char	*ft_strjoin(int size, char **strs, char *sep);
-int		ft_count_words(char const *s, char sep);
-
-#endif
