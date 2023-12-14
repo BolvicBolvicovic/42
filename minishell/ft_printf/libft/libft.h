@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:04:13 by vcornill          #+#    #+#             */
-/*   Updated: 2023/10/17 15:05:35 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:22:19 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_list
 	struct s_list	*next;
 }		t_list;
 char	*get_next_line(int fd);
+int		is_white_space(char c);
 int		ft_isalpha(int str);
 int		ft_isdigit(int str);
 int		ft_isalnum(int str);

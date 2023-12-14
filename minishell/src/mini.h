@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/14 14:34:08 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:23:47 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct
 	char		*value;
 }	token;
 
-int	find_type(char *str);
-
+int		find_type(char *str);
+char	*add_spaces(char *input);
+void	add_space(char *input, int *i);
+void	handle_quotes(char *input, int *i);
 #endif

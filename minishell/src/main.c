@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/14 14:49:04 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/14 17:44:39 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(void)
 		input = readline("minishell$ ");
 		if (ft_strlen(input) > 0)
 		{
+			input = add_spaces(input);
 			t_argv = tokenize(input);
 			while (t_argv[++i].value)
 			{
