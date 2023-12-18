@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/14 18:23:47 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:52:36 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef enum
 	T_PIPE,
 	T_REDIRECT_IN,
 	T_REDIRECT_OUT,
+	T_APPEND,
+	T_HEREDOC,
 }	token_type;
 
 typedef struct
@@ -40,6 +42,8 @@ typedef struct
 
 int		find_type(char *str);
 char	*add_spaces(char *input);
-void	add_space(char *input, int *i);
+void	add_space(char **input, int *i);
 void	handle_quotes(char *input, int *i);
+int		clear_input(char *input);
+
 #endif
