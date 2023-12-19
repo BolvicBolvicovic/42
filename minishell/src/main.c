@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 15:07:53 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:50:33 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ token	*tokenize(char *argv)
 		while (argv[i] && is_str(argv[i], "<>|\'\" "))
 			i++;
 		if (i != j)
+		{
 			add_token(&token_list, i + 1, j, argv);
-		if (quote)
-			add_quote_flag(token_list, T_WORD, quote);
-		update_token_flags(&token_list);
+			if (quote)
+				add_quote_flag(token_list, T_WORD, quote);
+		}
 		j = i;
 		while (argv[i] && !is_str(argv[i], "<>|\'\" "))
                         i++;
@@ -52,7 +53,6 @@ token	*tokenize(char *argv)
 		update_quote_flags(argv[i], &quote);
 		if (quote)
 			add_quote_flag(token_list, T_WORD, quote);
-		update_token_flags(&token_list);
 	}
 	return (token_list);
 }
@@ -73,7 +73,7 @@ int	main(void)
 			t_argv = tokenize(input);
 			while (t_argv)
 			{
-				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);
+				printf("Value: %s Token: %d S_flag: %d D_flag: %d\n", t_argv->value, t_argv->type, t_argv->s_quote_f, t_argv->d_quote_f);
 				free(t_argv->value);
 				t_argv = t_argv->next;
 			}

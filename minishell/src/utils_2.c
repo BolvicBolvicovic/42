@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:47:06 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 15:03:23 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:56:37 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	no_quote(char *str)
 	return (1);
 }
 
-void	update_token_flags(token **list)
+void	update_token_flags(token *list)
 {
 	int	space;
 	int	no_q;
@@ -40,11 +40,9 @@ void	update_token_flags(token **list)
 
 	space = 0;
 	i = -1;
-	tmp = *list;
-	while (tmp->next)
-		tmp = tmp->next;
+	tmp = list;
 	tmp->f_space = is_one_space(tmp->value);
-	no_q = tmp->s_quote_f && tmp->d_quote_f;
+	no_q = !(tmp->s_quote_f && tmp->d_quote_f);
 	if (!tmp->f_space && no_q)
 		add_command_token(tmp);
 	if (no_q)

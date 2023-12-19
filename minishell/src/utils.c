@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:36:52 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 13:10:01 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:03:02 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ void	add_token(token **list, int i, int j, char *str)
 	k = -1;
 	new_node = ft_calloc(sizeof(token), 1);
 	new_node->next = NULL;
-	new_node->value = ft_calloc(1, i - j + 1);
+	new_node->value = ft_calloc(1, i - j);
 	while (j < i)
 		new_node->value[++k] = str[j++];
 	new_node->value[k] = '\0';
 	token_addback(list, new_node);
+	update_token_flags(new_node);
 }
 
 void	add_quote_flag(token *list, int t_flag, int quote)

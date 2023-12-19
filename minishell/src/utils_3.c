@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:18:10 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 15:04:16 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:51:04 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,31 @@ int	str_error(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != ' ')
+	while (str[i] && str[i] == ' ')
 		i++;
-	while (str[i] == ' ')
+	while (str[i] && str[i] != ' ')
 		i++;
-	return (!str[i]);
+	while (str[i] && str[i] == ' ')
+		i++;
+	return (str[i]);
 }
 
 char	*del_spaces(char *str)
 {
-	int		len;
-	int		i;
+	int		start;
+	int		end;
 	char	*tmp;
-
-	len = -1;
-	while (str[++len])
-		continue ;
-	tmp = ft_calloc(1, len + 1);
-	i = -1;
-	while (++i < len)
-		tmp[i] = str[i];
-	tmp[i] = '\0';
-	free(str);
+	
+	start = 0;
+	end = ft_strlen(str) - 1;
+	while (str[start] == ' ')
+		start++;
+	while (end > start && str[end] == ' ')
+		end--;
+	tmp = ft_calloc(1, end - start + 2);
+	ft_strlcpy(tmp, str + start, end - start + 2);
+	tmp[end - start + 1] = '\0';
 	return (tmp);
-
 }
 
 void	add_operator_token(token *node)
@@ -86,6 +87,4 @@ void	add_operator_token(token *node)
 		node->type = T_REDIRECT_OUT;
 	else if (ft_strcmp(node->value, "|") == 0)
 		node->type = T_PIPE;
-	else
-		node->type = T_ERROR;
 }

@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 15:02:48 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:53:57 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		clear_input(char *input);
 int		is_str(char c, char *str);
 void	add_token(token **list, int i, int j, char *str);
 void	add_quote_flag(token *list, int t_flag, int quote);
-void	update_token_flags(token **list);
+void	update_token_flags(token *list);
 void	add_command_token(token *node);
 void	add_operator_token(token *node);
 
