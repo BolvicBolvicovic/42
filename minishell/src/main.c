@@ -6,30 +6,55 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/14 17:44:39 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:07:53 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+void	update_quote_flags(char c, int *quote)
+{
+	if (c == '\'' && *quote & S_QUOTE)
+		*quote &= ~S_QUOTE;
+	else if (c == '\'')
+		*quote |= S_QUOTE;
+	if (c == '\"' && *quote & D_QUOTE)
+		*quote &= ~D_QUOTE;
+	else if (c == '\"')
+		*quote |= D_QUOTE;
+}
+
 token	*tokenize(char *argv)
 {
-	char	**av;
-	int		num_of_words;
+	int		quote;
 	int		i;
-	token	*array;
+	int		j;
+	token	*token_list;
 	
-	num_of_words = ft_count_words(argv, ' ');
-	array = malloc(sizeof(token) * (num_of_words + 1));
-	av = ft_split(argv, ' ');
-	i = -1;
-	while (av[++i])
+	i = 0;
+	quote = 0;
+	token_list = NULL;
+	while (argv[i])
 	{
-		array[i].type = find_type(av[i]);
-		array[i].value = av[i];
+		j = i;
+		while (argv[i] && is_str(argv[i], "<>|\'\" "))
+			i++;
+		if (i != j)
+			add_token(&token_list, i + 1, j, argv);
+		if (quote)
+			add_quote_flag(token_list, T_WORD, quote);
+		update_token_flags(&token_list);
+		j = i;
+		while (argv[i] && !is_str(argv[i], "<>|\'\" "))
+                        i++;
+                if (argv[j])
+			add_token(&token_list, i + 1, j, argv);
+		update_quote_flags(argv[i], &quote);
+		if (quote)
+			add_quote_flag(token_list, T_WORD, quote);
+		update_token_flags(&token_list);
 	}
-	array[i].value = NULL;
-	return (array);
+	return (token_list);
 }
 
 int	main(void)
@@ -45,12 +70,12 @@ int	main(void)
 		input = readline("minishell$ ");
 		if (ft_strlen(input) > 0)
 		{
-			input = add_spaces(input);
 			t_argv = tokenize(input);
-			while (t_argv[++i].value)
+			while (t_argv)
 			{
-				printf("Value: %s Token: %d\n", t_argv[i].value, t_argv[i].type);
-				free(t_argv[i].value);
+				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);
+				free(t_argv->value);
+				t_argv = t_argv->next;
 			}
 		}
 		free(t_argv);

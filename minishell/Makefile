@@ -6,7 +6,7 @@
 #    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2023/12/14 17:53:06 by vcornill         ###   ########.fr        #
+#    Updated: 2023/12/19 15:01:23 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS =	-Wall -Wextra -Werror -g \
 LFLAGS =	-L$(LIBFT_DIR) \
 		-L$(FT_PRINTF_DIR) \
 		-lft -lftprintf -lreadline
-FILES = main utils utils_2
+FILES = main utils utils_2 utils_3
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

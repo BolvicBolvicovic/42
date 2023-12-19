@@ -6,65 +6,60 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:36:52 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/18 17:33:58 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 13:10:01 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	space(char **input, int i)
-{
-	int		j;
-	char	*tmp;
-
-	tmp = ft_calloc(1, ft_strlen(*input) + 1);
-	j = -1;
-	while (++j != i)
-		tmp[j] = (*input)[j];
-	tmp[j] = ' ';
-	while ((*input)[i])
-		tmp[++j] = (*input)[i++];
-	tmp[++j] = '\0';
-	*input = tmp;
-}
-
-void	add_space(char **input, int *i)
-{
-	int	j;
-	
-	j = *i;
-	if (ft_memcmp((*input) + *i, "<<", 2) == 0 || ft_memcmp((*input) + *i, ">>", 2) == 0)
-		j += 2;
-	if (j > 0 && !is_white_space((*input)[j - 1]))
-	{
-		space(input, j);
-		*i += 1;
-	}
-	if ((*input)[j + 1] && !is_white_space((*input)[j + 1]))
-		space(input, j + 1);
-}
-
-char	*add_spaces(char *input)
+int	is_str(char c, char *str)
 {
 	int	i;
 
-	while (1)
+	i = -1;
+	while (str[++i])
+		if (str[i] == c)
+			return (0);
+	return (1);
+}
+
+void	token_addback(token **list, token *node)
+{
+	token	*tmp;
+
+	tmp = *list;
+	if (!*list)
+		*list = node;
+	else
 	{
-		i = -1;
-		while (input[++i])
-		{
-			if (ft_memcmp(&input[i], "<<", 2) == 0 || ft_memcmp(&input[i], ">>", 2) == 0)
-			{
-				add_space(&input, &i);
-				i++;
-			}
-			else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
-				add_space(&input, &i);
-		}
-		if (clear_input(input))
-			break ;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = node;
 	}
-	return (input);
+}
+
+void	add_token(token **list, int i, int j, char *str)
+{
+	token	*new_node;
+	int		k;
+
+	k = -1;
+	new_node = ft_calloc(sizeof(token), 1);
+	new_node->next = NULL;
+	new_node->value = ft_calloc(1, i - j + 1);
+	while (j < i)
+		new_node->value[++k] = str[j++];
+	new_node->value[k] = '\0';
+	token_addback(list, new_node);
+}
+
+void	add_quote_flag(token *list, int t_flag, int quote)
+{
+	while (list->next)
+		list = list->next;
+	list->type = t_flag;
+	list->s_quote_f = (quote & S_QUOTE);
+	list->d_quote_f = (quote & D_QUOTE);
 }
 
 int	find_type(char *str)

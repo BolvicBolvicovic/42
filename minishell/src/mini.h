@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/18 16:52:36 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:02:48 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include "libft.h"
 # include "ft_printf.h"
 
+
+# define D_QUOTE 0x01
+# define S_QUOTE 0x02
+
 typedef enum
 {
 	T_WORD,
@@ -32,18 +36,27 @@ typedef enum
 	T_REDIRECT_OUT,
 	T_APPEND,
 	T_HEREDOC,
+	T_ENVP_ARG,
+	T_ERROR,
 }	token_type;
 
-typedef struct
+typedef struct soken
 {
 	token_type	type;
 	char		*value;
+	int		s_quote_f;
+	int		d_quote_f;
+	int		f_space;
+	struct soken	*next;
 }	token;
 
 int		find_type(char *str);
-char	*add_spaces(char *input);
-void	add_space(char **input, int *i);
-void	handle_quotes(char *input, int *i);
 int		clear_input(char *input);
+int		is_str(char c, char *str);
+void	add_token(token **list, int i, int j, char *str);
+void	add_quote_flag(token *list, int t_flag, int quote);
+void	update_token_flags(token **list);
+void	add_command_token(token *node);
+void	add_operator_token(token *node);
 
 #endif

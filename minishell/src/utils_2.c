@@ -6,15 +6,49 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:47:06 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/15 12:10:45 by vcornill         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:03:23 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-void	handle_quotes(char *input, int *i)
+
+int	is_one_space(char *str)
 {
-	(void)input;
-	(void)i;
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == ' ')
+			return (1);
+	return (0);
+}
+
+int	no_quote(char *str)
+{
+	while (str++)
+		if (*str == '\'' || *str == '\"')
+			return (0);
+	return (1);
+}
+
+void	update_token_flags(token **list)
+{
+	int	space;
+	int	no_q;
+	int	i;
+	token	*tmp;
+
+	space = 0;
+	i = -1;
+	tmp = *list;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->f_space = is_one_space(tmp->value);
+	no_q = tmp->s_quote_f && tmp->d_quote_f;
+	if (!tmp->f_space && no_q)
+		add_command_token(tmp);
+	if (no_q)
+		add_operator_token(tmp);
 }
 
 int	clear_input(char *input)
