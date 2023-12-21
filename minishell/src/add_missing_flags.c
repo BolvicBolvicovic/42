@@ -12,54 +12,11 @@
 
 #include "mini.h"
 
-int	is_one_space(char *str)
+/*void	add_quote_flag(token *list, int t_flag, int quote)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == ' ')
-			return (1);
-	return (0);
-}
-
-int	no_quote(char *str)
-{
-	while (str++)
-		if (*str == '\'' || *str == '\"')
-			return (0);
-	return (1);
-}
-
-void	update_token_flags(token *list)
-{
-	int	space;
-	int	no_q;
-	int	i;
-	token	*tmp;
-
-	space = 0;
-	i = -1;
-	tmp = list;
-	tmp->f_space = is_one_space(tmp->value);
-	no_q = !(tmp->s_quote_f && tmp->d_quote_f);
-	if (!tmp->f_space && no_q)
-		add_command_token(tmp);
-	if (no_q)
-		add_operator_token(tmp);
-}
-
-int	clear_input(char *input)
-{
-	int	i;
-	
-	i = -1;
-	while (input[++i])
-	{
-		if (input[i] == '|' || input[i] == '<' || input[i] == '>')
-			if ((input[i + 1] && !is_white_space(input[i + 1]))
-				|| (i > 0 && !is_white_space(input[i - 1])))
-				return (0);
-	}
-	return (1);
-}
+	while (list->next)
+		list = list->next;
+	list->type = t_flag;
+	list->s_quote_f = (quote & S_QUOTE);
+	list->d_quote_f = (quote & D_QUOTE);
+}*/

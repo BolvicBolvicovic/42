@@ -12,17 +12,6 @@
 
 #include "mini.h"
 
-int	only_space(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] != ' ' || !(str[i] >= '\r' && str[i] <= '\t'))
-			return (0);
-	return (1);
-}
-
 void	add_command_token(token *node)
 {
 	if (ft_strcmp(node->value, "echo") == 0
@@ -87,4 +76,20 @@ void	add_operator_token(token *node)
 		node->type = T_REDIRECT_OUT;
 	else if (ft_strcmp(node->value, "|") == 0)
 		node->type = T_PIPE;
+}
+
+void	update_token_flags(token *list)
+{
+	int	space;
+	int	i;
+	token	*tmp;
+
+	space = 0;
+	i = -1;
+	tmp = list;
+	tmp->f_space = is_one_space(tmp->value);
+	if (!tmp->f_space)
+		add_command_token(tmp);
+	else
+		add_operator_token(tmp);
 }
