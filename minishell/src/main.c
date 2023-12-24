@@ -15,21 +15,19 @@
 int	main(void)
 {
 	token	*t_argv;
-	int		i;
 	char	*input;
 
 	while (1)
 	{
-		i = -1;
 		t_argv = NULL;
 		input = readline("minishell$ ");
 		if (ft_strlen(input) > 0)
 		{
 			t_argv = tokenize(input);
-			//add_flags(t_argv);
+			add_flags(&t_argv);
 			while (t_argv)
 			{
-				printf("Value: %s Token: %d", t_argv->value, t_argv->type);
+				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);
 				free(t_argv->value);
 				t_argv = t_argv->next;
 			}

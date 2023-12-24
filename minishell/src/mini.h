@@ -32,6 +32,7 @@
 typedef enum
 {
 	T_WORD,
+	T_SPACE,
 	T_CMD,
 	T_PIPE,
 	T_REDIRECT_IN,
@@ -62,6 +63,9 @@ int		is_str(char c, char *str);
 int		is_one_space(char *str);
 int		no_quote(char *str);
 int		only_space(char *str);
+
+//Flags
+void	add_flags(token **t_argv);
 
 //Tokenize
 void	add_token(token **list, int i, int j, char *str);

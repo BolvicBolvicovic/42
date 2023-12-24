@@ -45,13 +45,11 @@ void	add_token(token **list, int i, int j, char *str)
 
 token	*tokenize(char *argv)
 {
-	int		quote;
 	int		i;
 	int		j;
 	token	*token_list;
 	
 	i = 0;
-	quote = 0;
 	token_list = NULL;
 	while (argv[i])
 	{

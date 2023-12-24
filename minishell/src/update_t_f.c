@@ -80,12 +80,8 @@ void	add_operator_token(token *node)
 
 void	update_token_flags(token *list)
 {
-	int	space;
-	int	i;
 	token	*tmp;
 
-	space = 0;
-	i = -1;
 	tmp = list;
 	tmp->f_space = is_one_space(tmp->value);
 	if (!tmp->f_space)

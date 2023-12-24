@@ -12,11 +12,23 @@
 
 #include "mini.h"
 
-/*void	add_quote_flag(token *list, int t_flag, int quote)
+void	add_flags(token **t_argv)
 {
-	while (list->next)
-		list = list->next;
-	list->type = t_flag;
-	list->s_quote_f = (quote & S_QUOTE);
-	list->d_quote_f = (quote & D_QUOTE);
-}*/
+	token	*tmp;
+	int	cmd_flag;
+
+	tmp = *t_argv;
+	cmd_flag = 0;
+	while (tmp)
+	{
+		if (only_space(tmp->value))
+			tmp->type = T_SPACE;
+		else if (!cmd_flag && tmp->type == T_CMD)
+			cmd_flag = 1;
+		else if (cmd_flag && tmp->type == T_CMD)
+			tmp->type = T_WORD;
+		else if (tmp->type >= T_PIPE && tmp->type <= T_HEREDOC)
+			cmd_flag = 0;
+		tmp = tmp->next;
+	}
+}
