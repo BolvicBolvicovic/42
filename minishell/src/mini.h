@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/02 14:04:41 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/02 19:12:42 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef enum
 
 typedef struct s_envp
 {
-	char		*v_name;
+	char		*name;
+	void		*value;
 	struct s_envp	*next;
 }	t_envp;
 
