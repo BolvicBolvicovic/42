@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/20 13:12:40 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:04:41 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef enum
 {
 	T_WORD,
 	T_SPACE,
+	T_S_QUOTE,
+	T_D_QUOTE,
 	T_CMD,
 	T_PIPE,
 	T_REDIRECT_IN,

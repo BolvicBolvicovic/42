@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:13:47 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/20 13:14:03 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:09:31 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,12 @@ token	*tokenize(char *argv)
 		if (i != j)
 			add_token(&token_list, i + 1, j, argv);
 		j = i;
-		while (argv[i] && !is_str(argv[i], "\'\""))
+		if (argv[i] && !is_str(argv[i], "\""))
+			i++;
+		if (argv[j] && i != j)
+			add_token(&token_list, i + 1, j, argv);
+		j = i;
+		if (argv[i] && !is_str(argv[i], "\'"))
 			i++;
 		if (argv[j] && i != j)
 			add_token(&token_list, i + 1, j, argv);

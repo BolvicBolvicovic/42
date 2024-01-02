@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_3.c                                          :+:      :+:    :+:   */
+/*   update_t_f.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:18:10 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 17:51:04 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/02 13:56:03 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	update_token_flags(token *list)
 
 	tmp = list;
 	tmp->f_space = is_one_space(tmp->value);
-	if (!tmp->f_space)
-		add_command_token(tmp);
-	else
-		add_operator_token(tmp);
+	add_command_token(tmp);
+	add_operator_token(tmp);
 }
