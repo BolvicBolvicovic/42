@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:08:06 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/02 19:05:11 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:05:42 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	exec_command(char **arg_tab, char *cpy)
 	{
 		final_path = ft_realloc(final_path, ft_strlen
 				(path[i]) + ft_strlen(arg_tab[0]) + 2);
-		ft_strcat(final_path, path[i]);
-		ft_strcat(final_path, arg_tab[0]);
+		ft_strlcat(final_path, path[i], 0);
+		ft_strlcat(final_path, arg_tab[0], 0);
 		if (access(final_path, X_OK) == 0)
 		{
 			free_tab(path);

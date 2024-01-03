@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/20 13:05:42 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:16:35 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ int	main(void)
 	token	*t_argv;
 	char	*input;
 
+	printf("\033c");
+	printf("\033]0;MiniFeur\a");
+//	printf("\x1b[2J");
+//	printf("\x1b[H");
 	while (1)
 	{
 		t_argv = NULL;
-		input = readline("minishell$ ");
+		input = readline("➜ MiniFeur$ ");
 		if (ft_strlen(input) > 0)
 		{
 			t_argv = tokenize(input);
