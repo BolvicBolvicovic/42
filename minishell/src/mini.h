@@ -35,6 +35,7 @@ typedef enum
 	T_SPACE,
 	T_S_QUOTE,
 	T_D_QUOTE,
+	T_CMD_ENVP,
 	T_CMD,
 	T_PIPE,
 	T_REDIRECT_IN,
@@ -44,18 +45,19 @@ typedef enum
 	T_ERROR,
 }	token_type;
 
-typedef struct s_envp
+typedef struct s_var_envp
 {
 	char		*name;
 	void		*value;
 	struct s_envp	*next;
-}	t_envp;
+}	t_var_envp;
 
 typedef struct soken
 {
 	token_type	type;
-	t_envp		*envp;
+	t_var_envp		*envp;
 	char		*value;
+	char		*path;
 	int		quote_flag;
 	int		f_space;
 	struct soken	*next;
@@ -69,6 +71,7 @@ int		only_space(char *str);
 
 //Flags
 void	add_flags(token **t_argv);
+void	exec_command_flag(token *t_argv, char *path);
 
 //Tokenize
 void	add_token(token **list, int i, int j, char *str);
@@ -76,6 +79,6 @@ void	add_quote_flag(token *list, int t_flag, int quote);
 void	update_token_flags(token *list);
 void	add_command_token(token *node);
 void	add_operator_token(token *node);
-token	*tokenize(char *argv);
+token	*tokenize(char *argv, char **envp);
 
 #endif

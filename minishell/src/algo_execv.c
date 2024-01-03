@@ -15,12 +15,9 @@
 void	*ft_realloc(char *ptr, size_t size)
 {
 	char	*str;
-	int		i;
 	
-	i = -1;
-	str = malloc(size);
+	str = ft_calloc(size, 0);
 	free(ptr);
-	str[0] = '\0';
 	return (str);
 }
 
@@ -34,7 +31,7 @@ void	free_tab(char **path)
 	free(path);
 }
 
-void	exec_command(char **arg_tab, char *cpy)
+void	exec_command_flag(token *t_argv, char *cpy)
 {
 	int		i;
 	char	**path;
@@ -46,16 +43,15 @@ void	exec_command(char **arg_tab, char *cpy)
 	while (path[++i])
 	{
 		final_path = ft_realloc(final_path, ft_strlen
-				(path[i]) + ft_strlen(arg_tab[0]) + 2);
-		ft_strlcat(final_path, path[i], 0);
-		ft_strlcat(final_path, arg_tab[0], 0);
+				(path[i]) + ft_strlen(t_argv->value) + 2);
+		ft_strlcat(final_path, path[i], ft_strlen(final_path));
+		ft_strlcat(final_path, t_argv->value, ft_strlen(final_path));
 		if (access(final_path, X_OK) == 0)
 		{
-			free_tab(path);
-			execv(final_path, arg_tab);
+			t_argv->type = T_CMD_ENVP;
+			break ;
 		}
 	}
 	free_tab(path);
 	free(final_path);
-	perror("");
 }

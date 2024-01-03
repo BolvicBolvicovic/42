@@ -12,27 +12,28 @@
 
 #include "mini.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	token	*t_argv;
 	char	*input;
 
+	(void)argc;
+	(void)argv;
 	printf("\033c");
 	printf("\033]0;MiniFeur\a");
-//	printf("\x1b[2J");
-//	printf("\x1b[H");
 	while (1)
 	{
 		t_argv = NULL;
 		input = readline("➜ MiniFeur$ ");
 		if (ft_strlen(input) > 0)
 		{
-			t_argv = tokenize(input);
+			t_argv = tokenize(input, envp);
 			add_flags(&t_argv);
 			while (t_argv)
 			{
 				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);
 				free(t_argv->value);
+				free(t_argv->path);
 				t_argv = t_argv->next;
 			}
 		}

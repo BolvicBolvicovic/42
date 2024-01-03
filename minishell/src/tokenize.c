@@ -43,7 +43,33 @@ void	add_token(token **list, int i, int j, char *str)
 	update_token_flags(new_node);
 }
 
-token	*tokenize(char *argv)
+char	*get_path(char **envp)
+{
+	int	i;
+	char	*path;
+
+	i = -1;
+	while (envp[++i])
+	{
+		if (ft_strnstr(envp[i], "PATH=", 5))
+		{
+			path = ft_strdup(envp[i]);
+			break ;
+		}
+	}
+	return (path);
+}
+
+void	add_path(token *list, char **envp)
+{
+	while (list)
+	{
+		list->path = get_path(envp);
+		list = list->next;
+	}
+}
+
+token	*tokenize(char *argv, char **envp)
 {
 	int		i;
 	int		j;
@@ -74,5 +100,6 @@ token	*tokenize(char *argv)
                 if (argv[j] && i != j)
 			add_token(&token_list, i + 1, j, argv);
 	}
+	add_path(token_list, envp);
 	return (token_list);
 }

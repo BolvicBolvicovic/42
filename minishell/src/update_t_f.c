@@ -22,6 +22,8 @@ void	add_command_token(token *node)
 		|| ft_strcmp(node->value, "env") == 0
 		|| ft_strcmp(node->value, "exit") == 0)
 		node->type = T_CMD;
+	else
+		exec_command_flag(node, node->path);
 }
 
 int	str_error(char *str)
