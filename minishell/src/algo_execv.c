@@ -12,15 +12,6 @@
 
 #include "mini.h"
 
-void	*ft_realloc(char *ptr, size_t size)
-{
-	char	*str;
-	
-	str = ft_calloc(1, size);
-	free(ptr);
-	return (str);
-}
-
 void	free_tab(char **path)
 {
 	int	i;

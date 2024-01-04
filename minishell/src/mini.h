@@ -45,17 +45,9 @@ typedef enum
 	T_ERROR,
 }	token_type;
 
-typedef struct s_var_envp
-{
-	char		*name;
-	void		*value;
-	struct s_envp	*next;
-}	t_var_envp;
-
 typedef struct soken
 {
 	token_type	type;
-	t_var_envp		*envp;
 	char		*value;
 	char		*path;
 	int		s_quote_flag;
@@ -68,6 +60,7 @@ int		is_str(char c, char *str);
 int		is_one_space(char *str);
 int		no_quote(char *str);
 int		only_space(char *str);
+void	*ft_realloc(char *ptr, size_t size);
 
 //Flags
 void	add_flags(token **t_argv);

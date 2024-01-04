@@ -12,6 +12,15 @@
 
 #include "mini.h"
 
+void	*ft_realloc(char *ptr, size_t size)
+{
+	char	*str;
+	
+	str = ft_calloc(1, size);
+	free(ptr);
+	return (str);
+}
+
 int	is_str(char c, char *str)
 {
 	int	i;
