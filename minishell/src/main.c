@@ -27,8 +27,14 @@ int	main(int argc, char **argv, char **envp)
 		input = readline("➜ MiniFeur$ ");
 		if (ft_strlen(input) > 0)
 		{
+			if (ft_strcmp(input, "e") == 0)
+			{
+				free(input);
+				break ;
+			}
 			t_argv = tokenize(input, envp);
 			add_flags(&t_argv);
+			join_string(&t_argv);
 			while (t_argv)
 			{
 				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);

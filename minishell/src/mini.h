@@ -72,6 +72,7 @@ int		only_space(char *str);
 //Flags
 void	add_flags(token **t_argv);
 void	exec_command_flag(token *t_argv, char *path);
+void	join_string(token **token_list);
 
 //Tokenize
 void	add_token(token **list, int i, int j, char *str);

@@ -60,9 +60,9 @@ void	add_flags(token **t_argv)
 			quote_flag = !quote_flag;
 		if (only_space(tmp->value))
 			tmp->type = T_SPACE;
-		else if (!cmd_flag && tmp->type == T_CMD)
+		else if (!cmd_flag && (tmp->type == T_CMD || tmp->type == T_CMD_ENVP))
 			cmd_flag = 1;
-		else if ((cmd_flag && tmp->type == T_CMD) 
+		else if ((cmd_flag && (tmp->type == T_CMD || tmp->type == T_CMD_ENVP)) 
 			|| (quote_flag && !(tmp->type == T_D_QUOTE || tmp->type == T_S_QUOTE)))
 			tmp->type = T_WORD;
 		else if (tmp->type >= T_PIPE && tmp->type <= T_HEREDOC)
