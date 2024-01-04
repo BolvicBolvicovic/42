@@ -58,7 +58,7 @@ typedef struct soken
 	t_var_envp		*envp;
 	char		*value;
 	char		*path;
-	int		quote_flag;
+	int		s_quote_flag;
 	int		f_space;
 	struct soken	*next;
 }	token;
@@ -73,6 +73,7 @@ int		only_space(char *str);
 void	add_flags(token **t_argv);
 void	exec_command_flag(token *t_argv, char *path);
 void	join_string(token **token_list);
+void	add_envp_var(token **t_argv, char **envp);
 
 //Tokenize
 void	add_token(token **list, int i, int j, char *str);

@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 			t_argv = tokenize(input, envp);
 			add_flags(&t_argv);
 			join_string(&t_argv);
+			add_envp_var(&t_argv, envp);
 			while (t_argv)
 			{
 				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);

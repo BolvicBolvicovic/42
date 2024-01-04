@@ -35,6 +35,7 @@ void	add_token(token **list, int i, int j, char *str)
 	k = -1;
 	new_node = ft_calloc(sizeof(token), 1);
 	new_node->next = NULL;
+	new_node->s_quote_flag = 0;
 	new_node->value = ft_calloc(1, i - j);
 	while (j < i)
 		new_node->value[++k] = str[j++];
