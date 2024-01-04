@@ -40,7 +40,6 @@ void	add_token(token **list, int i, int j, char *str)
 		new_node->value[++k] = str[j++];
 	new_node->value[k] = '\0';
 	token_addback(list, new_node);
-	update_token_flags(new_node);
 }
 
 char	*get_path(char **envp)
@@ -65,6 +64,7 @@ void	add_path(token *list, char **envp)
 	while (list)
 	{
 		list->path = get_path(envp);
+		update_token_flags(list);
 		list = list->next;
 	}
 }
