@@ -50,7 +50,9 @@ void	join_string(token **token_list)
 	while (tmp)
 	{
 		if (tmp->next)
-			if (tmp->next->type == T_S_QUOTE || tmp->next->type == T_D_QUOTE)
+			if (tmp->next->type == T_SPACE 
+				|| tmp->next->type == T_S_QUOTE
+				|| tmp->next->type == T_D_QUOTE)
 				destroy_token(tmp, tmp->next);
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:13:47 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/02 14:09:31 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:16:11 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	*get_path(char **envp)
 	char	*path;
 
 	i = -1;
+	path = NULL;
 	while (envp[++i])
 	{
 		if (ft_strnstr(envp[i], "PATH=", 5))

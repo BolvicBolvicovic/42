@@ -20,21 +20,23 @@ char	*transform_value(char *str, int *i, char **envp, char *var)
 			l = 0;
 			while (envp[j][++k])
 				value[l++] = envp[j][k];
+			value[l] = '\0';
 			break ;
 		}
 	}
 	new_str = ft_calloc(1, ft_strlen(str) + ft_strlen(value) - ft_strlen(var));
 	j = -1;
-	l = -1;
+	l = 0;
 	while (++j < *i)
-		new_str[j] = str[++l];
+		new_str[j] = str[l++];
 	k = -1;
 	while (value[++k])
-		new_str[++j] = value[k];
+		new_str[j++] = value[k];
 	l = l + ft_strlen(var) + 1;
 	while (str[++l])
 		new_str[j++] = str[l];
 	free(str);
+	*i = *i + j;
 	return (new_str);
 }
 
@@ -65,17 +67,19 @@ int	is_envp(char *str, char **envp, char **variable)
 	return (0);
 }
 
-void	handle_envp_var(char *str, char **envp)
+void	handle_envp_var(char **str, char **envp)
 {
 	int	i;
 	char	*var;
 	i = -1;
-	while (str[++i])
+	while ((*str)[++i])
 	{
 		var = NULL;
-		if (str[i] == '$')
-			if (is_envp(&str[i], envp, &var))
-				str = transform_value(str, &i, envp, var); 
+		if ((*str)[i] == '$')
+		{
+			if (is_envp((*str) + i, envp, &var))
+				*str = transform_value(*str, &i, envp, var); 
+		}
 		free(var);
 	}
 }
@@ -88,7 +92,7 @@ void	add_envp_var(token **t_argv, char **envp)
 	while (node)
 	{
 		if (node->type == T_WORD && !node->s_quote_flag)
-			handle_envp_var(node->value, envp);
+			handle_envp_var(&node->value, envp);
 		node = node->next;
 	}
 }

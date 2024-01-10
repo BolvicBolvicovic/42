@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/03 15:16:35 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:23:32 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		t_argv = NULL;
 		input = readline("➜ MiniFeur$ ");
-		if (ft_strlen(input) > 0)
+		if (input && ft_strlen(input) > 0)
 		{
 			if (ft_strcmp(input, "e") == 0)
 			{
@@ -45,7 +45,10 @@ int	main(int argc, char **argv, char **envp)
 			}
 		}
 		free(t_argv);
-		free(input);
+		if (input)
+			free(input);
+		else
+			break ;
 	}
 	return (0);
 }
