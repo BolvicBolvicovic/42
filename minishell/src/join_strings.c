@@ -15,13 +15,14 @@ void	join_token(token *node, token *next_node)
 
 void	destroy_token(token *previous_node, token *node_to_destroy)
 {
-	previous_node->next = node_to_destroy->next;
+	if (previous_node)
+		previous_node->next = node_to_destroy->next;
 	free(node_to_destroy->value);
 	free(node_to_destroy->path);
 	free(node_to_destroy);
 }
 
-void	del_t_space_t_quote(token **token_list)
+void	del_t_quote(token **token_list)
 {
 	token	*tmp;
 	token	*tmp2;
@@ -29,15 +30,11 @@ void	del_t_space_t_quote(token **token_list)
 	tmp = *token_list;
 	while (tmp)
 	{
-		if (tmp->type == T_SPACE
-			|| tmp->type == T_S_QUOTE
-			|| tmp->type == T_D_QUOTE)
+		if (tmp->type == T_S_QUOTE || tmp->type == T_D_QUOTE)
 		{
-			tmp2 = tmp;
-			tmp = tmp->next;
-			free(tmp2->value);
-			free(tmp2->path);
-			free(tmp2);
+			tmp2 = tmp->next;
+			destroy_token(NULL, tmp);
+			tmp = tmp2;;
 		}
 		else 
 			break ;
@@ -46,11 +43,23 @@ void	del_t_space_t_quote(token **token_list)
 	while (tmp)
 	{
 		if (tmp->next)
-			if (tmp->next->type == T_SPACE 
-				|| tmp->next->type == T_S_QUOTE
-				|| tmp->next->type == T_D_QUOTE)
+			if (tmp->next->type == T_S_QUOTE || tmp->next->type == T_D_QUOTE)
 				destroy_token(tmp, tmp->next);
 		tmp = tmp->next;
+	}
+}
+
+void	handle_spaces(token **token_list)
+{
+	token	*tmp;
+
+	tmp = *token_list;
+	while (tmp->next)
+	{
+		if (tmp->type == T_WORD && tmp->next->type == T_WORD)
+			join_token(tmp, tmp->next);
+		else
+			tmp = tmp->next;
 	}
 }
 
@@ -79,5 +88,6 @@ void	join_string(token **token_list)
 			break ;
 		tmp = tmp->next;
 	}
-	del_t_space_t_quote(token_list);
+	del_t_quote(token_list);
+	handle_spaces(token_list);
 }

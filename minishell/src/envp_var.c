@@ -1,12 +1,37 @@
 #include "mini.h"
 
+
+char	*get_new_str(char *str, char *value, int *i, char *var)
+{
+	char	*new_str;
+	int		l;
+	int		k;
+	int		j;
+
+	new_str = ft_calloc(1, ft_strlen(str) + ft_strlen(value) - ft_strlen(var) + 1);
+	j = -1;
+	l = 0;
+	while (++j < *i)
+		new_str[j] = str[l++];
+	k = -1;
+	while (value[++k])
+		new_str[j++] = value[k];
+	l = l + ft_strlen(var);
+	while (str[++l])
+		new_str[j++] = str[l];
+	new_str[j] = '\0';
+	free(str);
+	free(value);
+	*i = *i + j - 1;
+	return (new_str);
+}
+
 char	*transform_value(char *str, int *i, char **envp, char *var)
 {
 	int		l;
 	int		k;
 	int		j;
 	char	*value;
-	char	*new_str;
 
 	j = -1;
 	while (envp[++j])
@@ -23,22 +48,8 @@ char	*transform_value(char *str, int *i, char **envp, char *var)
 			value[l] = '\0';
 			break ;
 		}
-	}
-	new_str = ft_calloc(1, ft_strlen(str) + ft_strlen(value) - ft_strlen(var) + 1);
-	j = -1;
-	l = 0;
-	while (++j < *i)
-		new_str[j] = str[l++];
-	k = -1;
-	while (value[++k])
-		new_str[j++] = value[k];
-	l = l + ft_strlen(var);
-	while (str[++l])
-		new_str[j++] = str[l];
-	new_str[j] = '\0';
-	free(str);
-	*i = *i + j - 1;
-	return (new_str);
+	}	
+	return (get_new_str(str, value, i, var));
 }
 
 int	is_envp(char *str, char **envp, char **variable)
