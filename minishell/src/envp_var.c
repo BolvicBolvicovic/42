@@ -24,7 +24,7 @@ char	*transform_value(char *str, int *i, char **envp, char *var)
 			break ;
 		}
 	}
-	new_str = ft_calloc(1, ft_strlen(str) + ft_strlen(value) - ft_strlen(var));
+	new_str = ft_calloc(1, ft_strlen(str) + ft_strlen(value) - ft_strlen(var) + 1);
 	j = -1;
 	l = 0;
 	while (++j < *i)
@@ -32,11 +32,12 @@ char	*transform_value(char *str, int *i, char **envp, char *var)
 	k = -1;
 	while (value[++k])
 		new_str[j++] = value[k];
-	l = l + ft_strlen(var) + 1;
+	l = l + ft_strlen(var);
 	while (str[++l])
 		new_str[j++] = str[l];
+	new_str[j] = '\0';
 	free(str);
-	*i = *i + j;
+	*i = *i + j - 1;
 	return (new_str);
 }
 
