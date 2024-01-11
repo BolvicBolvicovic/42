@@ -22,7 +22,7 @@ void	destroy_token(token *previous_node, token *node_to_destroy)
 	free(node_to_destroy);
 }
 
-void	del_t_quote(token **token_list)
+void	del_first_t_quote(token **token_list)
 {
 	token	*tmp;
 	token	*tmp2;
@@ -39,13 +39,22 @@ void	del_t_quote(token **token_list)
 		else 
 			break ;
 	}
-	*token_list = tmp;
+}
+
+void	del_t_quote(token **token_list)
+{
+	token	*tmp;
+
+	tmp = *token_list;
 	while (tmp)
 	{
 		if (tmp->next)
 			if (tmp->next->type == T_S_QUOTE || tmp->next->type == T_D_QUOTE)
 				destroy_token(tmp, tmp->next);
-		tmp = tmp->next;
+			else
+				tmp = tmp->next;
+		else
+			break ;
 	}
 }
 
@@ -70,7 +79,8 @@ void	join_string(token **token_list)
 	tmp = *token_list;
 	while (tmp)
 	{
-		if (tmp->type == T_S_QUOTE || tmp->type == T_D_QUOTE)
+		if (tmp->next && ((tmp->type == T_S_QUOTE && tmp->next->type != T_S_QUOTE)
+			|| (tmp->type == T_D_QUOTE && tmp->next->type != T_D_QUOTE)))
 		{
 			if (tmp->type == T_S_QUOTE)
 				tmp->next->s_quote_flag = 1;
@@ -84,10 +94,13 @@ void	join_string(token **token_list)
 			}
 			tmp = tmp->next;
 		}
+		//else
+		//	tmp = tmp->next;
 		if (!tmp)
 			break ;
 		tmp = tmp->next;
 	}
+	//del_first_t_quote(token_list);
 	del_t_quote(token_list);
 	handle_spaces(token_list);
 }

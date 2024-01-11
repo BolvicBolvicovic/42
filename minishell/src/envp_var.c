@@ -34,6 +34,7 @@ char	*transform_value(char *str, int *i, char **envp, char *var)
 	char	*value;
 
 	j = -1;
+	value = NULL;
 	while (envp[++j])
 	{
 		if (ft_strnstr(envp[j], var, ft_strlen(var)))

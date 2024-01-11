@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/10 17:23:32 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:45:06 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
+	token	*tmp;
 	token	*t_argv;
 	char	*input;
 
@@ -36,9 +37,17 @@ int	main(int argc, char **argv, char **envp)
 			add_flags(&t_argv);
 			join_string(&t_argv);
 			add_envp_var(&t_argv, envp);
+			if (t_argv->type == T_S_QUOTE || t_argv->type == T_D_QUOTE)
+			{
+				tmp = t_argv->next;
+				free(t_argv->value);
+				free(t_argv->path);
+				free(t_argv);
+				t_argv = tmp;
+			}
 			while (t_argv)
 			{
-				printf("Value: %s Token: %d\n", t_argv->value, t_argv->type);
+				printf("Value: %s Token Type: %d\n", t_argv->value, t_argv->type);
 				free(t_argv->value);
 				free(t_argv->path);
 				t_argv = t_argv->next;
