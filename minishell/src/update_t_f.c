@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:18:10 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/11 15:44:55 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:42:25 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*del_spaces(char *str)
 	tmp = ft_calloc(1, end - start + 2);
 	ft_strlcpy(tmp, str + start, end - start + 2);
 	tmp[end - start + 1] = '\0';
+	free(str);
 	return (tmp);
 }
 
