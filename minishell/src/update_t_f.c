@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:18:10 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/02 13:56:03 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:44:55 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char	*del_spaces(char *str)
 	
 	start = 0;
 	end = ft_strlen(str) - 1;
-	while (str[start] == ' ')
+	while (str[start] == ' ' || (str[start] >= '\t' && str[start] <= '\r'))
 		start++;
-	while (end > start && str[end] == ' ')
+	while (end > start && (str[end] == ' ' || (str[end] >= '\t' && str[end] <= '\r')))
 		end--;
 	tmp = ft_calloc(1, end - start + 2);
 	ft_strlcpy(tmp, str + start, end - start + 2);

@@ -6,11 +6,28 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/11 14:45:06 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:32:32 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+void	check_redirect(token **token_list)
+{
+	token	*tmp;
+
+	tmp = *token_list;
+	while (tmp)
+	{
+		if (tmp->value[0] == '<' 
+			&& !(!tmp->value[1] || (tmp->value[1] == '<' && !tmp->value[2])))
+			tmp->type = T_ERROR;
+		if (tmp->value[0] == '>' 
+			&& !(!tmp->value[1] || (tmp->value[1] == '>' && !tmp->value[2])))
+			tmp->type = T_ERROR;
+		tmp = tmp->next;
+	}
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -35,9 +52,11 @@ int	main(int argc, char **argv, char **envp)
 			}
 			t_argv = tokenize(input, envp);
 			add_flags(&t_argv);
+			check_redirect(&t_argv);
 			join_string(&t_argv);
 			add_envp_var(&t_argv, envp);
-			if (t_argv->type == T_S_QUOTE || t_argv->type == T_D_QUOTE)
+			if (t_argv->type == T_S_QUOTE
+				|| t_argv->type == T_D_QUOTE || t_argv->type == T_SPACE)
 			{
 				tmp = t_argv->next;
 				free(t_argv->value);

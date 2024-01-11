@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:36:52 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/19 17:03:02 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:11:20 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_one_space(char *str)
 
 	i = -1;
 	while (str[++i])
-		if (str[i] == ' ')
+		if (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 			return (1);
 	return (0);
 }

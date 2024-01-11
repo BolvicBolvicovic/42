@@ -41,7 +41,7 @@ void	del_first_t_quote(token **token_list)
 	}
 }
 
-void	del_t_quote(token **token_list)
+void	del_t_type(token **token_list, token_type type1, token_type type2)
 {
 	token	*tmp;
 
@@ -49,7 +49,7 @@ void	del_t_quote(token **token_list)
 	while (tmp)
 	{
 		if (tmp->next)
-			if (tmp->next->type == T_S_QUOTE || tmp->next->type == T_D_QUOTE)
+			if (tmp->next->type == type1 || tmp->next->type == type2)
 				destroy_token(tmp, tmp->next);
 			else
 				tmp = tmp->next;
@@ -94,13 +94,11 @@ void	join_string(token **token_list)
 			}
 			tmp = tmp->next;
 		}
-		//else
-		//	tmp = tmp->next;
 		if (!tmp)
 			break ;
 		tmp = tmp->next;
 	}
-	//del_first_t_quote(token_list);
-	del_t_quote(token_list);
+	del_t_type(token_list, T_D_QUOTE, T_S_QUOTE);
 	handle_spaces(token_list);
+	del_t_type(token_list, T_D_QUOTE, T_SPACE);
 }
