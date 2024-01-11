@@ -71,6 +71,14 @@ void	handle_spaces(token **token_list)
 			tmp = tmp->next;
 	}
 }
+//finis la fonction
+int	str_ended_backslash(token *node)
+{
+	int	len;
+
+	len = ft_strlen(node->value);
+	return (node->value[len] == '\\');
+}
 
 void	join_string(token **token_list)
 {
@@ -85,7 +93,7 @@ void	join_string(token **token_list)
 			if (tmp->type == T_S_QUOTE)
 				tmp->next->s_quote_flag = 1;
 			tmp = tmp->next;
-			while (tmp->next && (tmp->next->type != T_S_QUOTE && tmp->next->type != T_D_QUOTE))
+			while (tmp->next && ((tmp->next->type != T_S_QUOTE && tmp->next->type != T_D_QUOTE) || str_ended_backslash(tmp)))
 				join_token(tmp, tmp->next);
 			if (!tmp->next)
 			{
