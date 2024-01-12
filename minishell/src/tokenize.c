@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 13:13:47 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/11 16:20:22 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:29:52 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	add_token(token **list, int i, int j, char *str)
 	new_node = ft_calloc(sizeof(token), 1);
 	new_node->next = NULL;
 	new_node->s_quote_flag = 0;
+	new_node->d_quote_flag = 0;
 	new_node->value = ft_calloc(1, i - j);
 	while (j < i)
 		new_node->value[++k] = str[j++];
@@ -91,6 +92,14 @@ int	while_statment_tokenize(int *i, int *j, char *argv, char *dif)
 	return (*i != *j);
 }
 
+int	while_statment_tokenize2(int *i, int *j, char *argv, char *dif)
+{
+	*j = *i;
+	while (argv[*i] && !is_str(argv[*i], dif))
+		*i = *i + 1;
+	return (argv[*j] && *i != *j);
+}
+
 token	*tokenize(char *argv, char **envp)
 {
 	int		i;
@@ -109,10 +118,9 @@ token	*tokenize(char *argv, char **envp)
 			add_token(&token_list, i + 1, j, argv);
 		if (if_statment_tokenize(&i, &j, argv, "|"))
 			add_token(&token_list, i + 1, j, argv);
-		j = i;
-		while (argv[i] && !is_str(argv[i], "<>\t\n\v\f\r "))
-                        i++;
-                if (argv[j] && i != j)
+                if (while_statment_tokenize2(&i, &j, argv, "<>"))
+			add_token(&token_list, i + 1, j, argv);
+                if (while_statment_tokenize2(&i, &j, argv, " \t\n\v\f\r"))
 			add_token(&token_list, i + 1, j, argv);
 	}
 	return (add_path(token_list, envp));
