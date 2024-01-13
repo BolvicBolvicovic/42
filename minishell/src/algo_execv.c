@@ -22,6 +22,17 @@ void	free_tab(char **path)
 	free(path);
 }
 
+int	no_slash(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '/')
+			return (0);
+	return (1);
+}
+
 void	exec_command_flag(token *t_argv, char *cpy)
 {
 	int		i;
@@ -38,7 +49,7 @@ void	exec_command_flag(token *t_argv, char *cpy)
 		final_path = ft_strcat(final_path, path[i]);
 		final_path = ft_strcat(final_path, "/");
 		final_path = ft_strcat(final_path, t_argv->value);
-		if (access(final_path, X_OK) == 0)
+		if (access(final_path, X_OK) == 0 && no_slash(t_argv->value))
 		{
 			t_argv->type = T_CMD_ENVP;
 			free(final_path);
