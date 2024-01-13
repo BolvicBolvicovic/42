@@ -80,24 +80,22 @@ int	is_envp(char *str, char **envp, char **variable)
 	return (0);
 }
 
-char	*del_backslash(char *str, int *i)
+char	*del_backslash(char *str, int i)
 {
 	char	*new_str;
 	int	j;
 	
 	j = -1;
-	new_str = ft_calloc(1, ft_strlen(str) - 1);
-	while (++j < *i)
+	new_str = ft_calloc(1, ft_strlen(str));
+	while (++j < i)
 		new_str[j] = str[j];
 	while (str[++j])
 		new_str[j - 1] = str[j];
 	free(str);
-	new_str[j - 1] = '\0';
-	*i += 1;
 	return (new_str);
 }
 
-void	handle_envp_var(char **str, char **envp)
+void	handle_envp_var(char **str, char **envp, int flag)
 {
 	int	i;
 	char	*var;
@@ -110,12 +108,12 @@ void	handle_envp_var(char **str, char **envp)
 			if (is_envp((*str) + i, envp, &var))
 				*str = transform_value(*str, &i, envp, var); 
 		}
-		else if ((*str)[i] == '\\')
+		else if ((*str)[i] == '\\' && flag)
 			if ((*str)[i + 1])
 				if ((*str)[i + 1] == '\\' 
 					|| (*str)[i + 1] == '$' 
 					|| (*str)[i + 1] == '\"')
-					*str = del_backslash(*str, &i);
+					*str = del_backslash(*str, i);
 		free(var);
 	}
 }
@@ -128,7 +126,7 @@ void	add_envp_var(token **t_argv, char **envp)
 	while (node)
 	{
 		if (node->type == T_WORD && !node->s_quote_flag)
-			handle_envp_var(&node->value, envp);
+			handle_envp_var(&node->value, envp, node->d_quote_flag);
 		node = node->next;
 	}
 }

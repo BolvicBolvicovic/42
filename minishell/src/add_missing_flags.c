@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:47:06 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/02 14:32:00 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:45:14 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	add_flags(token **t_argv)
 	{
 		if (tmp->type == T_D_QUOTE || tmp->type == T_S_QUOTE)
 			quote_flag = !quote_flag;
-		if (only_space(tmp->value))
-			tmp->type = T_SPACE;
 		else if (!cmd_flag && (tmp->type == T_CMD || tmp->type == T_CMD_ENVP))
 			cmd_flag = 1;
 		else if ((cmd_flag && (tmp->type == T_CMD || tmp->type == T_CMD_ENVP)) 

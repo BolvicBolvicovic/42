@@ -4,8 +4,6 @@ void	join_token(token *node, token *next_node)
 {
 	if (*next_node->value)
 		node->value = ft_strjoin(node->value, next_node->value);
-	else
-		node->value = ft_strjoin(node->value, " ");
 	node->type = T_WORD;
 	node->next = next_node->next;
 	free(next_node->value);
@@ -20,25 +18,6 @@ void	destroy_token(token *previous_node, token *node_to_destroy)
 	free(node_to_destroy->value);
 	free(node_to_destroy->path);
 	free(node_to_destroy);
-}
-
-void	del_first_t_quote(token **token_list)
-{
-	token	*tmp;
-	token	*tmp2;
-
-	tmp = *token_list;
-	while (tmp)
-	{
-		if (tmp->type == T_S_QUOTE || tmp->type == T_D_QUOTE)
-		{
-			tmp2 = tmp->next;
-			destroy_token(NULL, tmp);
-			tmp = tmp2;;
-		}
-		else 
-			break ;
-	}
 }
 
 void	del_t_type(token **token_list, token_type type1, token_type type2)
@@ -71,13 +50,20 @@ void	handle_spaces(token **token_list)
 			tmp = tmp->next;
 	}
 }
-//finis la fonction
+
 int	str_ended_backslash(token *node)
 {
 	int	len;
+	int	i;
 
+	i = 1;
 	len = ft_strlen(node->value);
-	return (node->value[len] == '\\');
+	if (node->value[len - i] == '\\')
+		while (len - i >= 0 && node->value[len - i] == '\\')
+			i++;
+	return ((node->next->type != T_S_QUOTE && node->next->type != T_D_QUOTE) 
+		|| ((i - 1) % 2));
+
 }
 
 void	join_string(token **token_list)
@@ -92,8 +78,10 @@ void	join_string(token **token_list)
 		{
 			if (tmp->type == T_S_QUOTE)
 				tmp->next->s_quote_flag = 1;
+			else if (tmp->type == T_D_QUOTE)
+				tmp->next->d_quote_flag = 1;
 			tmp = tmp->next;
-			while (tmp->next && ((tmp->next->type != T_S_QUOTE && tmp->next->type != T_D_QUOTE) || str_ended_backslash(tmp)))
+			while (tmp->next && str_ended_backslash(tmp))
 				join_token(tmp, tmp->next);
 			if (!tmp->next)
 			{

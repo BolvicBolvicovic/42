@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:18:10 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/11 17:42:25 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:51:14 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,10 @@ void	add_command_token(token *node)
 		exec_command_flag(node, node->path);
 }
 
-int	str_error(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	while (str[i] && str[i] != ' ')
-		i++;
-	while (str[i] && str[i] == ' ')
-		i++;
-	return (str[i]);
-}
-
-char	*del_spaces(char *str)
-{
-	int		start;
-	int		end;
-	char	*tmp;
-	
-	start = 0;
-	end = ft_strlen(str) - 1;
-	while (str[start] == ' ' || (str[start] >= '\t' && str[start] <= '\r'))
-		start++;
-	while (end > start && (str[end] == ' ' || (str[end] >= '\t' && str[end] <= '\r')))
-		end--;
-	tmp = ft_calloc(1, end - start + 2);
-	ft_strlcpy(tmp, str + start, end - start + 2);
-	tmp[end - start + 1] = '\0';
-	free(str);
-	return (tmp);
-}
-
 void	add_operator_token(token *node)
 {
-	if (only_space(node->value))
+	if (only_space(node))
 		return ;
-	if (str_error(node->value))
-	{
-		node->type = T_ERROR;
-		return ;
-	}
-	node->value = del_spaces(node->value);
 	if (ft_strcmp(node->value, "<<") == 0)
 		node->type = T_HEREDOC;
 	else if (ft_strcmp(node->value, "<") == 0)

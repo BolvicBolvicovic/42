@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/02 19:12:42 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:25:30 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct soken
 	char		*value;
 	char		*path;
 	int		s_quote_flag;
+	int		d_quote_flag;
 	int		f_space;
 	struct soken	*next;
 }	token;
@@ -59,7 +60,7 @@ typedef struct soken
 int		is_str(char c, char *str);
 int		is_one_space(char *str);
 int		no_quote(char *str);
-int		only_space(char *str);
+int		only_space(token *node);
 void	*ft_realloc(char *ptr, size_t size);
 
 //Flags
