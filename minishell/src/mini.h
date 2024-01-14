@@ -32,6 +32,7 @@
 typedef enum
 {
 	T_WORD,
+	T_DIR_OR_FILE,
 	T_SPACE,
 	T_S_QUOTE,
 	T_D_QUOTE,

@@ -49,7 +49,13 @@ void	exec_command_flag(token *t_argv, char *cpy)
 		final_path = ft_strcat(final_path, path[i]);
 		final_path = ft_strcat(final_path, "/");
 		final_path = ft_strcat(final_path, t_argv->value);
-		if (access(final_path, X_OK) == 0 && no_slash(t_argv->value))
+		if (!no_slash(t_argv->value))
+		{
+			t_argv->type = T_DIR_OR_FILE;
+			free(final_path);
+			break ;
+		}
+		else if (access(final_path, X_OK) == 0)
 		{
 			t_argv->type = T_CMD_ENVP;
 			free(final_path);
