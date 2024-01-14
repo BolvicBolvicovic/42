@@ -56,6 +56,8 @@ typedef struct soken
 	int		f_space;
 	struct soken	*next;
 }	token;
+//Main Function
+token	*parsing(char **envp);
 
 //Utils
 int		is_str(char c, char *str);

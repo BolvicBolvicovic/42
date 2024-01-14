@@ -29,6 +29,35 @@ void	check_redirect(token **token_list)
 	}
 }
 
+token	*parsing(char **envp)
+{
+	token	*tmp;
+	token	*t_argv;
+	char	*input;
+
+	t_argv = NULL;
+	input = readline("➜ MiniFeur$ ");
+	if (input && ft_strlen(input) > 0)
+	{
+		t_argv = tokenize(input, envp);
+		add_flags(&t_argv);
+		check_redirect(&t_argv);
+		join_string(&t_argv);
+		add_envp_var(&t_argv, envp);
+		if (t_argv->type == T_S_QUOTE
+			|| t_argv->type == T_D_QUOTE || t_argv->type == T_SPACE)
+		{
+			tmp = t_argv->next;
+			free(t_argv->value);
+			free(t_argv->path);
+			free(t_argv);
+			t_argv = tmp;
+		}
+		free(input);
+	}
+	return (t_argv);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	token	*tmp;
