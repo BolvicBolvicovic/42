@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:32:58 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 17:35:58 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:44:02 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	insert_empty_str(t_oken **node)
 
 void	if_statement_joinstr(t_oken **tmp)
 {
-	if ((*tmp)->next && (((*tmp)->type == T_S_QUOTE && (*tmp)->next->type != T_S_QUOTE)
+	if ((*tmp)->next && (((*tmp)->type == T_S_QUOTE
+				&& (*tmp)->next->type != T_S_QUOTE)
 			|| ((*tmp)->type == T_D_QUOTE && (*tmp)->next->type != T_D_QUOTE)))
 	{
 		if ((*tmp)->type == T_S_QUOTE)
@@ -38,7 +39,8 @@ void	if_statement_joinstr(t_oken **tmp)
 		while ((*tmp)->next && str_ended_backslash(*tmp))
 			join_token(*tmp, (*tmp)->next);
 	}
-	else if ((*tmp)->next && (((*tmp)->type == T_S_QUOTE && (*tmp)->next->type == T_S_QUOTE)
+	else if ((*tmp)->next && (((*tmp)->type == T_S_QUOTE
+				&& (*tmp)->next->type == T_S_QUOTE)
 			|| ((*tmp)->type == T_D_QUOTE && (*tmp)->next->type == T_D_QUOTE)))
 		insert_empty_str(tmp);
 }
