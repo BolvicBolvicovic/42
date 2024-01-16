@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:36:52 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/12 15:18:18 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:50:15 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_realloc(char *ptr, size_t size)
 {
 	char	*str;
-	
+
 	str = ft_calloc(1, size);
 	free(ptr);
 	return (str);
@@ -51,13 +51,14 @@ int	no_quote(char *str)
 	return (1);
 }
 
-int	only_space(token *node)
+int	only_space(t_oken *node)
 {
 	int	i;
 
 	i = -1;
 	while (node->value[++i])
-		if (node->value[i] != ' ' && !(node->value[i] >= '\t' && node->value[i] <= '\r'))
+		if (node->value[i] != ' '
+			&& !(node->value[i] >= '\t' && node->value[i] <= '\r'))
 			return (0);
 	node->type = T_SPACE;
 	return (1);

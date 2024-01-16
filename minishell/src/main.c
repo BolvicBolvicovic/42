@@ -6,33 +6,33 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/11 17:36:06 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:39:42 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	check_redirect(token **token_list)
+void	check_redirect(t_oken **token_list)
 {
-	token	*tmp;
+	t_oken	*tmp;
 
 	tmp = *token_list;
 	while (tmp)
 	{
-		if (tmp->value[0] == '<' 
+		if (tmp->value[0] == '<'
 			&& !(!tmp->value[1] || (tmp->value[1] == '<' && !tmp->value[2])))
 			tmp->type = T_ERROR;
-		if (tmp->value[0] == '>' 
+		if (tmp->value[0] == '>'
 			&& !(!tmp->value[1] || (tmp->value[1] == '>' && !tmp->value[2])))
 			tmp->type = T_ERROR;
 		tmp = tmp->next;
 	}
 }
 
-token	*parsing(char **envp)
+t_oken	*parsing(char **envp)
 {
-	token	*tmp;
-	token	*t_argv;
+	t_oken	*tmp;
+	t_oken	*t_argv;
 	char	*input;
 
 	t_argv = NULL;
@@ -60,8 +60,8 @@ token	*parsing(char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	token	*tmp;
-	token	*t_argv;
+	t_oken	*tmp;
+	t_oken	*t_argv;
 	char	*input;
 
 	(void)argc;
@@ -96,7 +96,7 @@ int	main(int argc, char **argv, char **envp)
 			while (t_argv)
 			{
 				tmp = t_argv->next;
-				printf("Value: %s Token Type: %d\n", t_argv->value, t_argv->type);
+				printf("Value: -%s- Token Type: %d\n", t_argv->value, t_argv->type);
 				free(t_argv->value);
 				free(t_argv->path);
 				free(t_argv);

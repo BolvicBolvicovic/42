@@ -6,13 +6,13 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:18:10 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/12 14:51:14 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:50:04 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	add_command_token(token *node)
+void	add_command_token(t_oken *node)
 {
 	if (ft_strcmp(node->value, "echo") == 0
 		|| ft_strcmp(node->value, "cd") == 0
@@ -26,7 +26,7 @@ void	add_command_token(token *node)
 		exec_command_flag(node, node->path);
 }
 
-void	add_operator_token(token *node)
+void	add_operator_token(t_oken *node)
 {
 	if (only_space(node))
 		return ;
@@ -42,9 +42,9 @@ void	add_operator_token(token *node)
 		node->type = T_PIPE;
 }
 
-void	update_token_flags(token *list)
+void	update_token_flags(t_oken *list)
 {
-	token	*tmp;
+	t_oken	*tmp;
 
 	tmp = list;
 	tmp->f_space = is_one_space(tmp->value);
