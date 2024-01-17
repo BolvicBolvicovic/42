@@ -25,7 +25,7 @@ CFLAGS =	-Wall -Wextra -Werror -g \
 LFLAGS =	-L$(LIBFT_DIR) \
 		-L$(FT_PRINTF_DIR) \
 		-lft -lftprintf -lreadline
-FILES = main utils tokenize add_missing_flags update_t_f algo_execv join_strings envp_var
+FILES = add_missing_flags envp_var main tokenize utils utils_joinstr algo_execv join_strings update_t_f utils_envpvar utils_tokenize
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))
