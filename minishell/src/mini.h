@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/17 17:10:54 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:51:55 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <fcntl.h>
+# include <linux/limits.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -27,6 +29,11 @@
 # define S_QUOTE 0x02
 # define D_IN_S_QUOTE 0x04
 # define S_IN_D_QUOTE 0x08
+
+typedef struct environement
+{
+	char	**env_cpy;
+}	t_env;
 
 typedef enum soken_type
 {
@@ -45,7 +52,6 @@ typedef enum soken_type
 	T_ERROR,
 }	t_oken_type;
 
-
 typedef struct soken
 {
 	t_oken_type		type;
@@ -61,8 +67,6 @@ t_oken	*parsing(char **envp);
 
 //Signal
 void	sig_init(void);
-int		is_exec(int value);
-void	ft_raise_error(char *error);
 
 //Utils
 int		is_str(char c, char *str);
@@ -82,6 +86,7 @@ int		str_ended_backslash(t_oken *node);
 void	token_addback(t_oken **list, t_oken *node);
 void	add_token(t_oken **list, int i, int j, char *str);
 char	*get_path(char **envp);
+void	free_tab(char **tab);
 t_oken	*add_path(t_oken *list, char **envp);
 
 //Flags
@@ -97,5 +102,13 @@ void	update_token_flags(t_oken *list);
 void	add_command_token(t_oken *node);
 void	add_operator_token(t_oken *node);
 t_oken	*tokenize(char *argv, char **envp);
+
+//buit-in command
+void	ft_echo(char **arg_tab);
+void	ft_cd(char **arg_tab);
+void	ft_pwd(void);
+char	**ft_export(char **arg_tab, t_env *env_cpy);
+void	ft_unset(char **arg_tab, t_env *env_cpy);
+void	ft_env(t_env *envp, int is_export);
 
 #endif

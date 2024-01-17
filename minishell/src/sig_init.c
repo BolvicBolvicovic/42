@@ -6,13 +6,13 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/17 17:09:47 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:51:19 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-extern int g_status;
+extern int	g_status;
 
 void	ft_raise_error(char *error)
 {

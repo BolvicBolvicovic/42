@@ -12,7 +12,7 @@
 
 #include "mini.h"
 
-void	free_tab(char **path)
+/*void	free_tab(char **path)
 {
 	int	i;
 
@@ -20,7 +20,7 @@ void	free_tab(char **path)
 	while (path[++i])
 		free(path[i]);
 	free(path);
-}
+}*/
 
 int	no_slash(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:24:35 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 15:33:00 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:49:56 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	is_envp(char *str, char **envp, char **variable)
 	}
 	while (envp[++i])
 	{
-		if (ft_strnstr(envp[i], var, ft_strlen(var)))
+		if (ft_strnstr(envp[i], var, ft_strlen(var))
+			&& envp[i][ft_strlen(var)] == '=')
 		{
 			*variable = var;
 			return (1);

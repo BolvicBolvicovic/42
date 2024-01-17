@@ -6,7 +6,7 @@
 #    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2024/01/17 17:08:54 by vcornill         ###   ########.fr        #
+#    Updated: 2024/01/17 18:27:57 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS =	-Wall -Wextra -Werror -g \
 LFLAGS =	-L$(LIBFT_DIR) \
 		-L$(FT_PRINTF_DIR) \
 		-lft -lftprintf -lreadline
-FILES = sig_init add_missing_flags envp_var main tokenize utils utils_joinstr algo_execv join_strings update_t_f utils_envpvar utils_tokenize
+FILES = sig_init add_missing_flags envp_var main tokenize utils utils_joinstr algo_execv join_strings update_t_f utils_envpvar utils_tokenize built_in
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))
