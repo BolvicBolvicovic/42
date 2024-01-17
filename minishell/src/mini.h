@@ -6,12 +6,13 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 17:02:22 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:10:54 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_H
 # define MINI_H
+# include <signal.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -44,6 +45,7 @@ typedef enum soken_type
 	T_ERROR,
 }	t_oken_type;
 
+
 typedef struct soken
 {
 	t_oken_type		type;
@@ -56,6 +58,11 @@ typedef struct soken
 }	t_oken;
 //Main Function
 t_oken	*parsing(char **envp);
+
+//Signal
+void	sig_init(void);
+int		is_exec(int value);
+void	ft_raise_error(char *error);
 
 //Utils
 int		is_str(char c, char *str);

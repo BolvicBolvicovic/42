@@ -6,11 +6,13 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:49 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 17:39:42 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:10:54 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+int	g_status;
 
 void	check_redirect(t_oken **token_list)
 {
@@ -68,6 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	printf("\033c");
 	printf("\033]0;MiniFeur\a");
+	sig_init();
 	while (1)
 	{
 		t_argv = NULL;
