@@ -2,7 +2,6 @@
 
 void	randomChamp(std::string name)
 {
-	Zombie	*newZ = newZombie(name);
-	newZ->announce();
-	delete newZ;
+	Zombie	newZ = Zombie(name);
+	newZ.announce();
 }

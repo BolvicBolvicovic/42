@@ -2,9 +2,15 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc == 2)
+	Zombie	*newZ;
+	if (argc == 3)
+	{
 		randomChamp(argv[1]);
+		newZ = newZombie(argv[2]);
+		newZ->announce();
+		delete newZ;
+	}
 	else
-		std::cout << "Just give one name for the Z.\n";
+		std::cout << "Just give two names for Zs.\n";
 	return (0);
 }
