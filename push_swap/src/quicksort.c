@@ -1,5 +1,14 @@
-//mets un header
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quicksort.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 18:22:09 by vcornill          #+#    #+#             */
+/*   Updated: 2023/12/12 15:16:58 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -18,22 +27,18 @@ void	index_to_values(t_list **a, int *index)
 	free(index);
 }
 
-void	assign_index(t_list **stack_a, int stack_size)
+void	assign_index(t_list **stack_a, int s_size, int o_size, int value)
 {
 	t_list	*ptr;
 	int		smallest;
-	int		value;
 	int		*index;
 	int		i;
-	int		original_size;
 
-	original_size = stack_size;
-	index = ft_calloc(sizeof(int), stack_size);
 	i = 0;
-	while (stack_size-- > 0)
+	index = ft_calloc(sizeof(int), s_size);
+	while (s_size-- > 0)
 	{
 		ptr = *stack_a;
-		value = 2147483647;
 		smallest = -1;
 		while (ptr)
 		{
@@ -46,7 +51,7 @@ void	assign_index(t_list **stack_a, int stack_size)
 			ptr = ptr->next;
 		}
 		if (smallest != -1)
-			index[smallest] = (stack_size - original_size) * (-1);
+			index[smallest] = (s_size - o_size) * (-1);
 		i = 0;
 	}
 	index_to_values(stack_a, index);
@@ -59,12 +64,12 @@ void	save_three(t_list **a, t_list **b)
 	int	i;
 
 	stack_size = ft_lstsize(*a);
-	assign_index(a, stack_size);
+	assign_index(a, stack_size, stack_size, 2147483647);
 	pushed = 0;
 	i = 0;
 	while (stack_size > 6 && i < stack_size && pushed < stack_size / 2)
 	{
-		if(*(int *)(*a)->content <= stack_size / 2)
+		if (*(int *)(*a)->content <= stack_size / 2)
 		{
 			pb(b, a);
 			pushed++;
@@ -82,9 +87,10 @@ void	save_three(t_list **a, t_list **b)
 
 int	get_low_pos(t_list *a)
 {
-	int		i;
-	int		lowest;
-	int		low_pos;
+	int	i;
+	int	lowest;
+	int	low_pos;
+
 	i = 0;
 	low_pos = 0;
 	lowest = *(int *)a->content;
@@ -131,8 +137,7 @@ void	quicksort(t_list **a, t_list **b)
 	save_three(a, b);
 	sort_three(a);
 	while (*b)
-		do_best_move(a, b);	
+		do_best_move(a, b);
 	if (!is_sorted(*a))
 		shift_stack(a);
 }
-
