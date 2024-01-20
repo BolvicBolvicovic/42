@@ -1,5 +1,5 @@
-NAME	= Harl2.0
-CC	= c++ -Wall -Wextra -Werror -std=c++98
+NAME	= harlFilter
+CC	= c++ -g -Wall -Wextra -Werror -std=c++98
 FILES	= $(addprefix src/, main.cpp Harl.cpp)
 
 all	: $(NAME)
