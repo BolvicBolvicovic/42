@@ -11,6 +11,7 @@ class	PhoneBook
 {
 	private:
 		Contact	contacts[MAX_CONTACTS];
+		bool	maxContact;
 		int	contactIndex;
 	public:
 		PhoneBook();
@@ -18,7 +19,6 @@ class	PhoneBook
 
 		void	add();
 		void	search() const;
-		void	exit();
 };
 
 #endif
