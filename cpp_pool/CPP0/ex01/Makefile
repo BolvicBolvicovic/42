@@ -1,10 +1,10 @@
 NAME	= PhoneBook
 CC	= c++ -Wall -Wextra -Werror -std=c++98
-FILES	= $(addprefix src/, main.pp)
+FILES	= $(addprefix src/, main.cpp Contact.cpp PhoneBook.cpp)
 
 all	: ${NAME}
 
-${NAME}	: ${FILES}
+${NAME}	:
 	@${CC} ${FILES} -o $@
 
 clean	:
