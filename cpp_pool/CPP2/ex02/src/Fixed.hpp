@@ -17,7 +17,29 @@ public:
 	~Fixed();
 
 	friend std::ostream	&operator<<( std::ostream &os, const Fixed &fixed );
-	Fixed			&operator=( const Fixed &other	);
+	Fixed			&operator=( const Fixed &other );
+	
+	bool			operator>( const Fixed &fNum ) const;
+	bool			operator<( const Fixed &fNum ) const;
+	bool			operator==( const Fixed &fNum ) const;
+	bool			operator<=( const Fixed &fNum ) const;
+	bool			operator>=( const Fixed &fNum ) const;
+	bool			operator!=( const Fixed &fNum ) const;
+	
+	Fixed			operator+( const Fixed &fNum ) const;
+	Fixed			operator-( const Fixed &fNum ) const;
+	Fixed			operator/( const Fixed &fNum ) const;
+	Fixed			operator*( const Fixed &fNum ) const;
+
+	Fixed			&operator++( void ); // prefix
+	Fixed			operator++( int ); // postfix
+	Fixed			&operator--( void ); // prefix
+	Fixed			operator--( int ); // postfix
+
+	Fixed			&min(Fixed &a, Fixed&b);
+	Fixed			&max(Fixed &a, Fixed&b);
+	const Fixed		&min(const Fixed &a, const Fixed&b);
+	const Fixed		&max(const Fixed &a, const Fixed&b);
 
 	int			getRawBits( void ) 	const	;
 	void			setRawBits( int const raw	);
