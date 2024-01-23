@@ -1,6 +1,6 @@
-NAME	= ex00
+NAME	= DreamWork
 CC	= c++ -Wall -Wextra -Werror -std=c++98
-FILES	= $(addprefix src/, main.cpp Zombie.cpp newZombie.cpp randomChump.cpp)
+FILES	= $(addprefix src/, Account.cpp tests.cpp)
 
 all	: ${NAME}
 
