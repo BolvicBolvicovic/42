@@ -1,6 +1,6 @@
 NAME	= ex02
 CC	= c++ -g -Wall -Wextra -Werror -std=c++98
-FILES	= $(addprefix src/, main.cpp Fixed.cpp)
+FILES	= $(addprefix src/, main.cpp Fixed.cpp bsp.cpp Point.cpp)
 
 all	: ${NAME}
 
