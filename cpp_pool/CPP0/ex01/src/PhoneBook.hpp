@@ -18,7 +18,7 @@ class	PhoneBook
 		~PhoneBook();
 
 		void	add();
-		void	search() const;
+		void	search();
 };
 
 #endif

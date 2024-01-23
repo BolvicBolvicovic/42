@@ -2,6 +2,15 @@
 Contact::Contact()	{}
 Contact::~Contact()	{}
 
+void		Contact::printContact(void)
+{
+	std::cout << getFirstName()	<< std::endl;
+	std::cout << getLastName()	<< std::endl;
+	std::cout << getNickname()	<< std::endl;
+	std::cout << getPhoneNumber()	<< std::endl;
+	std::cout << getDarkestSecret()	<< std::endl;
+}
+
 void		Contact::setFirstName(std::string str)
 {
 	this->firstName = str;
