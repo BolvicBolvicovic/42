@@ -1,6 +1,6 @@
 NAME	= ex01
 CC	= c++ -g -Wall -Wextra -Werror -std=c++98
-FILES	= $(addprefix src/, main.cpp Fixed.cpp)
+FILES	= $(addprefix src/, main.cpp ClapTrap.cpp)
 
 all	: ${NAME}
 
