@@ -6,11 +6,13 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:46:14 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 15:48:41 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:42:24 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+extern int	g_status;
 
 void	handle_envp_var(char **str, char **envp, int flag)
 {
@@ -21,7 +23,12 @@ void	handle_envp_var(char **str, char **envp, int flag)
 	while ((*str)[++i])
 	{
 		var = NULL;
-		if ((*str)[i] == '$' && is_envp((*str) + i, envp, &var))
+		if (ft_strcmp(*str, "$?") == 0)
+		{
+			free(*str);
+			*str = ft_strdup(ft_itoa((int)g_status));
+		}
+		else if ((*str)[i] == '$' && is_envp((*str) + i, envp, &var))
 			*str = transform_value(*str, &i, envp, var);
 		else if ((*str)[i] == '\\' && flag)
 			if ((*str)[i + 1])

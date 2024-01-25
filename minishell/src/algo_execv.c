@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:08:06 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/16 15:48:26 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:53:52 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	exec_command_flag(t_oken *t_argv, char *cpy)
 
 	path = ft_split(cpy, ':');
 	i = -1;
-	while (path[++i])
+	while (path && path[++i])
 	{
 		final_path = build_final_path(t_argv, path[i]);
 		if (!no_slash(t_argv->value))

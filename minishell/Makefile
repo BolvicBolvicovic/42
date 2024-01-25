@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2024/01/17 18:27:57 by vcornill         ###   ########.fr        #
+#    Updated: 2024/01/20 18:11:12 by acasamit         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 CC = cc
-CFLAGS =	-Wall -Wextra -Werror -g \
+CFLAGS =	-Wall -Wextra -Werror -g -O0 \
 		-I$(LIBFT_DIR) \
 		-I$(FT_PRINTF_DIR)
 LFLAGS =	-L$(LIBFT_DIR) \
 		-L$(FT_PRINTF_DIR) \
 		-lft -lftprintf -lreadline
-FILES = sig_init add_missing_flags envp_var main tokenize utils utils_joinstr algo_execv join_strings update_t_f utils_envpvar utils_tokenize built_in
+FILES = sig_init add_missing_flags envp_var main tokenize utils utils_joinstr algo_execv join_strings update_t_f utils_envpvar utils_tokenize built_in built_in2 built_in3 export special_char command_main command_utils exec_command main_loop
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))
