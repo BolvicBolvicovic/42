@@ -30,6 +30,6 @@ public:
 	void		setHealth( int nb );
 	void		setEnergy( int nb );
 	void		setAttackDamage( int nb );
-}
+};
 
 #endif
