@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/20 18:10:58 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:52:33 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct command
 	int		fd;
 	int		piped;
 	int		redirect;
+	int		out;
 	int		heredoc;
 	int		builtin;
 	int		rd_fd;

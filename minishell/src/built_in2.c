@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:41 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/18 19:07:40 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:06:01 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ char	**ft_export(char **arg_tab, t_env *env)
 	return (env->env_cpy);
 }
 
-void	echo_empty(void)
-{
-	printf("\n");
-	exit(EXIT_SUCCESS);
-}
-
 void	echo_utils(char **arg_tab)
 {
 	int	j;
@@ -69,7 +63,10 @@ void	ft_echo(char **arg_tab)
 	i = 0;
 	j = 0;
 	if (!arg_tab[1])
-		echo_empty();
+	{
+		printf("\n");
+		return ;
+	}
 	if (arg_tab[1][0] == '-')
 	{
 		while (arg_tab[1][++i])
@@ -82,10 +79,7 @@ void	ft_echo(char **arg_tab)
 		return (echo_utils(arg_tab));
 	j = 1;
 	while (arg_tab[++j] && arg_tab[j + 1] != NULL)
-	{
-		printf("%s", arg_tab[j]);
-		printf(" ");
-	}
+		printf("%s ", arg_tab[j]);
 	if (arg_tab[j] && arg_tab[j + 1] == NULL)
 		printf("%s", arg_tab[j]);
 }

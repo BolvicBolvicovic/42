@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command1.c                                    :+:      :+:    :+:   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:52:51 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/20 17:53:27 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:48:19 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_command	var_init(int rd)
 	c.stdout_backup = dup(STDOUT_FILENO);
 	c.stdin_backup = dup(STDIN_FILENO);
 	c.args = malloc(sizeof(char *));
+	c.args[0] = NULL;
 	c.piped = 0;
 	c.redirect = 0;
 	c.heredoc = 0;
@@ -69,6 +70,7 @@ t_command	var_init(int rd)
 	c.is_dir = 0;
 	c.error = 0;
 	c.command = 0;
+	c.out = 0;
 	return (c);
 }
 
@@ -98,10 +100,9 @@ t_oken	*fill_arg_tab_utils(t_command *c, t_oken *lst)
 
 t_oken	*fill_arg_tab(t_command *c, t_oken *lst)
 {
-	lst = if_in_do(c, lst);
-	lst = if_out_do(c, lst);
-	lst = if_heredoc_do(c, lst);
-	lst = if_append_do(c, lst);
+	lst = handle_special_char(c, lst);
+	if (c->heredoc || c->out || c->error || !lst)
+		return (lst);
 	c->command = (lst->type == 6 || lst->type == 5);
 	c->builtin = (lst->type == 6);
 	c->args[0] = ft_strdup(lst->value);
