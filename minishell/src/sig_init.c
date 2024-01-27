@@ -22,11 +22,11 @@ void	ft_raise_error(char *error)
 
 int	is_exec(int value)
 {
-	static int	is_exec = 0;
+	static int	flag = 0;
 
 	if (value >= 0)
-		is_exec = value;
-	return (is_exec);
+		flag = value;
+	return (flag);
 }
 
 void	sig_int(int signum)

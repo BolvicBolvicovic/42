@@ -103,6 +103,7 @@ void				free_tokens(t_oken *list);
 
 //Signal
 void				sig_init(void);
+int					is_exec(int value);
 
 //Utils
 int					is_str(char c, char *str);

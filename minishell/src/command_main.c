@@ -114,6 +114,7 @@ t_oken	*do_command(t_oken *lst, int rd_fd, char *path, t_env *env)
 {
 	t_command	c;
 
+	is_exec(1);
 	c = var_init(rd_fd);
 	lst = fill_arg_tab(&c, lst);
 	if (!c.error)
@@ -127,5 +128,7 @@ t_oken	*do_command(t_oken *lst, int rd_fd, char *path, t_env *env)
 	free_tab(c.args);
 	if (c.error)
 		printf("minishell: error\n");
+	if (lst)
+		is_exec(0);
 	return (lst);
 }

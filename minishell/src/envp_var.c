@@ -51,4 +51,5 @@ void	add_envp_var(t_oken **t_argv, char **envp)
 			handle_envp_var(&node->value, envp, node->d_quote_flag);
 		node = node->next;
 	}
+	g_status = 0;
 }
