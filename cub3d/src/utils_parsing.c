@@ -4,7 +4,7 @@ int	check_format(char *str, char *cmp)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (str[i] && ft_strcmp(&str[i], cmp) != 0)
 		i++;
 	if (ft_strcmp(&str[i], cmp) == 0)
@@ -13,5 +13,104 @@ int	check_format(char *str, char *cmp)
 	
 }
 
-is_map
-add_line_
+int	is_map(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i + 1] && line[i + 1] == '\n')
+			line[i + 1] = '\0';
+		if (line[i] != '0' && line[i] != '1'
+			&& line[i] != 'N' && line[i] != 'S'
+			&& line[i] != 'E' && line[i] != 'O'
+			&& line[i] != ' ' && line[i] != '\t')
+			return (0);
+	}
+	return (1);
+}
+
+char	**add_line(char **tab, char *line)
+{
+	char	**newtab;
+	int		tab_size;
+	int		i;
+
+	tab_size = 1;
+	while (tab && tab[tab_size])
+		tab_size++;
+	newtab = ft_calloc(tab_size + 1, sizeof(char *));
+	i = -1;
+	while (++i < tab_size && tab)
+		newtab[i] = ft_strdup(tab[i]);
+	newtab[i] = ft_strdup(line);
+	newtab[++i] = NULL;
+	ft_free_tab(tab);
+	free(line);
+	return (newtab);
+}
+
+int	valid_path(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
+		return (0);
+	}
+	close(fd);
+	return (1);
+}
+
+int	valid_color_setting(char *setting)
+{
+	int	i;
+
+	i = 0;
+	while (setting[i] && setting[i] != '\n')
+	{
+		if (!ft_isdigit(setting[i]))
+			return (0);
+		if (ft_atoi(&setting[i]) > 255)
+			return (0);
+		while (ft_isdigit(setting[i]))
+			i++;
+		if (setting[i] != ',')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	valid_instruction(t_game **game, char *line, char *id)
+{
+	int	i;
+
+	i = 0;
+	while (line && line[i] && i < 3)
+	{
+		if (line[i] != id[i])
+			ft_free_exit(*game, "Instruction ID invalid.");
+		i++;
+	}
+	if (!valid_path(&line[3]))
+		ft_free_exit(*game, "Instruction path invalid.");
+}
+
+void	valid_color(t_game **game, char *line, char *id)
+{
+	int	i;
+
+	i = 0;
+	while (line && line[i] && i < 2)
+	{
+		if (line[i] != id[i])
+			ft_free_exit(*game, "Color ID invalid.");
+		i++;
+	}
+	if (!valid_color_setting(&line[2]))
+		ft_free_exit(*game, "Instruction path invalid.");
+}

@@ -21,7 +21,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 CC = cc
-CFLAGS =	-Wall -Wextra -Werror \
+CFLAGS =	-g -Wall -Wextra -Werror \
 			-I$(MLX_DIR)/include/MLX42 \
 			-I$(LIBFT_DIR) \
 			-I$(FT_PRINTF_DIR)
@@ -30,7 +30,7 @@ LFLAGS =	-L$(MLX_DIR)/build \
 			-L$(FT_PRINTF_DIR) \
 			-lmlx42 -lft -lftprintf -lglfw -ldl
 
-FILES = main
+FILES = main error parsing utils_general utils_parsing
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))
