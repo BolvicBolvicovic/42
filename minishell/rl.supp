@@ -1,32 +1,6 @@
 {
-   <insert_a_suppression_name_here>
+   ignore_readlines_errors
    Memcheck:Leak
-   match-leak-kinds: definite
-   fun:malloc
-   fun:xmalloc
-   fun:rl_add_undo
-   fun:rl_delete_text
-   fun:_rl_rubout_char
-   fun:_rl_dispatch_subseq
-   fun:readline_internal_char
-   fun:readline
-   fun:parsing
-   fun:do_main_loop
-   fun:main
-}
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: definite
-   fun:malloc
-   fun:xmalloc
-   fun:rl_add_undo
-   fun:rl_delete_text
-   fun:_rl_rubout_char
-   fun:_rl_dispatch_subseq
-   fun:readline_internal_char
-   fun:readline
-   fun:parsing
-   fun:do_main_loop
-   fun:main
+   ...
+   obj:*/libreadline.so.*
 }

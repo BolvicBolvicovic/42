@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:28:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:03:34 by vcornill         ###   ########.fr       */
+/*   Created: 2024/01/25 16:28:14 by vcornill          #+#    #+#             */
+/*   Updated: 2024/01/25 18:29:04 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-#include <string>
-#include <iostream>
-
-class	Animal
+class	Cat : public Animal
 {
-protected:
-	std::string	type;
+private:
+	Brain	*brain;
 public:
-	Animal( void );
-	Animal( std::string type );
-	Animal( Animal &copy );
-	virtual	~Animal( void );
+	Cat();
+	Cat( Cat &cpy);
+	~Cat();
 
-	std::string	getType( void ) const;
-	void		setType( std::string str );
-
-	virtual void	makeSound( void ) const;
-
+	void	makeSound( void ) const;
 };

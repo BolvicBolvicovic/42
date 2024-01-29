@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:28:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:03:34 by vcornill         ###   ########.fr       */
+/*   Created: 2024/01/25 16:28:07 by vcornill          #+#    #+#             */
+/*   Updated: 2024/01/26 10:32:10 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <string>
-#include <iostream>
-
-class	Animal
+#include "Dog.hpp"
+Dog::Dog()		: brain( new Brain() )
 {
-protected:
-	std::string	type;
-public:
-	Animal( void );
-	Animal( std::string type );
-	Animal( Animal &copy );
-	virtual	~Animal( void );
+	this->setType( "Dog" );
+	std::cout << "Dog created" << std::endl;
+}
+Dog::Dog( Dog &cpy)	: brain( cpy.brain )
+{
+	this->setType( cpy.type );
+	std::cout << "Dog copy created" << std::endl;
+}
+Dog::~Dog()
+{ delete this->brain; std::cout << "Dog destroyed" << std::endl; }
 
-	std::string	getType( void ) const;
-	void		setType( std::string str );
-
-	virtual void	makeSound( void ) const;
-
-};
+void	Dog::makeSound( void ) const	{ std::cout << "CuiCui..." << std::endl; }

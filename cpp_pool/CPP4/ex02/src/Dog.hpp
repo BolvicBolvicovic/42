@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:28:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:03:34 by vcornill         ###   ########.fr       */
+/*   Created: 2024/01/25 16:28:11 by vcornill          #+#    #+#             */
+/*   Updated: 2024/01/25 18:25:55 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <string>
-#include <iostream>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class	Animal
+class	Dog : public Animal
 {
-protected:
-	std::string	type;
+private:
+	Brain	*brain;	
 public:
-	Animal( void );
-	Animal( std::string type );
-	Animal( Animal &copy );
-	virtual	~Animal( void );
+	Dog();
+	Dog( Dog &cpy);
+	~Dog();
 
-	std::string	getType( void ) const;
-	void		setType( std::string str );
-
-	virtual void	makeSound( void ) const;
-
+	void	makeSound( void ) const;
 };

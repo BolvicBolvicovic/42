@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:57:57 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/26 23:01:01 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:31:45 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ t_oken	*handle_special_char(t_command *c, t_oken *lst)
 
 void	child_process_do(t_command *c, char *path, t_env *env)
 {
-	if (!c->args[0])
+	if (!c->args[0] || c->builtin)
+	{
+		free_tab(env->env_cpy);
 		exit(EXIT_SUCCESS);
-	if (c->builtin)
-		exit(EXIT_SUCCESS);
+	}
 	if (c->piped == 1)
 	{
 		close(c->fd_tab[0]);
@@ -52,6 +53,7 @@ void	child_process_do(t_command *c, char *path, t_env *env)
 		dup2(c->rd_fd, STDIN_FILENO);
 	exec_command(c->args, path, env->env_cpy, c->is_dir);
 	dup2(c->stdout_backup, STDOUT_FILENO);
+	free_tab(env->env_cpy);
 	exit(EXIT_FAILURE);
 }
 

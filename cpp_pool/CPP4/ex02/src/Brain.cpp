@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:28:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:03:34 by vcornill         ###   ########.fr       */
+/*   Created: 2024/01/25 18:12:15 by vcornill          #+#    #+#             */
+/*   Updated: 2024/01/25 18:24:59 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <string>
+#include "Brain.hpp"
 #include <iostream>
-
-class	Animal
-{
-protected:
-	std::string	type;
-public:
-	Animal( void );
-	Animal( std::string type );
-	Animal( Animal &copy );
-	virtual	~Animal( void );
-
-	std::string	getType( void ) const;
-	void		setType( std::string str );
-
-	virtual void	makeSound( void ) const;
-
-};
+Brain::Brain()	{ std::cout << "Brain built" << std::endl; }
+Brain::~Brain()	{ std::cout << "Brain destroyed" << std::endl; }

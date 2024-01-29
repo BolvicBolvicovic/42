@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:10:38 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/26 22:59:34 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:10:41 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ int	ft_error(t_oken *t_argv)
 
 void	do_main_loop(t_env *env, t_oken *t_argv, char *cpy)
 {
+	t_oken	*tmp;
+
 	while (1)
 	{
 		t_argv = parsing(env->env_cpy);
+		tmp = t_argv;
 		if (!t_argv || !ft_strcmp(t_argv->value, "exit"))
 			break ;
 		while (t_argv)
@@ -52,7 +55,7 @@ void	do_main_loop(t_env *env, t_oken *t_argv, char *cpy)
 				break ;
 			}
 		}
-		free_tokens(t_argv);
+		free_tokens(tmp);
 	}
-	free_tokens(t_argv);
+	free_tokens(tmp);
 }

@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 16:28:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:03:34 by vcornill         ###   ########.fr       */
+/*   Created: 2024/01/25 16:27:39 by vcornill          #+#    #+#             */
+/*   Updated: 2024/01/25 18:25:17 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Dog.hpp"
+#include "Cat.hpp"
 
-#include <string>
-#include <iostream>
-
-class	Animal
+int	main( void )
 {
-protected:
-	std::string	type;
-public:
-	Animal( void );
-	Animal( std::string type );
-	Animal( Animal &copy );
-	virtual	~Animal( void );
-
-	std::string	getType( void ) const;
-	void		setType( std::string str );
-
-	virtual void	makeSound( void ) const;
-
-};
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	delete j;//should not create a leak
+	delete i;
+	return 0;
+}
