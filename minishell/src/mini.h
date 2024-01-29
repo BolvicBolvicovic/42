@@ -6,7 +6,7 @@
 /*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 21:52:33 by deck             ###   ########.fr       */
+/*   Updated: 2024/01/29 12:49:54 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ t_oken				*if_out_do(t_command *c, t_oken *lst);
 t_oken				*if_append_do(t_command *c, t_oken *lst);
 t_oken				*if_heredoc_do(t_command *c, t_oken *lst);
 t_oken				*handle_special_char(t_command *c, t_oken *lst);
-void				child_process_do(t_command *c, char *path, t_env *env);
+void				child_process_do(t_command *c, char *path, t_env *env, t_oken *lst);
 void				if_built_in_do(t_command *c, t_env *env);
 t_oken				*parent_process_do(t_command *c,
 						t_oken *lst, char *path, t_env *env);

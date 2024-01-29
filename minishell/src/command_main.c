@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:57:57 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/29 12:31:45 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:48:59 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ t_oken	*handle_special_char(t_command *c, t_oken *lst)
 	return (lst);
 }
 
-void	child_process_do(t_command *c, char *path, t_env *env)
+void	child_process_do(t_command *c, char *path, t_env *env, t_oken *lst)
 {
 	if (!c->args[0] || c->builtin)
 	{
+		free_tokens(lst);
 		free_tab(env->env_cpy);
 		exit(EXIT_SUCCESS);
 	}
@@ -53,6 +54,7 @@ void	child_process_do(t_command *c, char *path, t_env *env)
 		dup2(c->rd_fd, STDIN_FILENO);
 	exec_command(c->args, path, env->env_cpy, c->is_dir);
 	dup2(c->stdout_backup, STDOUT_FILENO);
+	free_tokens(lst);
 	free_tab(env->env_cpy);
 	exit(EXIT_FAILURE);
 }
@@ -124,7 +126,7 @@ t_oken	*do_command(t_oken *lst, int rd_fd, char *path, t_env *env)
 	if (!c.error)
 		c.pid = fork();
 	if (!c.error && !c.pid)
-		child_process_do(&c, path, env);
+		child_process_do(&c, path, env, lst);
 	else
 		lst = parent_process_do(&c, lst, path, env);
 	free_tab(c.args);
