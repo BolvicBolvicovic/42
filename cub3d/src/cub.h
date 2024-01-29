@@ -9,6 +9,8 @@ typedef struct	s_game
 {
 	char	**instructions;
 	char	**map;
+	mlx_t	*mlx;
+	mlx_texture_t	*tab_texture[4];
 }	t_game;
 
 // Error
@@ -26,5 +28,5 @@ void	parsing(t_game **game, int argc, char **argv);
 int		check_format(char *str, char *cmp);
 int		is_map(char *line);
 char	**add_line(char **tab, char *line);
-void	valid_instruction(t_game **game, char *line, char *id);
+void	valid_instruction(t_game **game, char *line, char *id, int indexText);
 void	valid_color(t_game **game, char *line, char *id);

@@ -40,7 +40,7 @@ char	**add_line(char **tab, char *line)
 	tab_size = 1;
 	while (tab && tab[tab_size])
 		tab_size++;
-	newtab = ft_calloc(tab_size + 1, sizeof(char *));
+	newtab = ft_calloc(tab_size + 2, sizeof(char *));
 	i = -1;
 	while (++i < tab_size && tab)
 		newtab[i] = ft_strdup(tab[i]);
@@ -51,24 +51,26 @@ char	**add_line(char **tab, char *line)
 	return (newtab);
 }
 
-int	valid_path(char *path)
+int	valid_path(char *path, t_game **game, int indexText)
 {
-	int	fd;
+	int	i;
 
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		close(fd);
+	i = -1;
+	while (path[++i])
+		if (path[i] == '\n')
+			path[i] = '\0';
+	(*game)->tab_texture[indexText] = mlx_load_png(path);
+	if (!(*game)->tab_texture[indexText])
 		return (0);
-	}
-	close(fd);
 	return (1);
 }
 
 int	valid_color_setting(char *setting)
 {
 	int	i;
-
+	int	coma_flag;
+	
+	coma_flag = 0;
 	i = 0;
 	while (setting[i] && setting[i] != '\n')
 	{
@@ -78,14 +80,16 @@ int	valid_color_setting(char *setting)
 			return (0);
 		while (ft_isdigit(setting[i]))
 			i++;
-		if (setting[i] != ',')
+		if (setting[i] != ',' && coma_flag < 2)
 			return (0);
+		else
+			coma_flag++;
 		i++;
 	}
 	return (1);
 }
 
-void	valid_instruction(t_game **game, char *line, char *id)
+void	valid_instruction(t_game **game, char *line, char *id, int indexText)
 {
 	int	i;
 
@@ -96,7 +100,7 @@ void	valid_instruction(t_game **game, char *line, char *id)
 			ft_free_exit(*game, "Instruction ID invalid.");
 		i++;
 	}
-	if (!valid_path(&line[3]))
+	if (!valid_path(&line[3], game, indexText))
 		ft_free_exit(*game, "Instruction path invalid.");
 }
 
@@ -112,5 +116,5 @@ void	valid_color(t_game **game, char *line, char *id)
 		i++;
 	}
 	if (!valid_color_setting(&line[2]))
-		ft_free_exit(*game, "Instruction path invalid.");
+		ft_free_exit(*game, "Color instruction invalid.");
 }

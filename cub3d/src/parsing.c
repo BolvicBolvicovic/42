@@ -10,9 +10,15 @@ void	check_args(int argc, char **argv)
 
 void	init_game(t_game **game)
 {
+	int	i;
+
 	*game = ft_calloc(1, sizeof(t_game));
 	(*game)->map = NULL;
 	(*game)->instructions = NULL;
+	(*game)->mlx = mlx_init(512, 512, "PsYcHaDeLeCkS3D", 1);
+	i = -1;
+	while (++i < 4)
+		(*game)->tab_texture[i] = NULL;
 }
 
 void	fill_tabs(t_game **game, char *file_name)
@@ -49,13 +55,13 @@ void	check_tabs(t_game **game)
 	while ((*game)->instructions && (*game)->instructions[++tab_size])
 	{
 		if (tab_size == 0)
-			valid_instruction(game, (*game)->instructions[tab_size], "NO ");
+			valid_instruction(game, (*game)->instructions[tab_size], "NO ", 0);
 		else if (tab_size == 1)
-			valid_instruction(game, (*game)->instructions[tab_size], "SO ");
+			valid_instruction(game, (*game)->instructions[tab_size], "SO ", 1);
 		else if (tab_size == 2)
-			valid_instruction(game, (*game)->instructions[tab_size], "WE ");
+			valid_instruction(game, (*game)->instructions[tab_size], "WE ", 2);
 		else if (tab_size == 3)
-			valid_instruction(game, (*game)->instructions[tab_size], "EA ");
+			valid_instruction(game, (*game)->instructions[tab_size], "EA ", 3);
 		else if (tab_size == 4)
 			valid_color(game, (*game)->instructions[tab_size], "F ");
 		else if (tab_size == 5)
