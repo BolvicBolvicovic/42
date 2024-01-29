@@ -6,7 +6,7 @@
 /*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/29 12:49:54 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:49:29 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void				sig_init(void);
 int					is_exec(int value);
 
 //Utils
+t_oken				*copy_token_list(t_oken *lst)
 int					is_str(char c, char *str);
 int					is_one_space(char *str);
 int					no_quote(char *str);

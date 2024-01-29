@@ -6,11 +6,40 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:44:32 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 16:42:48 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:48:52 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+t_oken	*copy_token_list(t_oken *lst)
+{
+	t_oken	*tmp;
+	t_oken	*head;
+	int		i;
+
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		i++
+		tmp = tmp->next;
+	}
+	head = ft_calloc(sizeof(t_oken));
+	tmp = head;
+	while (lst)
+	{
+		tmp->value = ft_strdup(lst->value);
+		tmp->type = lst->type;
+		if (lst->next)
+			tmp->next = ft_calloc(t_oken);
+		else
+			tmp->next = NULL;
+		tmp = tmp->next;
+		lst = lst->next;
+	}
+	return (head);
+}
 
 void	token_addback(t_oken **list, t_oken *node)
 {
