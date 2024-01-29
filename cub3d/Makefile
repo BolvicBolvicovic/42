@@ -30,7 +30,7 @@ LFLAGS =	-L$(MLX_DIR)/build \
 			-L$(FT_PRINTF_DIR) \
 			-lmlx42 -lft -lftprintf -lglfw -ldl
 
-FILES = main error parsing utils_general utils_parsing
+FILES = main error parsing utils_general utils_parsing utils_map_checker
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

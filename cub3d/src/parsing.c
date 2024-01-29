@@ -36,12 +36,12 @@ void	fill_tabs(t_game **game, char *file_name)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (is_map(line))
+		if (is_map(line) && !only_w_spaces(line))
 		{	
 			(*game)->map = add_line((*game)->map, line);
 			flag = 1;
 		}
-		else if (!flag)
+		else if (!flag && !only_w_spaces(line))
 			(*game)->instructions = add_line((*game)->instructions, line);
 	}
 	close(fd);
@@ -51,6 +51,7 @@ void	check_tabs(t_game **game)
 {
 	int	tab_size;
 
+	is_valid_map(game);
 	tab_size = -1;
 	while ((*game)->instructions && (*game)->instructions[++tab_size])
 	{

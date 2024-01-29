@@ -20,6 +20,7 @@ void	ft_free_exit(t_game *game, char *str);
 
 //Utils general
 void	ft_free_tab(char **tab);
+int		only_w_spaces(char *str);
 
 // Parsing
 void	parsing(t_game **game, int argc, char **argv);
@@ -30,3 +31,4 @@ int		is_map(char *line);
 char	**add_line(char **tab, char *line);
 void	valid_instruction(t_game **game, char *line, char *id, int indexText);
 void	valid_color(t_game **game, char *line, char *id);
+void	is_valid_map(t_game **game);
