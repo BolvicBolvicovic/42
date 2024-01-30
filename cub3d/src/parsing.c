@@ -14,8 +14,6 @@ void	init_game_ptr(t_game **game)
 
 	*game = ft_calloc(1, sizeof(t_game));
 	(*game)->map = NULL;
-	(*game)->posX = 0;
-	(*game)->posY = 0;
 	(*game)->instructions = NULL;
 	(*game)->mlx = mlx_init(512, 512, "PsYcHaDeLeCkS3D", 1);
 	i = -1;

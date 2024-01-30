@@ -8,8 +8,8 @@
 
 typedef struct s_coord
 {
-	int	x;
-	int y;
+	double	x;
+	double	y;
 }		t_coord;
 
 typedef struct	s_game
