@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 10:17:19 by vcornill          #+#    #+#             */
-/*   Updated: 2023/08/18 10:17:20 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/30 09:46:12 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[++j])
 		conca[j + i] = s2[j];
 	conca[i + j] = '\0';
+	free(s1);
 	return (conca);
 }

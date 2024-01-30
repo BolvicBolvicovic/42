@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:03:21 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/18 19:03:33 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:39:33 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**ft_export_print(char **env_cpy)
 int	ft_export_utils1(t_env *env, char **arg_tab, int j, int i)
 {
 	free(env->env_cpy[j]);
-	env->env_cpy[j] = malloc(ft_strlen(arg_tab[i]) + 2);
+	env->env_cpy[j] = malloc(ft_strlen(arg_tab[i]) + 3);
 	env->env_cpy[j][0] = '\0';
 	ft_strcat(env->env_cpy[j], arg_tab[i]);
 	ft_strcat(env->env_cpy[j], "\"\"");
@@ -55,7 +55,7 @@ t_export	ft_export_master(t_export e, char **arg_tab, t_env *env)
 		while (env->env_cpy[e.k])
 			e.k++;
 		env->env_cpy = ft_realloc_tab(env->env_cpy, e.k + 1);
-		env->env_cpy[e.k] = malloc(ft_strlen(arg_tab[e.i]) + 2);
+		env->env_cpy[e.k] = malloc(ft_strlen(arg_tab[e.i]) + 3);
 		env->env_cpy[e.k][0] = '\0';
 		ft_strcat(env->env_cpy[e.k], arg_tab[e.i]);
 		ft_strcat(env->env_cpy[e.k], "\"\"");
@@ -68,7 +68,7 @@ t_export	ft_export_main(t_export e, t_env *env, char **arg_tab)
 {
 	if (!e.equal)
 	{
-		arg_tab[e.i] = realloc(arg_tab[e.i], ft_strlen(arg_tab[e.i]) + 2);
+		arg_tab[e.i] = ft_realloc_s(arg_tab[e.i], ft_strlen(arg_tab[e.i]) + 2);
 		ft_strcat(arg_tab[e.i], "=");
 	}
 	e.j = 0;

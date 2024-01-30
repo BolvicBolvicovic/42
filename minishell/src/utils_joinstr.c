@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_joinstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:41:26 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 16:08:19 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:13:28 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	join_token(t_oken *node, t_oken *next_node)
 {
 	if (*next_node->value)
 		node->value = ft_strjoin(node->value, next_node->value);
-	node->type = T_WORD;
+	if (node->type != T_DIR_OR_FILE && node->next->type != T_DIR_OR_FILE)
+		node->type = T_WORD;
+	else
+		node->type = T_DIR_OR_FILE;
 	node->next = next_node->next;
 	free(next_node->value);
 	free(next_node->path);

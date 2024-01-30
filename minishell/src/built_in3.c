@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:08:25 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/23 15:24:32 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:30:31 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ char	**ft_realloc_tab(char **tab, int size)
 	new_tab[size - 1] = NULL;
 	new_tab[size] = NULL;
 	i = -1;
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
+	free_tab(tab);
 	return (new_tab);
 }

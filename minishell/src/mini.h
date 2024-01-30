@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/29 18:49:29 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:25:02 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct command
 	int		do_not;
 	int		error;
 	int		command;
+	t_oken	*lst_cpy;
 }					t_command;
 
 //Main Function
@@ -106,7 +107,6 @@ void				sig_init(void);
 int					is_exec(int value);
 
 //Utils
-t_oken				*copy_token_list(t_oken *lst)
 int					is_str(char c, char *str);
 int					is_one_space(char *str);
 int					no_quote(char *str);
@@ -129,10 +129,15 @@ char				*get_path(char **envp);
 void				free_tab(char **tab);
 t_oken				*add_path(t_oken *list, char **envp);
 char				**ft_realloc_tab(char **tab, int size);
-char				*ft_realloc_string(char *str, int size);
+char				*ft_realloc_s(char *str, int size);
 char				*ft_strcat_path(char *dest, char *src);
 void				ft_put_str_fd(int fd, char *str);
 char				**copy_string_array(char **original);
+void				free_exec_command(char **path, char *final_path);
+void				free_built_in(t_command *c, t_env *env);
+void				free_child_process(t_command *c, t_env *env);
+void				do_pipe(t_command *c, t_oken *lst,
+						char *path, t_env *env);
 
 //Flags
 void				add_flags(t_oken **t_argv);
@@ -147,13 +152,14 @@ void				update_token_flags(t_oken *list);
 void				add_command_token(t_oken *node);
 void				add_operator_token(t_oken *node);
 t_oken				*tokenize(char *argv, char **envp);
+t_oken				*copy_token_list(t_oken *lst);
 
 //command exec
 void				exec_command(char **arg_tab, char *cpy, char **envp,
 						int rd_fd);
 void				execute_heredoc(const char *end_str, int fd_write);
 void				do_built_in_command(char **args, t_env *env_cpy);
-t_command			var_init(int rd);
+t_command			var_init(int rd, t_oken *lst);
 t_oken				*fill_arg_tab_utils(t_command *c, t_oken *lst);
 t_oken				*fill_arg_tab(t_command *c, t_oken *lst);
 t_oken				*if_in_do(t_command *c, t_oken *lst);
@@ -162,7 +168,7 @@ t_oken				*if_out_do(t_command *c, t_oken *lst);
 t_oken				*if_append_do(t_command *c, t_oken *lst);
 t_oken				*if_heredoc_do(t_command *c, t_oken *lst);
 t_oken				*handle_special_char(t_command *c, t_oken *lst);
-void				child_process_do(t_command *c, char *path, t_env *env, t_oken *lst);
+void				child_process_do(t_command *c, char *path, t_env *env);
 void				if_built_in_do(t_command *c, t_env *env);
 t_oken				*parent_process_do(t_command *c,
 						t_oken *lst, char *path, t_env *env);

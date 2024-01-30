@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_tokenize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:44:32 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/29 18:48:52 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:59:19 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,16 @@ t_oken	*copy_token_list(t_oken *lst)
 {
 	t_oken	*tmp;
 	t_oken	*head;
-	int		i;
 
-	i = 0;
-	tmp = lst;
-	while (tmp)
-	{
-		i++
-		tmp = tmp->next;
-	}
-	head = ft_calloc(sizeof(t_oken));
+	head = ft_calloc(1, sizeof(t_oken));
 	tmp = head;
 	while (lst)
 	{
 		tmp->value = ft_strdup(lst->value);
 		tmp->type = lst->type;
+		tmp->path = NULL;
 		if (lst->next)
-			tmp->next = ft_calloc(t_oken);
+			tmp->next = ft_calloc(1, sizeof(t_oken));
 		else
 			tmp->next = NULL;
 		tmp = tmp->next;

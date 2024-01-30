@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:49:41 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/24 18:34:38 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:35:24 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	exec_command(char **arg_tab, char *cpy, char **envp, int is_dir)
 				execve(final_path, arg_tab, envp);
 			}
 		}
-		free(final_path);
+		free_exec_command(path, final_path);
 	}
 	perror("");
 }

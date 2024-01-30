@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/25 09:59:05 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:48:35 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	free_tokens(t_oken *list)
 	while (list)
 	{
 		tmp = list->next;
-		free(list->value);
-		free(list->path);
+		if (list->value)
+			free(list->value);
+		if (list->path)
+			free(list->path);
 		free(list);
 		list = tmp;
 	}

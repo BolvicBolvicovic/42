@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:54:54 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/26 23:00:43 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:46:28 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ t_oken	*if_in_do(t_command *c, t_oken *lst)
 
 t_oken	*if_pipe_do(t_command *c, t_oken *lst)
 {
+	if (!lst->next)
+	{
+		c->error = 1;
+		lst = lst->next;
+		printf("minishell: synthaxe error\n");
+		return (lst);
+	}
 	if (lst != NULL && lst->type == 7)
 	{
 		if (lst->next->type == 7)

@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:41 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/26 20:06:01 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:40:18 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_echo(char **arg_tab)
 		printf("%s", arg_tab[j]);
 }
 
-char	*ft_realloc_string(char *str, int size)
+char	*ft_realloc_s(char *str, int size)
 {
 	int		i;
 	char	*new_str;
