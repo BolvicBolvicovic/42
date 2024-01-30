@@ -8,12 +8,14 @@ void	check_args(int argc, char **argv)
 		ft_exit("Wrong format");
 }
 
-void	init_game(t_game **game)
+void	init_game_ptr(t_game **game)
 {
 	int	i;
 
 	*game = ft_calloc(1, sizeof(t_game));
 	(*game)->map = NULL;
+	(*game)->posX = 0;
+	(*game)->posY = 0;
 	(*game)->instructions = NULL;
 	(*game)->mlx = mlx_init(512, 512, "PsYcHaDeLeCkS3D", 1);
 	i = -1;
@@ -43,6 +45,8 @@ void	fill_tabs(t_game **game, char *file_name)
 		}
 		else if (!flag && !only_w_spaces(line))
 			(*game)->instructions = add_line((*game)->instructions, line);
+		else
+			free(line);
 	}
 	close(fd);
 }
@@ -72,10 +76,39 @@ void	check_tabs(t_game **game)
 		ft_free_exit(*game, "Wrong number of instructions.");
 }
 
+void	init_player_pos(t_game **game)
+{
+	int	i;
+	int	j;
+	int	found;
+
+	found = 0;
+	i = -1;
+	while ((*game)->instructions[++i])
+	{
+		j = -1;
+		while ((*game)->instructions[++j])
+			if (((*game)->instructions[i][j] == 'N')
+				|| ((*game)->instructions[i][j] == 'W')
+				|| ((*game)->instructions[i][j] == 'E')
+				|| ((*game)->instructions[i][j] == 'S'))
+				{
+					found = 1;
+					(*game)->player_pos.x = j;
+					(*game)->player_pos.y = i;
+					(*game)->starting_dir = (*game)->instructions[i][j];
+					break ;
+				}
+		if (found)
+			break ;
+	}
+}
+
 void	parsing(t_game **game, int argc, char **argv)
 {
 	check_args(argc, argv);
-	init_game(game);
+	init_game_ptr(game);
 	fill_tabs(game, argv[1]);
 	check_tabs(game);
+	init_player_pos(game);
 }
