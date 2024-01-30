@@ -78,18 +78,9 @@ int	wrong_starting_pos(char **map)
 void	is_valid_map(t_game **game)
 {
 	if (!is_closed((*game)->map))
-	{
 		ft_free_exit(*game, "Map is not closed.");
-		return ;
-	}
 	if (!forbidden_character((*game)->map))
-	{
 		ft_free_exit(*game, "Map contains forbidden characters.");
-		return ;
-	}
 	if (wrong_starting_pos((*game)->map))
-	{
 		ft_free_exit(*game, "Wrong starting position.");
-		return ;
-	}
 }
