@@ -47,6 +47,7 @@ $(FT_PRINTF):
 clean :
 	@rm -rf $(OBJS)
 	@make fclean -C $(FT_PRINTF_DIR)
+	@make fclean -C $(LIBFT_DIR)
 
 fclean : clean
 	@rm -rf $(NAME)
