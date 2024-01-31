@@ -6,11 +6,23 @@
 #include <fcntl.h>
 #include <math.h>
 
+# define WIDTH	640
+# define HEIGHT	480
+# define TEXTUREWIDTH	32
+# define TEXTUREHEIGHT	32
+
+
 typedef struct s_coord
 {
 	double	x;
 	double	y;
 }		t_coord;
+
+typedef struct s_int_coord
+{
+	int	x;
+	int	y;
+}		t_int_coord;
 
 typedef struct	s_game
 {
@@ -19,7 +31,18 @@ typedef struct	s_game
 	t_coord			player_pos;
 	t_coord			plane_pos;
 	t_coord			dir_pos;
+	t_int_coord		cell;
+	t_int_coord		texture_floor;
+	t_coord			ray0;
+	t_coord			ray1;
+	t_coord			floor_step;
+	t_coord			floor;
+	int				p;
+	float			pos_z;
+	float			row_distance;
 	int				starting_dir;	
+	
+
 	mlx_t			*mlx;
 	mlx_texture_t	*tab_texture[4];
 }	t_game;

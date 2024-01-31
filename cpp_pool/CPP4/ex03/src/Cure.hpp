@@ -10,4 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "AMateria.hpp"
 
+class Cure: public AMateria
+{
+public:
+	Cure();
+	Cure( Cure &cure );
+	~Cure();
+
+	void		use( ICharacter &target );
+	AMateria	*clone() const;
+};

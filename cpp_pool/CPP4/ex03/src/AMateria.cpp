@@ -5,24 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 10:43:55 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:55:29 by vcornill         ###   ########.fr       */
+/*   Created: 2024/01/26 10:43:58 by vcornill          #+#    #+#             */
+/*   Updated: 2024/01/26 10:44:22 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "AMateria.hpp"
 
-#include <string>
-#include <iostream>
+AMateria::~AMateria( void ) { std::cout << "AMateria " << this->type << " destroyed\n"; }
 
-class AMateria
-{
-protected:
-	std::string	type;
-public:
-	virtual			~AMateria( void );
-	
-	std::string const	&getType( void ) const;		//Returns the materia type
-	virtual AMateria	*clone( void ) const = 0;
-	virtual void		use( ICharacter& target );
-};
+std::string const	&AMateria::getType( void ) const	{ return this->type; }
+
+void		AMateria::use( ICharacter &target )
+{ std::cout << "'* Amateria has some effect on " << target.getName() << " *'\n"; }

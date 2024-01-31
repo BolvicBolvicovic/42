@@ -15,7 +15,7 @@ void	init_game_ptr(t_game **game)
 	*game = ft_calloc(1, sizeof(t_game));
 	(*game)->map = NULL;
 	(*game)->instructions = NULL;
-	(*game)->mlx = mlx_init(512, 512, "PsYcHaDeLeCkS3D", 1);
+	(*game)->mlx = mlx_init(WIDTH, HEIGHT, "PsYcHaDeLeCkS3D", 1);
 	i = -1;
 	while (++i < 4)
 		(*game)->tab_texture[i] = NULL;
