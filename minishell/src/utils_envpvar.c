@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:24:35 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/17 18:49:56 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:30:08 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char	*transform_value(char *str, int *i, char **envp, char *var)
 	value = NULL;
 	while (envp[++j])
 	{
-		if (ft_strnstr(envp[j], var, ft_strlen(var)))
+		if (ft_strnstr(envp[j], var, ft_strlen(var))
+			&& envp[j][ft_strlen(var)] == '=')
 		{
 			value = ft_calloc(1, ft_strlen(envp[j]) - ft_strlen(var));
 			k = 0;
@@ -80,6 +81,7 @@ int	is_envp(char *str, char **envp, char **variable)
 		var[i - 1] = str[i];
 		i++;
 	}
+	i = -1;
 	while (envp[++i])
 	{
 		if (ft_strnstr(envp[i], var, ft_strlen(var))

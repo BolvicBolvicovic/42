@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:32:58 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/16 17:44:02 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:17:30 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	if_statement_joinstr(t_oken **tmp)
 		*tmp = (*tmp)->next;
 		while ((*tmp)->next && str_ended_backslash(*tmp))
 			join_token(*tmp, (*tmp)->next);
+		*tmp = (*tmp)->next;
 	}
 	else if ((*tmp)->next && (((*tmp)->type == T_S_QUOTE
 				&& (*tmp)->next->type == T_S_QUOTE)
@@ -53,9 +54,6 @@ void	join_string(t_oken **token_list)
 	while (tmp)
 	{
 		if_statement_joinstr(&tmp);
-		tmp = tmp->next;
-		if (!tmp)
-			break ;
 		tmp = tmp->next;
 	}
 	del_t_type(token_list, T_D_QUOTE, T_S_QUOTE);

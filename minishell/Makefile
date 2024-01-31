@@ -6,7 +6,7 @@
 #    By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2024/01/30 19:26:35 by acasamit         ###   ########.fr        #
+#    Updated: 2024/01/31 18:55:30 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 CC = cc
-CFLAGS =	-Wall -Wextra -Werror \
+CFLAGS =	-Wall -Wextra -Werror -O0 -g\
 		-I$(LIBFT_DIR) \
 		-I$(FT_PRINTF_DIR)
 LFLAGS =	-L$(LIBFT_DIR) \
