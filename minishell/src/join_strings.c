@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:32:58 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/31 19:17:30 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:39:01 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	join_string(t_oken **token_list)
 	while (tmp)
 	{
 		if_statement_joinstr(&tmp);
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	del_t_type(token_list, T_D_QUOTE, T_S_QUOTE);
 	handle_spaces(token_list);

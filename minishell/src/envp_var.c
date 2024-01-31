@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:46:14 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/31 19:07:24 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:24:54 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ void	handle_envp_var(char **str, char **envp, int flag)
 	while ((*str)[++i])
 	{
 		var = NULL;
-		if (ft_strcmp(*str, "$?") == 0)
-		{
-			free(*str);
-			*str = ft_itoa((int)g_status);
-		}
+		if (ft_strnstr(&(*str)[i], "$?", 2))
+			*str = transform_value(*str, &i, envp, ft_itoa((int)g_status));
 		else if ((*str)[i] == '$' && is_envp((*str) + i, envp, &var))
 			*str = transform_value(*str, &i, envp, var);
 		else if ((*str)[i] == '\\' && flag)
