@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/30 19:25:02 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:16:15 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void				do_pipe(t_command *c, t_oken *lst,
 //Flags
 void				add_flags(t_oken **t_argv);
 void				exec_command_flag(t_oken *t_argv, char *path);
-void				join_string(t_oken **token_list);
+void				join_string(t_oken **token_list, char **envp);
 void				add_envp_var(t_oken **t_argv, char **envp);
 
 //Tokenize

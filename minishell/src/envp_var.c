@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:46:14 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/31 20:24:54 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:13:30 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	handle_envp_var(char **str, char **envp, int flag)
 	char	*var;
 
 	i = -1;
-	while ((*str)[++i])
+	while ((*str) && (*str)[++i])
 	{
 		var = NULL;
 		if (ft_strnstr(&(*str)[i], "$?", 2))
 			*str = transform_value(*str, &i, envp, ft_itoa((int)g_status));
 		else if ((*str)[i] == '$' && is_envp((*str) + i, envp, &var))
+			*str = transform_value(*str, &i, envp, var);
+		else if ((*str)[i] == '$' && !is_envp((*str) + i, envp, &var))
 			*str = transform_value(*str, &i, envp, var);
 		else if ((*str)[i] == '\\' && flag)
 			if ((*str)[i + 1])
@@ -45,7 +47,11 @@ void	add_envp_var(t_oken **t_argv, char **envp)
 	while (node)
 	{
 		if (node->type == T_WORD && !node->s_quote_flag)
+		{
 			handle_envp_var(&node->value, envp, node->d_quote_flag);
+			if (!node->value[0])
+				node->type = T_SPACE;
+		}
 		node = node->next;
 	}
 	g_status = 0;

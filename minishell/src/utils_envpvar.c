@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:24:35 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/31 20:31:02 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:47:49 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ char	*get_new_str(char *str, char *value, int *i, char *v)
 	while (++j < *i)
 		new_str[j] = str[l++];
 	k = -1;
-	while (value[++k])
+	if (!value)
+		k++;
+	while (value && value[++k])
 		new_str[j++] = value[k];
 	l = l + ft_strlen(v);
-	while (str[++l])
+	while (str && str[++l])
 		new_str[j++] = str[l];
 	new_str[j] = '\0';
 	free(str);
@@ -92,7 +94,10 @@ int	is_envp(char *str, char **envp, char **viable)
 			return (1);
 		}
 	}
-	free(v);
+	if (*viable)
+		free(v);
+	else
+		*viable = v;
 	return (0);
 }
 

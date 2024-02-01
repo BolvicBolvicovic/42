@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 16:48:35 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:16:15 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ t_oken	*parsing(char **envp)
 		t_argv = tokenize(input, envp);
 		add_flags(&t_argv);
 		check_redirect(&t_argv);
-		join_string(&t_argv);
-		add_envp_var(&t_argv, envp);
+		join_string(&t_argv, envp);
 		if (t_argv->type == T_S_QUOTE
 			|| t_argv->type == T_D_QUOTE || t_argv->type == T_SPACE)
 			free_token(&t_argv);
