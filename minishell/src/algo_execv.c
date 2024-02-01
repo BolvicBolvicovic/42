@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 23:08:06 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/01 11:51:57 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:34:49 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*build_final_path(t_oken *t_av, char *path, int i)
 			(path) + ft_strlen(t_av->value) + 10);
 	if (!i)
 		final_path = ft_strcat(final_path, &path[5]);
-	else	
+	else
 		final_path = ft_strcat(final_path, path);
 	final_path = ft_strcat(final_path, "/");
 	final_path = ft_strcat(final_path, t_av->value);

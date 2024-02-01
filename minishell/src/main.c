@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/01 11:16:15 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:43:07 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@ void	check_redirect(t_oken **token_list)
 			&& !(!tmp->value[1] || (tmp->value[1] == '>' && !tmp->value[2])))
 			tmp->type = T_ERROR;
 		tmp = tmp->next;
-	}
-}
-
-void	free_tokens(t_oken *list)
-{
-	t_oken	*tmp;
-
-	while (list)
-	{
-		tmp = list->next;
-		if (list->value)
-			free(list->value);
-		if (list->path)
-			free(list->path);
-		free(list);
-		list = tmp;
 	}
 }
 
@@ -84,6 +68,16 @@ t_oken	*parsing(char **envp)
 	return (t_argv);
 }
 
+void	rc(void)
+{
+	printf("\033c\033]0;MiniFeur\a\n");
+	if (fork() == 0)
+	{
+		execve("./.minifeurrc", (char *[]){"./.minifeurrc", NULL}, NULL);
+		exit(1);
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_oken	*t_argv;
@@ -98,7 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	sig_init();
 	(void)argc;
 	(void)argv;
-	printf("\033c\033]0;MiniFeur\a");
+	rc();
 	while (envp[++i])
 	{
 		if (ft_strncmp(env.env_cpy[i], "PATH=", 5) == 0)
