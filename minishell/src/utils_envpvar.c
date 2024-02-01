@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:24:35 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/01 12:41:24 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:39:13 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ char	*transform_value(char *str, int *i, char **ev, char *v)
 	return (get_new_str(str, value, i, v));
 }
 
+char	*add_v(char **viable, char *v)
+{
+	if (*viable)
+	{
+		free(v);
+		v = NULL;
+	}
+	else
+		*viable = v;
+	return (v);
+}
+
 int	is_envp(char *str, char **envp, char **viable)
 {
 	int		i;
@@ -84,12 +96,9 @@ int	is_envp(char *str, char **envp, char **viable)
 		v[i - 1] = str[i];
 		i++;
 	}
-	if (*viable)
-		free(v);
-	else
-		*viable = v;
+	v = add_v(viable, v);
 	i = -1;
-	while (envp[++i])
+	while (v && envp[++i])
 	{
 		if (ft_strnstr(envp[i], v, ft_strlen(v))
 			&& envp[i][ft_strlen(v)] == '=')
@@ -111,20 +120,4 @@ char	*del_backslash(char *str, int i)
 		new_str[j - 1] = str[j];
 	free(str);
 	return (new_str);
-}
-
-void	free_tokens(t_oken *list)
-{
-	t_oken	*tmp;
-
-	while (list)
-	{
-		tmp = list->next;
-		if (list->value)
-			free(list->value);
-		if (list->path)
-			free(list->path);
-		free(list);
-		list = tmp;
-	}
 }

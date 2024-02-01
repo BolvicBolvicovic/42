@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/01 12:43:07 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:38:03 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ t_oken	*parsing(char **envp)
 	char	*input;
 
 	t_argv = NULL;
-	input = readline("➜ MiniFeur$ ");
+	if (g_status == 0)
+		input = readline("\033[0;32m➜\033[0;35m MiniFeur$ \033[1;33m");
+	else
+		input = readline("\033[0;31m➜\033[0;35m MiniFeur$ \033[1;33m");
 	if (input && ft_strlen(input) > 0)
 	{
 		add_history(input);
@@ -70,12 +73,17 @@ t_oken	*parsing(char **envp)
 
 void	rc(void)
 {
+	pid_t	pid;
+
 	printf("\033c\033]0;MiniFeur\a\n");
-	if (fork() == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		execve("./.minifeurrc", (char *[]){"./.minifeurrc", NULL}, NULL);
 		exit(1);
 	}
+	waitpid(0, NULL, 0);
+	g_status = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
