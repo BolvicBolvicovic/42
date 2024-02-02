@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "➜ MiniFeur$ echo /bin/ratio_chayanne_en_format_XL_avec_des_flammes_en_couleurs_pour_qu_il_brule_en_enfer.txt"
+echo "➜ MiniFeur$ bat /bin/ratio_chayanne_en_format_XL_avec_des_flammes_en_couleurs_pour_qu_il_brule_en_enfer.txt"
 echo "                                                                               ";
 echo -e "\033[1;36m (                  (       )             )            )           )    )      \033[00m";
 sleep 0.2

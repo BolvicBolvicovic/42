@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:46:14 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/01 13:29:43 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:20:15 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ void	add_envp_var(t_oken **t_argv, char **envp)
 	while (node)
 	{
 		if (node->type == T_WORD && !node->s_quote_flag)
-		{
 			handle_envp_var(&node->value, envp, node->d_quote_flag);
-			if (!node->value[0])
-				node->type = T_SPACE;
-		}
 		node = node->next;
 	}
 	g_status = 0;

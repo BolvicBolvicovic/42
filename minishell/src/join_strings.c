@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:32:58 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/01 13:58:50 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:48:17 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	insert_empty_str(t_oken **node)
 	empty_str->value[0] = '\0';
 	empty_str->next = (*node)->next;
 	(*node)->next = empty_str;
-	*node = (*node)->next;
+	*node = (*node)->next->next->next;
 }
 
 void	if_statement_joinstr(t_oken **tmp)
@@ -62,5 +62,12 @@ void	join_string(t_oken **token_list, char **envp)
 	add_envp_var(token_list, envp);
 	del_t_type(token_list, T_D_QUOTE, T_S_QUOTE);
 	handle_spaces(token_list);
-	del_t_type(token_list, T_D_QUOTE, T_SPACE);
+	tmp = *token_list;
+	while (tmp)
+	{
+		if (!tmp->value[0])
+			tmp->type = T_SPACE;
+		tmp = tmp->next;
+	}
+	del_t_type(token_list, T_SPACE, T_SPACE);
 }
