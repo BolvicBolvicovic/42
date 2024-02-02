@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:27:39 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 18:25:17 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:17:26 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "Cure.hpp"
 #include "ICharacter.hpp"
 #include "IMateriaSource.hpp"
+#include "AMateria.hpp"
 
 int main()
 {

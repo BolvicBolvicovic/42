@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:44:11 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:44:22 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:18:06 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include <string>
 #include <iostream>
+#include "AMateria.hpp"
 
 class ICharacter
 {
