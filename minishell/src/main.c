@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 16:48:35 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:38:03 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,6 @@ void	check_redirect(t_oken **token_list)
 	}
 }
 
-void	free_tokens(t_oken *list)
-{
-	t_oken	*tmp;
-
-	while (list)
-	{
-		tmp = list->next;
-		if (list->value)
-			free(list->value);
-		if (list->path)
-			free(list->path);
-		free(list);
-		list = tmp;
-	}
-}
-
 void	free_token(t_oken **list)
 {
 	t_oken	*tmp;
@@ -64,15 +48,17 @@ t_oken	*parsing(char **envp)
 	char	*input;
 
 	t_argv = NULL;
-	input = readline("➜ MiniFeur$ ");
+	if (g_status == 0)
+		input = readline("\033[0;32m➜\033[0;35m MiniFeur$ \033[1;33m");
+	else
+		input = readline("\033[0;31m➜\033[0;35m MiniFeur$ \033[1;33m");
 	if (input && ft_strlen(input) > 0)
 	{
 		add_history(input);
 		t_argv = tokenize(input, envp);
 		add_flags(&t_argv);
 		check_redirect(&t_argv);
-		join_string(&t_argv);
-		add_envp_var(&t_argv, envp);
+		join_string(&t_argv, envp);
 		if (t_argv->type == T_S_QUOTE
 			|| t_argv->type == T_D_QUOTE || t_argv->type == T_SPACE)
 			free_token(&t_argv);
@@ -83,6 +69,21 @@ t_oken	*parsing(char **envp)
 	else if (input)
 		add_token(&t_argv, 1, 0, "");
 	return (t_argv);
+}
+
+void	rc(void)
+{
+	pid_t	pid;
+
+	printf("\033c\033]0;MiniFeur\a\n");
+	pid = fork();
+	if (pid == 0)
+	{
+		execve("./.minifeurrc", (char *[]){"./.minifeurrc", NULL}, NULL);
+		exit(1);
+	}
+	waitpid(0, NULL, 0);
+	g_status = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -99,7 +100,7 @@ int	main(int argc, char **argv, char **envp)
 	sig_init();
 	(void)argc;
 	(void)argv;
-	printf("\033c\033]0;MiniFeur\a");
+	rc();
 	while (envp[++i])
 	{
 		if (ft_strncmp(env.env_cpy[i], "PATH=", 5) == 0)

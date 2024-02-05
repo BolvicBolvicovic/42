@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:24:35 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/31 20:31:02 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:39:13 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ char	*get_new_str(char *str, char *value, int *i, char *v)
 	while (++j < *i)
 		new_str[j] = str[l++];
 	k = -1;
-	while (value[++k])
+	if (!value)
+		k++;
+	while (value && value[++k])
 		new_str[j++] = value[k];
 	l = l + ft_strlen(v);
-	while (str[++l])
+	while (str && str[++l])
 		new_str[j++] = str[l];
 	new_str[j] = '\0';
 	free(str);
@@ -67,6 +69,18 @@ char	*transform_value(char *str, int *i, char **ev, char *v)
 	return (get_new_str(str, value, i, v));
 }
 
+char	*add_v(char **viable, char *v)
+{
+	if (*viable)
+	{
+		free(v);
+		v = NULL;
+	}
+	else
+		*viable = v;
+	return (v);
+}
+
 int	is_envp(char *str, char **envp, char **viable)
 {
 	int		i;
@@ -82,17 +96,14 @@ int	is_envp(char *str, char **envp, char **viable)
 		v[i - 1] = str[i];
 		i++;
 	}
+	v = add_v(viable, v);
 	i = -1;
-	while (envp[++i])
+	while (v && envp[++i])
 	{
 		if (ft_strnstr(envp[i], v, ft_strlen(v))
 			&& envp[i][ft_strlen(v)] == '=')
-		{
-			*viable = v;
 			return (1);
-		}
 	}
-	free(v);
 	return (0);
 }
 

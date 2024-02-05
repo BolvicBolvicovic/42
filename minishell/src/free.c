@@ -6,11 +6,27 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:33:58 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 19:06:05 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:36:33 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+void	free_tokens(t_oken *list)
+{
+	t_oken	*tmp;
+
+	while (list)
+	{
+		tmp = list->next;
+		if (list->value)
+			free(list->value);
+		if (list->path)
+			free(list->path);
+		free(list);
+		list = tmp;
+	}
+}
 
 void	free_exec_command(char **path, char *final_path)
 {
