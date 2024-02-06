@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:54:54 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 19:46:28 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:49:46 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_oken	*if_in_do(t_command *c, t_oken *lst)
 		g_status = 1;
 		perror("");
 		c->error = 1;
-		close(c->fd);
 		lst = NULL;
 		return (lst);
 	}
@@ -117,16 +116,14 @@ t_oken	*if_append_do(t_command *c, t_oken *lst)
 
 t_oken	*if_heredoc_do(t_command *c, t_oken *lst)
 {
+	int	tmp;
+
 	if (!lst->next || lst->next->type < 3 || lst->next->type > 6)
-	{
-		c->error = 1;
-		g_status = 2;
-		printf("minishell: synthaxe error\n");
-		lst = NULL;
-		return (lst);
-	}
+		error_if_heredoc(c, lst);
 	if (lst != NULL && lst->type == 11)
 	{
+		tmp = dup(STDOUT_FILENO);
+		dup2(c->stdout_backup, STDOUT_FILENO);
 		pipe(c->fd_tab);
 		execute_heredoc(lst->next->value, c->fd_tab[1]);
 		close(c->fd_tab[1]);
@@ -134,12 +131,14 @@ t_oken	*if_heredoc_do(t_command *c, t_oken *lst)
 		{
 			close(c->fd_tab[0]);
 			c->error = 1;
+			lst = lst->next->next;
 			return (lst);
 		}
 		dup2(c->fd_tab[0], STDIN_FILENO);
 		close(c->fd_tab[0]);
 		lst = lst->next->next;
 		c->heredoc = 1;
+		dup2(tmp, STDOUT_FILENO);
 	}
 	return (lst);
 }

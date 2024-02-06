@@ -6,7 +6,7 @@
 /*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:52:51 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/03 15:41:04 by deck             ###   ########.fr       */
+/*   Updated: 2024/02/06 13:49:39 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	execute_heredoc(const char *end_str, int fd_write)
 	while (1)
 	{
 		line = readline("> ");
+		if (!line)
+			break ;
 		if (ft_strcmp(line, end_str) == 0)
 		{
 			free(line);

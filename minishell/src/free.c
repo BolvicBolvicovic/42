@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:33:58 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/01 13:36:33 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:53:55 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_child_process(t_command *c, t_env *env)
 {
 	if (!c->args[0] || c->builtin)
 	{
-		if (c->redirect)
+		if (c->redirect && c->fd != -1)
 			close(c->fd);
 		if (c->piped)
 		{

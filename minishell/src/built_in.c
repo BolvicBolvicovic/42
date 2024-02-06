@@ -6,7 +6,7 @@
 /*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:40:48 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/03 15:33:13 by deck             ###   ########.fr       */
+/*   Updated: 2024/02/06 16:42:24 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	is_equal(const char *entry)
 
 void	ft_cd(char **arg_tab, t_env *env)
 {
-	int	error;
-	char **path;
-	char *str;
+	int		error;
+	char	*str;
 	int		i;
 
 	i = 0;
@@ -42,39 +41,20 @@ void	ft_cd(char **arg_tab, t_env *env)
 	ft_strcat(str, env->env_cpy[i] + 5);
 	if (!arg_tab[1])
 		error = chdir(getenv("HOME"));
-	else 
-	{
+	else
 		error = chdir(arg_tab[1]);
-	}
 	if (error == -1)
 	{
 		perror("");
 		free(str);
 	}
 	else
-	{
-		path = malloc(sizeof(char *) * 3);
-		path[0] = ft_strdup("export");
-		path[1] = str;
-		path[2] = NULL;
-		ft_export(path, env);
-		free(path[1]);
-		str = NULL;
-		str = malloc(PATH_MAX + 1);
-		str = getcwd(str, PATH_MAX);
-		path[1] = malloc(ft_strlen(str) + 5);
-		path[1][0] = '\0';
-		ft_strcat(path[1], "PWD=");
-		ft_strcat(path[1], str);
-		ft_export(path, env);
-		free_tab(path);
-		free(str);
-	}
+		else_statment_cd(str, env);
 }
 
 void	ft_pwd(t_env *env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ft_strncmp(env->env_cpy[i], "PWD=", 4))

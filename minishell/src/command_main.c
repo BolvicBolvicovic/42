@@ -6,7 +6,7 @@
 /*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:57:57 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/03 15:41:29 by deck             ###   ########.fr       */
+/*   Updated: 2024/02/06 13:53:01 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	child_process_do(t_command *c, char *path, t_env *env)
 
 void	if_built_in_do(t_command *c, t_env *env)
 {
-	if (c->builtin)
+	if (c->builtin && !c->error)
 	{
 		c->pid = fork();
 		if (c->pid == 0)
@@ -90,7 +90,8 @@ t_oken	*parent_process_do(t_command *c, t_oken *lst, char *path, t_env *env)
 	{
 		dup2(c->stdin_backup, STDIN_FILENO);
 		dup2(c->stdout_backup, STDOUT_FILENO);
-		if (!c->heredoc || (c->heredoc && c->redirect))
+		if ((!c->heredoc || (c->heredoc && c->redirect))
+			&& c->fd != -1)
 			close(c->fd);
 		c->redirect = 0;
 		c->heredoc = 0;

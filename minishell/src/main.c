@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/06 10:32:06 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:18:53 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ t_oken	*parsing(char **envp)
 
 	t_argv = NULL;
 	if (g_status == 0)
-		input = readline("\033[0;32m➜\033[0;35m MiniFeur$ \033[1;33m");
+		input = readline("\033[0;32m➜\033[0;35m MiniFeur$ \033[38;5;202m");
 	else
-		input = readline("\033[0;31m➜\033[0;35m MiniFeur$ \033[1;33m");
+		input = readline("\033[0;31m➜\033[0;35m MiniFeur$ \033[38;5;202m");
 	if (input && ft_strlen(input) > 0)
 	{
 		add_history(input);
