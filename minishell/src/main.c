@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:01:55 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/01 15:38:03 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:32:06 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ int	main(int argc, char **argv, char **envp)
 	i = -1;
 	t_argv = NULL;
 	cpy = NULL;
+	rc();
 	env.env_cpy = copy_string_array(envp);
 	sig_init();
 	(void)argc;
 	(void)argv;
-	rc();
 	while (envp[++i])
 	{
 		if (ft_strncmp(env.env_cpy[i], "PATH=", 5) == 0)
