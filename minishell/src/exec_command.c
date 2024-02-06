@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:52:51 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 19:48:19 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:41:04 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void	execute_heredoc(const char *end_str, int fd_write)
 	free(final_line);
 }
 
-void	do_built_in_command(char **args, t_env *env_cpy)
+void	do_built_in_command(char **args, t_env *env_cpy, t_command *c)
 {
 	if (!ft_strcmp(args[0], "echo"))
 		ft_echo(args);
 	if (!ft_strcmp(args[0], "cd"))
-		ft_cd(args);
+		ft_cd(args, env_cpy);
 	if (!ft_strcmp(args[0], "pwd"))
-		ft_pwd();
-	if (!ft_strcmp(args[0], "export"))
+		ft_pwd(env_cpy);
+	if (!ft_strcmp(args[0], "export") && !c->piped)
 		ft_export(args, env_cpy);
 	if (!ft_strcmp(args[0], "unset"))
 		ft_unset(args, env_cpy);

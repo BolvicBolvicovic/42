@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:57:57 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 19:07:07 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:41:29 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	if_built_in_do(t_command *c, t_env *env)
 					dup2(c->rd_fd, STDIN_FILENO);
 				if ((!ft_strcmp(c->args[0], "export") && !c->args[1])
 					|| ft_strcmp(c->args[0], "export"))
-					do_built_in_command(c->args, env);
+					do_built_in_command(c->args, env, c);
 			}
 			free_built_in(c, env);
 			exit(EXIT_SUCCESS);
 		}
 		if (!c->piped || (!ft_strcmp(c->args[0], "export") && c->args[1]))
-			do_built_in_command(c->args, env);
+			do_built_in_command(c->args, env, c);
 	}
 }
 

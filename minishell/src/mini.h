@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:13:56 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/01 11:16:15 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:41:45 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ t_oken				*copy_token_list(t_oken *lst);
 void				exec_command(char **arg_tab, char *cpy, char **envp,
 						int rd_fd);
 void				execute_heredoc(const char *end_str, int fd_write);
-void				do_built_in_command(char **args, t_env *env_cpy);
+void				do_built_in_command(char **args, t_env *env_cpy, t_command *c);
 t_command			var_init(int rd, t_oken *lst);
 t_oken				*fill_arg_tab_utils(t_command *c, t_oken *lst);
 t_oken				*fill_arg_tab(t_command *c, t_oken *lst);
@@ -176,8 +176,8 @@ t_oken				*do_command(t_oken *lst, int rd_fd, char *path, t_env *env);
 
 //buit-in command
 void				ft_echo(char **arg_tab);
-void				ft_cd(char **arg_tab);
-void				ft_pwd(void);
+void				ft_cd(char **arg_tab, t_env *env);
+void				ft_pwd(t_env *env);
 char				**ft_export(char **arg_tab, t_env *env_cpy);
 void				ft_unset(char **arg_tab, t_env *env_cpy);
 void				ft_env(t_env *envp, int is_export);

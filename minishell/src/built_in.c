@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:40:48 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/25 10:33:56 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:33:13 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,60 @@ int	is_equal(const char *entry)
 	return (0);
 }
 
-void	ft_cd(char **arg_tab)
+void	ft_cd(char **arg_tab, t_env *env)
 {
+	int	error;
+	char **path;
+	char *str;
+	int		i;
+
+	i = 0;
+	while (ft_strncmp(env->env_cpy[i], "PWD=", 4))
+		i++;
+	str = malloc(ft_strlen(env->env_cpy[i]) + 3);
+	str[0] = '\0';
+	ft_strcat(str, "OLDPWD=");
+	ft_strcat(str, env->env_cpy[i] + 5);
 	if (!arg_tab[1])
-		chdir(getenv("HOME"));
-	else if (chdir(arg_tab[1]) == -1)
+		error = chdir(getenv("HOME"));
+	else 
+	{
+		error = chdir(arg_tab[1]);
+	}
+	if (error == -1)
+	{
 		perror("");
+		free(str);
+	}
+	else
+	{
+		path = malloc(sizeof(char *) * 3);
+		path[0] = ft_strdup("export");
+		path[1] = str;
+		path[2] = NULL;
+		ft_export(path, env);
+		free(path[1]);
+		str = NULL;
+		str = malloc(PATH_MAX + 1);
+		str = getcwd(str, PATH_MAX);
+		path[1] = malloc(ft_strlen(str) + 5);
+		path[1][0] = '\0';
+		ft_strcat(path[1], "PWD=");
+		ft_strcat(path[1], str);
+		ft_export(path, env);
+		free_tab(path);
+		free(str);
+	}
 }
 
-void	ft_pwd(void)
+void	ft_pwd(t_env *env)
 {
-	char	*path;
+	int i;
 
-	path = malloc(PATH_MAX + 1);
-	path = getcwd(path, PATH_MAX);
-	printf("%s\n", path);
-	free(path);
+	i = 0;
+	while (ft_strncmp(env->env_cpy[i], "PWD=", 4))
+		i++;
+	printf("%s\n", env->env_cpy[i] + 4);
 }
 
 void	ft_env(t_env *envp, int is_export)

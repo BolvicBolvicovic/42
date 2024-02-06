@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_strings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:32:58 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/02 10:48:17 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:42:28 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	if_statement_joinstr(t_oken **tmp)
 void	join_string(t_oken **token_list, char **envp)
 {
 	t_oken	*tmp;
-	int		count;
 
-	count = 0;
 	tmp = *token_list;
 	while (tmp)
 	{

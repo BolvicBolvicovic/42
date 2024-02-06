@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 15:35:41 by acasamit          #+#    #+#             */
-/*   Updated: 2024/01/30 18:40:18 by acasamit         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:37:54 by deck             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_echo(char **arg_tab)
 		printf("\n");
 		return ;
 	}
-	if (arg_tab[1][0] == '-')
+	if (arg_tab[1][0] == '-' && arg_tab[1][1] == 'n')
 	{
 		while (arg_tab[1][++i])
 		{
