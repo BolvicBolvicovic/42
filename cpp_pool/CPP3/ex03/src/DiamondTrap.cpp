@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:33:52 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 16:18:31 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:05:57 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,4 @@ DiamondTrap::~DiamondTrap()
 { std::cout << "DiamondTrap " << this->name << " destroyed." << std::endl; }
 std::string	DiamondTrap::getName( void )	{ return this->name; }
 void		DiamondTrap::setName( std::string str )	{ this->name = str; }
+void		DiamondTrap::whoAmI( void ) { std::cout << this->name << " " << ClapTrap::name << std::endl; }
