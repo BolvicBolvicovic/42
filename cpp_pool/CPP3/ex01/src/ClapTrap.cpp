@@ -6,16 +6,12 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 15:34:12 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 11:48:53 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:57:06 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-	std::string	name;
-	int		health;
-	int		energy;
-	int		attackDamage;
 ClapTrap::ClapTrap( std::string Name ) : name(Name), health(10), energy(10), attackDamage(0) { std::cout << "ClapTrap " << this->name << " created." << std::endl; }
 ClapTrap::ClapTrap( ClapTrap &copy ) : name(copy.name), health(copy.health), energy(copy.energy), attackDamage(copy.attackDamage){ std::cout << "ClapTrap " << this->name << " created." << std::endl; }
 ClapTrap::~ClapTrap(){ std::cout << "ClapTrap " << this->name << " destroyed." << std::endl; }
