@@ -5,7 +5,7 @@ int	main(int argc, char **argv)
 	Zombie	*newZ;
 	if (argc == 3)
 	{
-		randomChamp(argv[1]);
+		randomChump(argv[1]);
 		newZ = newZombie(argv[2]);
 		newZ->announce();
 		delete newZ;
