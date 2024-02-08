@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:28:01 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/26 10:03:34 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:56:24 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ public:
 	Animal( std::string type );
 	Animal( Animal &copy );
 	virtual	~Animal( void );
+
+	Animal	&operator=( const Animal &ref );
 
 	std::string	getType( void ) const;
 	void		setType( std::string str );

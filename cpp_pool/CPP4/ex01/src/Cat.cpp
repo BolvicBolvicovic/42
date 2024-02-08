@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:28:07 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 18:23:55 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:03:51 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,9 @@ Cat::Cat( Cat &cpy)	: Animal( cpy.type ), brain( cpy.brain )
 Cat::~Cat()
 { delete this->brain; std::cout << "Cat destroyed" << std::endl; }
 
+Cat		&Cat::operator=( const Cat &ref )
+{
+	this->brain = ref.brain;
+	return *this;
+}
 void	Cat::makeSound( void ) const	{ std::cout << "Je soutiens E.Z..." << std::endl; }
