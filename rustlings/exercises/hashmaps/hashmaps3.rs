@@ -21,8 +21,8 @@ use std::collections::HashMap;
 // A structure to store the goal details of a team.
 #[derive(Debug)]
 struct Team {
-    goals_scored: u8,
-    goals_conceded: u8,
+    gs: u8,
+    gc: u8,
 }
 
 fn build_scores_table(results: String) -> HashMap<String, Team> {
@@ -31,12 +31,10 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
 
     for r in results.lines() {
         let v: Vec<&str> = r.split(',').collect();
-        println!("{:#?}", v);
-		scores.entry(v[0].to_string()).or_insert();
-        scores.or_insert(v[2].parse().unwrap());
-        scores.entry(v[1].to_string()).or_insert();
-        scores.or_insert(v[3].parse().unwrap());
-        println!("{:?}", scores);
+		let t_one_score = v[2].parse().unwrap();
+		let t_two_score = v[3].parse().unwrap();
+		scores.entry(v[0].to_string()).or_insert(Team {gs: v[2].parse().unwrap(), gc: v[3].parse().unwrap()});
+        scores.entry(v[1].to_string()).or_insert(Team {gs: v[3].parse().unwrap(), gc: v[2].parse().unwrap()});
         // TODO: Populate the scores table with details extracted from the
         // current line. Keep in mind that goals scored by team_1
         // will be the number of goals conceded from team_2, and similarly
@@ -75,15 +73,15 @@ mod tests {
     fn validate_team_score_1() {
         let scores = build_scores_table(get_results());
         let team = scores.get("England").unwrap();
-        assert_eq!(team.goals_scored, 5);
-        assert_eq!(team.goals_conceded, 4);
+        assert_eq!(team.gs, 5);
+        assert_eq!(team.gc, 4);
     }
 
     #[test]
     fn validate_team_score_2() {
         let scores = build_scores_table(get_results());
         let team = scores.get("Spain").unwrap();
-        assert_eq!(team.goals_scored, 0);
-        assert_eq!(team.goals_conceded, 2);
+        assert_eq!(team.gs, 0);
+        assert_eq!(team.gc, 2);
     }
 }
