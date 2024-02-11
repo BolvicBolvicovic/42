@@ -14,7 +14,6 @@
 // Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
@@ -31,10 +30,12 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
 
     for r in results.lines() {
         let v: Vec<&str> = r.split(',').collect();
-		let t_one_score = v[2].parse().unwrap();
-		let t_two_score = v[3].parse().unwrap();
-		scores.entry(v[0].to_string()).or_insert(Team {gs: v[2].parse().unwrap(), gc: v[3].parse().unwrap()});
-        scores.entry(v[1].to_string()).or_insert(Team {gs: v[3].parse().unwrap(), gc: v[2].parse().unwrap()});
+		let t_one = scores.entry(v[0].to_string()).or_insert(Team {gs: 0, gc: 0});
+		t_one.gs += v[2].parse::<u8>().unwrap();
+		t_one.gc += v[3].parse::<u8>().unwrap();
+        let t_two = scores.entry(v[1].to_string()).or_insert(Team {gs: 0, gc: 0});
+		t_two.gs += v[3].parse::<u8>().unwrap();
+		t_two.gc += v[2].parse::<u8>().unwrap();
         // TODO: Populate the scores table with details extracted from the
         // current line. Keep in mind that goals scored by team_1
         // will be the number of goals conceded from team_2, and similarly
