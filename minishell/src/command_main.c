@@ -6,7 +6,7 @@
 /*   By: deck <deck@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:57:57 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/06 13:53:01 by deck             ###   ########.fr       */
+/*   Updated: 2024/02/06 20:14:24 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ t_oken	*parent_process_do(t_command *c, t_oken *lst, char *path, t_env *env)
 		if (lst)
 			do_pipe(c, lst, path, env);
 	}
-	waitpid(c->pid, NULL, 0);
+	waitpid(c->pid, &g_status, 0);
+	g_status = WEXITSTATUS(g_status);
 	return (lst);
 }
 

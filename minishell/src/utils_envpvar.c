@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:24:35 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/01 13:39:13 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:09:25 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*transform_value(char *str, int *i, char **ev, char *v)
 	j = -1;
 	value = NULL;
 	if (ft_strnstr(&str[*i], "$?", 2))
-		return (get_new_str(str, v, i, v));
+		return (get_new_str(str, v, i, "?"));
 	while (ev[++j])
 	{
 		if (ft_strnstr(ev[j], v, ft_strlen(v)) && ev[j][ft_strlen(v)] == '=')
