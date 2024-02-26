@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:41:15 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/13 12:41:43 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:31:40 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 typedef struct s_philo
 {
 	struct s_data	*data;
-	pthread_t		t1;
 	int				id;
 	int				eat_count;
 	int				status;
@@ -65,9 +64,10 @@ void	init_philos(t_data *data);
 void	free_data(t_data *data);
 void	messages(char *msg, t_philo *philo);
 int		get_time(void);
-
+int		ft_error(char *str);
 //Routine
 int		init_thread(t_data *data);
+int		case_one(t_data *data);
 void	*routine(void *philo_ptr);
 void	eat(t_philo *philo);
 

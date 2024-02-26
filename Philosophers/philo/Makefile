@@ -6,14 +6,14 @@
 #    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2023/12/12 12:22:43 by vcornill         ###   ########.fr        #
+#    Updated: 2024/02/26 13:31:55 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo 
 
-CC 	=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -pthread
+CC 	=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -g -pthread #-fsanitize=thread
 FILES	=	main check_args utils routine eat
 
 SRCS	=	$(addprefix src/, $(addsuffix .c, $(FILES)))
@@ -22,9 +22,9 @@ OBJS	=	$(addprefix src/, $(addsuffix .o, $(FILES)))
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	@$(CC) -o $@ $(OBJS) -pthread
+	@$(CC) $(CFLAGS) -o $@ $(OBJS)
 
-.c.o:
+.o:
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :

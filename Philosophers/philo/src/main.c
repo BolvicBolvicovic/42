@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:39:20 by vcornill          #+#    #+#             */
-/*   Updated: 2023/12/13 12:22:49 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:15:10 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,6 @@ int	ft_error(char *str)
 	return (1);
 }
 
-void	end_all(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->philo_num)
-	{
-		pthread_mutex_destroy(&data->forks[i]);
-		pthread_mutex_destroy(&data->philos[i].lock);
-	}
-	pthread_mutex_destroy(&data->write);
-	pthread_mutex_destroy(&data->lock);
-	free_data(data);
-}
-
-int	case_one(t_data *data)
-{
-	data->start_time = get_time();
-	if (pthread_create(&data->tid[0], NULL, &routine, &data->philos[0]))
-	{
-		end_all(data);
-		return (ft_error("Error:\nCould not create thread.\n"));
-	}
-	pthread_detach(data->tid[0]);
-	while (!data->is_dead)
-		usleep(0);
-	end_all(data);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -68,12 +38,17 @@ int	main(int argc, char **argv)
 		return (ft_error("Error:\nInitialization failed.\n"));
 	}
 	if (data.philo_num == 1)
-		return (case_one(&data));
+	{
+		if (case_one(&data))
+			return (ft_error("Error:\nProblem with threading.\n"));
+		free_data(&data);
+		return (0);
+	}
 	if (!init_thread(&data))
 	{
-		end_all(&data);
+		free_data(&data);
 		return (ft_error("Error:\nProblem with threading.\n"));
 	}
-	end_all(&data);
+	free_data(&data);
 	return (0);
 }
