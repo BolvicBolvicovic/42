@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:27:55 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 17:57:15 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:29:22 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ WrongAnimal::WrongAnimal( WrongAnimal &copy ) : type( copy.type )
 {std::cout << "WrongAnimal copied " << this->type  << " created" << std::endl; }
 WrongAnimal::~WrongAnimal( void )
 {std::cout << "WrongAnimal " << this->type << " detroyed" << std::endl; }
+
+WrongAnimal		&WrongAnimal::operator=( const WrongAnimal &ref ) { this->type = ref.type; return *this; }
 
 std::string	WrongAnimal::getType( void ) const	{ return this->type; }
 void		WrongAnimal::setType( std::string str )	{ this->type = str; }

@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:27:39 by vcornill          #+#    #+#             */
-/*   Updated: 2024/01/25 18:25:17 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:19:59 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,11 @@ int	main( void )
 	const Animal* i = new Cat();
 	delete j;//should not create a leak
 	delete i;
-	return 0;
+	Dog test;
+    Cat tet;
+    {
+        Cat te = tet;
+        Dog testt = test;
+    }
+    return 0;
 }

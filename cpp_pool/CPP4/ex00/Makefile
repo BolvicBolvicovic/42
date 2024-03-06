@@ -1,6 +1,6 @@
 NAME	= ex00
-CC	= c++ -g -Wall -Wextra -Werror -std=c++98
-FILES	= $(addprefix src/, *.cpp)
+CC	= c++ -Wall -Wextra -Werror -std=c++98
+FILES	= $(addprefix src/, Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp WrongDog.cpp main.cpp)
 
 all	: ${NAME}
 
@@ -9,6 +9,8 @@ ${NAME}	: ${FILES}
 
 clean	:
 	@rm -f ${NAME}
+
+fclean	: clean
 
 re	: clean all
 
