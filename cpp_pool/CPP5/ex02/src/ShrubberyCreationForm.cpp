@@ -1,40 +1,40 @@
-#include "ShruberryCreationForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShruberryCreationForm::ShruberryCreationForm(): 
+ShrubberyCreationForm::ShrubberyCreationForm(): 
 	AForm(
-		"ShruberryCreationForm",
+		"ShrubberyCreationForm",
 		false,
 		145,
 		137
 	), target_path("random_target") {}
 
-ShruberryCreationForm::ShruberryCreationForm(std::string _target_path): 
+ShrubberyCreationForm::ShrubberyCreationForm(std::string _target_path): 
 	AForm(
-		"ShruberryCreationForm",
+		"ShrubberyCreationForm",
 		false,
 		145,
 		137
 	), target_path(_target_path) {}
 
-ShruberryCreationForm::ShruberryCreationForm(ShruberryCreationForm &ref):
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &ref):
 	AForm(
-		"ShruberryCreationForm",
+		"ShrubberyCreationForm",
 		ref.getIsSigned(),
 		145,
 		137
 	), target_path(ref.target_path) {}
 
-ShruberryCreationForm::~ShruberryCreationForm() {}
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 
 
-ShruberryCreationForm	&ShruberryCreationForm::operator=(ShruberryCreationForm &ref) {
+ShrubberyCreationForm	&ShrubberyCreationForm::operator=(ShrubberyCreationForm &ref) {
 	this->target_path = ref.target_path;
 	return *this;
 }
 
-void					ShruberryCreationForm::execute(const Bureaucrat &executor) const {
+void					ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
 	if (executor.getGrade() > this->getGradeRequiredToExec())
 		throw  AForm::GradeTooLowException();
 	

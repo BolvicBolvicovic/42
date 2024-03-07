@@ -1,11 +1,11 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-#include "ShruberryCreationForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 
 int	main() {
-	ShruberryCreationForm	a;
+	ShrubberyCreationForm	a;
 	PresidentialPardonForm	b("Tom");
 	RobotomyRequestForm		c("Tom");
 	Bureaucrat				Tom("Tom", 42);
