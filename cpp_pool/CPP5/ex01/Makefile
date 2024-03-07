@@ -10,6 +10,8 @@ ${NAME}	: ${FILES}
 clean	:
 	@rm -f ${NAME}
 
+fclean	: clean
+
 re	: clean all
 
 .PHONY	: clean re

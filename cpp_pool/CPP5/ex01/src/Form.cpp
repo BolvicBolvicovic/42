@@ -38,7 +38,7 @@ void                Form::beSigned(const Bureaucrat &bureaucrat) {
 
 std::ostream        &operator<<(std::ostream &os, const Form &form) {
     os << "Form: "<< std::endl << "name: " << form.getName() << std::endl
-        << "is signed: " << form.getIsSigned() << std::endl
+        << "is signed: " << (form.getIsSigned() == true ? "yes" : "no") << std::endl
         << "grade required to sign: " << (unsigned int)form.getGradeRequiredToSign() << std::endl
         << "grade required to exec: " << (unsigned int)form.getGradeRequiredToExec() << std::endl;
     return os;
