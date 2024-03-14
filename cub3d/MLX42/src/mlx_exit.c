@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   mlx_exit.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 02:43:22 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2023/06/08 18:12:20 by XEDGit        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   mlx_exit.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 02:43:22 by W2Wizard          #+#    #+#             */
+/*   Updated: 2023/11/28 03:50:15 by acasamit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ static void mlx_free_image(void* content)
 	mlx_image_t* img = content;
 
 	mlx_freen(4, img->context, img->pixels, img->instances, img);
+}
+
+static void antoine_free(void *ptr)
+{
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }
 
 //= Public =//
@@ -43,8 +52,8 @@ void mlx_terminate(mlx_t* mlx)
 	glLinkProgram(mlxctx->shaderprogram);
 	glDeleteProgram(mlxctx->shaderprogram);
 	glfwTerminate();
-	mlx_lstclear((mlx_list_t**)(&mlxctx->hooks), &free);
-	mlx_lstclear((mlx_list_t**)(&mlxctx->render_queue), &free);
+	mlx_lstclear((mlx_list_t**)(&mlxctx->hooks), &antoine_free);
+	mlx_lstclear((mlx_list_t**)(&mlxctx->render_queue), &antoine_free);
 	mlx_lstclear((mlx_list_t**)(&mlxctx->images), &mlx_free_image);
 	mlx_freen(2, mlxctx, mlx);
 }

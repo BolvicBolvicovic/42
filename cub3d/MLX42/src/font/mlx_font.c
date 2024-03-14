@@ -31,13 +31,19 @@ static void mlx_draw_char(mlx_image_t* image, int32_t texoffset, int32_t imgoffs
 	if (texoffset < 0)
 		return;
 
-	char* pixelx;
-	uint8_t* pixeli;
-	for (uint32_t y = 0; y < FONT_HEIGHT; y++)
-	{
-		pixelx = &font_atlas.pixels[(y * font_atlas.width + texoffset) * BPP];
-		pixeli = image->pixels + ((y * image->width + imgoffset) * BPP);
-		memcpy(pixeli, pixelx, FONT_WIDTH * BPP);
+	//char* pixelx;
+	//uint8_t* pixeli;
+	for (uint32_t y = 0; y < FONT_HEIGHT; y++) {
+    		for (uint32_t x = 0; x < FONT_WIDTH * BPP; x += BPP) {
+        		uint8_t* font_pixel = (uint8_t*)&font_atlas.pixels[(y * font_atlas.width + texoffset) * BPP + x];
+        		uint8_t* img_pixel = image->pixels + ((y * image->width + imgoffset) * BPP + x);
+
+        		// Exemple pour changer la couleur en rouge (préserver l'alpha)
+        		img_pixel[0] = 0; // Rouge
+        		img_pixel[1] = 0;   // Vert
+        		img_pixel[2] = 0;   // Bleu
+        		img_pixel[3] = font_pixel[3]; // Alpha
+    		}
 	}
 }
 

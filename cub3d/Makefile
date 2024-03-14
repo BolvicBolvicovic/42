@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vcornill <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2023/11/16 13:19:15 by vcornill         ###   ########.fr        #
+#    Updated: 2024/02/27 11:03:32 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ CFLAGS =	-g -Wall -Wextra -Werror \
 LFLAGS =	-L$(MLX_DIR)/build \
 			-L$(LIBFT_DIR) \
 			-L$(FT_PRINTF_DIR) \
-			-lmlx42 -lft -lftprintf -lglfw -ldl
+			-lmlx42 -lft -lftprintf -lglfw -ldl -lm
 
-FILES = main error parsing utils_general utils_parsing utils_map_checker
+FILES = utils_parsing_color utils_parsing_path raycast key draw main error parsing utils_general utils_parsing utils_map_checker init_game
 
 SRCS = $(addprefix src/, $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix src/, $(addsuffix .o, $(FILES)))

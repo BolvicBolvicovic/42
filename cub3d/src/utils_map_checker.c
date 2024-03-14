@@ -1,5 +1,16 @@
-#include "cub.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_map_checker.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/27 10:33:11 by vcornill          #+#    #+#             */
+/*   Updated: 2024/03/14 13:07:08 by vcornill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "cub.h"
 
 int	valid_ext(char *str)
 {
@@ -18,6 +29,8 @@ int	is_closed(char **map)
 	int	j;
 
 	i = -1;
+	if (!map)
+		return (0);
 	while (map[++i])
 	{
 		j = -1;
@@ -28,7 +41,7 @@ int	is_closed(char **map)
 			if (ft_strchr("0NEWSD", map[i][j]) && (!map[i][j + 1] || j == 0))
 				return (0);
 			if (ft_strchr("0NEWSD", map[i][j])
-				&& (int)ft_strlen(map[i - 1]) - 1 < j)
+				&& (int)ft_strlen(map[i + 1]) - 1 < j)
 				return (0);
 			if (ft_strchr("0NEWSD", map[i][j])
 				&& (!ft_strchr("10NEWSD", map[i][j + 1])
@@ -78,7 +91,7 @@ int	wrong_starting_pos(char **map)
 void	is_valid_map(t_game **game)
 {
 	if (!is_closed((*game)->map))
-		ft_free_exit(*game, "Map is not closed.");
+		ft_free_exit(*game, "Map is a directory/ not closed/ empty.");
 	if (!forbidden_character((*game)->map))
 		ft_free_exit(*game, "Map contains forbidden characters.");
 	if (wrong_starting_pos((*game)->map))
