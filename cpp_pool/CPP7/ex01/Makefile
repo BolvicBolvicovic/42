@@ -1,4 +1,4 @@
-NAME	= ex00
+NAME	= ex01
 CC	= c++ -g -Wall -Wextra -Werror -std=c++98
 FILES	= $(addprefix src/, *.cpp)
 
