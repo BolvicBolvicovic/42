@@ -1,11 +1,11 @@
-#include <wcexcept.h>
+#pragma once
+#include <iostream>
+#include <algorithm>
 
 template <typename T>
-int		easyfind(T container, int n) {
-	int	size = constainer.size();
-	int i = -1;
-	while (++i < size)
-		if (container[i] == n)
-			return i;
-	throw 
+void		easyfind(const T &container, int n) {
+	if (std::find(container, n) != container.end())
+		std::cout << "found " << n << std::endl;
+	else
+		std::cout << "did not find " << n << std::endl;
 }
