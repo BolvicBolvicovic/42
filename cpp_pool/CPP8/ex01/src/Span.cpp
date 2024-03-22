@@ -30,13 +30,11 @@ void	Span::addNumber(int nb) {
 		this->container->push_back(nb);
 		int	count = 0;
 		for (std::vector<int>::iterator ptr = this->container->begin(); ptr < container->end(); ptr++) {
-			if (this->longest < (nb < *ptr ? *ptr - nb : nb - *ptr))
-				this->longest = (nb < *ptr ? *ptr - nb : nb - *ptr);
+			this->longest = std::max(this->longest, (nb < *ptr ? *ptr - nb : nb - *ptr));
 			if (nb == *ptr)
 				count++;
-			if (this->shortest > (nb < *ptr ? *ptr - nb : nb - *ptr))
-				if (nb != *ptr || count > 1)
-					this->shortest = (nb < *ptr ? *ptr - nb : nb - *ptr);
+			if (nb != *ptr || count > 1)
+					this->shortest = std::min(this->shortest, (nb < *ptr ? *ptr - nb : nb - *ptr));
 		}
 	} else {
 		throw Span::SpanFull();
