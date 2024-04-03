@@ -1,69 +1,65 @@
-use clap::Parser;
+use clap::{
+    Arg,
+    command,
+    Command,
+};
 
-#[derive(Parser, Debug)]
-struct Equation {
-	pattern: Vec<String>,
+struct Solver {
+    x_pow   : f32,
+    x       : f32,
+    int     : f32,
 }
 
-impl Equation {
+impl Solver {
+    pub fn solve(&self) {
+        let delta: f32 = self.x * self.x - 4.0 * self.x_pow * self.int;
+        if delta < 0.0 {
+            println!("There is no solution for {}x^2 + {}x + {} because delta {} is negative.", self.x_pow, self.x, self.int, delta);
+        } else if delta == 0.0 {
+            println!("There is one solution for {}x^2 + {}x + {}: x = {}.", self.x_pow, self.x, self.int, -self.x / 2.0 * self.x_pow);
+        } else {
+            println!("There are two solutions for {}x^2 + {}x + {}: x1 = {} and x2 = {}.", self.x_pow, self.x, self.int, -self.x - delta.sqrt() / 2.0 * self.x_pow, -self.x + delta.sqrt() / 2.0 * self.x_pow);
+        }
 
-	fn reduction(&self) -> (Vec<String>, Vec<String>){
-		let mut other_side = false;
-		let mut r_side = Vec::new();
-		let mut l_side = Vec::new();
-		for string in self.pattern.iter() {
-			if string == "=" { other_side = true; continue; }
-			if other_side == false { l_side.push((*string).clone()); }
-			else { r_side.push((*string).clone()); }
-		}
-		if r_side.len() <= l_side.len() {
-			let mut is_done = false;
-			while !is_done {
-				for i in 0..l_side.len()  {
-					let mut breaker = false;
-					for j in 0..r_side.len() {
-						if l_side[i] == r_side[j] {
-							l_side.swap_remove(i);
-							r_side.swap_remove(j);
-							breaker = true;
-							break;
-						}
-					}
-					if breaker {
-						break;
-					}
-					if i == l_side.len() - 1 {
-						is_done = true;
-					}
-				}
-			}
-		} else {
-			let mut is_done = false;
-			while !is_done {
-				for i in 0..r_side.len()  {
-					let mut breaker = false;
-					for j in 0..l_side.len() {
-						if r_side[i] == l_side[j] {
-							r_side.swap_remove(i);
-							l_side.swap_remove(j);
-							breaker = true;
-							break;
-						}
-					}
-					if breaker {
-						break;
-					}
-					if i == r_side.len() - 1 {
-						is_done = true;
-					}
-				}
-			}
-		}
-		(l_side, r_side)
-	}
+    }
 }
 
 fn main() {
-	let args = Equation::parse().reduction();
-	println!("{:?}", args);
+    let matches = command!()
+        .arg_required_else_help(true)
+        .subcommand_required(true)
+        .subcommand(
+            Command::new("solve")
+                .allow_hyphen_values(true)
+                .short_flag('s')
+                .long_flag("solve")
+                .about("Solve reduced simple 2nd degree equation")
+                .arg(Arg::new("X_POW_TWO")
+                    .default_value("0X^2"))
+                .arg(Arg::new("X")
+                    .default_value("0X"))
+                .arg(Arg::new("Integer")
+                    .default_value("0"))
+        )
+        .get_matches();
+    match matches.subcommand() {
+        Some(("solve", solve_matches))  => {
+            let solver = Solver {
+                x_pow   : match solve_matches.get_one::<String>("X_POW_TWO") {
+                    Some(string)    => string.parse::<f32>().unwrap(),
+                    None            => 0.0,
+                },
+                x       : match solve_matches.get_one::<String>("X") {
+                    Some(string)    => string.parse::<f32>().unwrap(),
+                    None            => 0.0,
+                },
+                int     : match solve_matches.get_one::<String>("Integer") {
+                    Some(string)    => string.parse::<f32>().unwrap(),
+                    None            => 0.0,
+                },
+            };
+            solver.solve();
+        },
+        None | Some(_)                  => println!("Command not found.")
+    };
 }
