@@ -14,11 +14,11 @@ impl Solver {
     pub fn solve(&self) {
         let delta: f32 = self.x * self.x - 4.0 * self.x_pow * self.int;
         if delta < 0.0 {
-            println!("There is no solution for {}x^2 + {}x + {} because delta {} is negative.", self.x_pow, self.x, self.int, delta);
+            println!("There is no solution for {}x^2 + {}x + {} = 0 because delta {} is negative.", self.x_pow, self.x, self.int, delta);
         } else if delta == 0.0 {
-            println!("There is one solution for {}x^2 + {}x + {}: x = {}.", self.x_pow, self.x, self.int, -self.x / 2.0 * self.x_pow);
+            println!("There is one solution for {}x^2 + {}x + {} = 0 -> x = {}.", self.x_pow, self.x, self.int, -self.x / 2.0 * self.x_pow);
         } else {
-            println!("There are two solutions for {}x^2 + {}x + {}: x1 = {} and x2 = {}.", self.x_pow, self.x, self.int, -self.x - delta.sqrt() / 2.0 * self.x_pow, -self.x + delta.sqrt() / 2.0 * self.x_pow);
+            println!("There are two solutions for {}x^2 + {}x + {} = 0 -> x1 = {} and x2 = {}.", self.x_pow, self.x, self.int, -self.x - delta.sqrt() / 2.0 * self.x_pow, -self.x + delta.sqrt() / 2.0 * self.x_pow);
         }
 
     }
