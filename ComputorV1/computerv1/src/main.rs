@@ -14,8 +14,16 @@ fn get_type(arg: &str) -> Option<Types> {
         return Some(Types::XPow);
     } else if arg.contains('X') {
         return Some(Types::X);
-    } else if "0123456789".contains(arg) {
-        return Some(Types::Int);
+    } else  {
+        let mut is_num = true;
+        for c in arg.chars() {
+            if !c.is_ascii_digit() {
+                is_num = false;
+            }
+        }
+        if is_num {
+            return Some(Types::Int);
+        }
     }
     match arg {
         "+" => Some(Types::Plus),
@@ -26,6 +34,21 @@ fn get_type(arg: &str) -> Option<Types> {
 
 }
 
+fn get_num(arg: &str) -> String {
+    let mut num = String::new();
+    let mut first = true;
+    for c in arg.chars() {
+        if !c.is_ascii_digit() {
+            if first {
+                num.push('1');
+            }
+            break;
+        }
+        first = false;
+        num.push(c);
+    }
+    num
+}
 
 fn main() {
     let mut argv: Vec<String> = args().collect();
@@ -47,24 +70,43 @@ Equal is not necessary but can be used only once.");
     for arg in argv.iter() {
         match get_type(arg) {
             Some(r#type) => match r#type {
-                Types::Plus => {next_value_pos = true; if equal {next_value_pos = !next_value_pos;}},
-                Types::Minus => {next_value_pos = false; if equal {next_value_pos = !next_value_pos;}},
+                Types::Plus => {
+                    next_value_pos = true;
+                    if equal {next_value_pos = !next_value_pos;}
+                },
+                Types::Minus => {
+                    next_value_pos = false;
+                    if equal {next_value_pos = !next_value_pos;}
+                },
                 Types::Equal => if equal {panic!("= has to be used once");} else {equal = true;},
-                Types::X => if next_value_pos {x += arg.parse::<f64>().unwrap();} else {x -= arg.parse::<f64>().unwrap();},
-                Types::XPow =>if next_value_pos {x_pow += arg.parse::<f64>().unwrap();} else {x_pow -= arg.parse::<f64>().unwrap();},
-                Types::Int =>if next_value_pos {int += arg.parse::<f64>().unwrap();} else {int -= arg.parse::<f64>().unwrap();},
+                Types::X => {
+                    let num = get_num(arg);
+                    if next_value_pos { x += num.parse::<f64>().unwrap();
+                    } else {x -= num.parse::<f64>().unwrap();}
+                },
+                Types::XPow => {
+                    let num = get_num(arg);
+                    if next_value_pos { x_pow += num.parse::<f64>().unwrap();
+                    } else { x_pow -= num.parse::<f64>().unwrap();}
+                },
+                Types::Int => if next_value_pos {int += arg.parse::<f64>().unwrap();} else {int -= arg.parse::<f64>().unwrap();},
             },
             None => println!("{} is not a valid argument", arg),
         };
     }
 
-    let delta = x * x - 4.0 * x_pow * int;
+    let delta = (x * x) - (4.0 * x_pow * int);
     
-    if delta < 0.0 {
-        println!("There is no solution for {}x^2 + {}x + {} = 0 because delta {} is negative.", x_pow, x, int, delta);
+    if delta < 0.0 || (x == 0.0 && x_pow == 0.0) {
+        println!("There is no solution for {}x^2 + {}x + {} = 0 because delta {} is negative or a and b equal 0.", x_pow, x, int, delta);
     } else if delta == 0.0 {
         println!("There is one solution for {}x^2 + {}x + {} = 0 -> x = {}.", x_pow, x, int, -x / 2.0 * x_pow);
+    } else if x == 0.0 || x_pow == 0.0 { 
+        println!("There is one solution for {}x^2 + {}x + {} = 0 -> x = {}.", x_pow, x, int,
+        (
+            -int / (if x == 0.0 {1.0} else {x}) / (if x_pow == 0.0 {1.0} else {x_pow})
+        ));
     } else {
-        println!("There are two solutions for {}x^2 + {}x + {} = 0 -> x1 = {} and x2 = {}.", x_pow, x, int, -x - delta.sqrt() / 2.0 * x_pow, -x + delta.sqrt() / 2.0 * x_pow);
+        println!("There are two solutions for {}x^2 + {}x + {} = 0 -> x1 = {} and x2 = {}.", x_pow, x, int, (-x - delta.sqrt()) / 2.0 * x_pow, (-x + delta.sqrt()) / 2.0 * x_pow);
     }
 }
