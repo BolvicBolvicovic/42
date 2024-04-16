@@ -6,7 +6,7 @@
 #    By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 20:04:03 by vcornill          #+#    #+#              #
-#    Updated: 2024/02/27 11:03:32 by vcornill         ###   ########.fr        #
+#    Updated: 2024/03/14 17:38:10 by vcornill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ fclean : clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re 
 
 $(NAME): $(MLX) $(LIBFT) $(FT_PRINTF) $(OBJS)
 	@$(CC) -o $@ $(OBJS) $(LFLAGS)

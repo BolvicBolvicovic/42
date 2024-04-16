@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:33:11 by vcornill          #+#    #+#             */
-/*   Updated: 2024/03/14 13:07:08 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:13:08 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	is_closed(char **map)
 	int	j;
 
 	i = -1;
-	if (!map)
-		return (0);
 	while (map[++i])
 	{
 		j = -1;
@@ -60,6 +58,8 @@ int	forbidden_character(char **map)
 	int	j;
 
 	i = -1;
+	while (map[++i] && ft_strchr("\n", map[i][0]))
+		continue ;
 	while (map[++i])
 	{
 		j = -1;
@@ -90,10 +90,12 @@ int	wrong_starting_pos(char **map)
 
 void	is_valid_map(t_game **game)
 {
-	if (!is_closed((*game)->map))
-		ft_free_exit(*game, "Map is a directory/ not closed/ empty.");
+	if (!(*game)->map)
+		ft_free_exit(*game, "Map is a directory/ empty.");
 	if (!forbidden_character((*game)->map))
 		ft_free_exit(*game, "Map contains forbidden characters.");
+	if (!is_closed((*game)->map))
+		ft_free_exit(*game, "Map is a not closed.");
 	if (wrong_starting_pos((*game)->map))
 		ft_free_exit(*game, "Wrong starting position.");
 }

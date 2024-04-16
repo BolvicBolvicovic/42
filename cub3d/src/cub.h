@@ -6,7 +6,7 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 02:07:23 by acasamit          #+#    #+#             */
-/*   Updated: 2024/02/27 11:07:42 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:49:12 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void		parsing(t_game **game, int argc, char **argv);
 
 // Utils parsing
 int			check_format(char *str, char *cmp);
-int			is_map(char *line);
+int			is_map(t_game *game, char *line);
 char		**add_line(char **tab, char *line);
 void		valid_instruction(t_game **game, char *line);
 void		valid_color(t_game **game, char *line);

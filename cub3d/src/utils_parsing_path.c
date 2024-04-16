@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:56:05 by vcornill          #+#    #+#             */
-/*   Updated: 2024/03/13 17:14:20 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:23:59 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	valid_path(char *path, t_game **game, int indexText)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	i = -1;
-	while (path[++i])
-		if (path[i] == '\n')
-			path[i] = '\0';
-	i = -1;
-	while (path[++i] && path[i] == ' ')
-		continue ;
-	(*game)->tab_texture[indexText] = mlx_load_png(&path[i]);
+	str = ft_strtrim(path, "\n ");
+	(*game)->tab_texture[indexText] = mlx_load_png(str);
+	free(str);
 	if (!(*game)->tab_texture[indexText])
 		return (0);
 	return ((*game)->no);

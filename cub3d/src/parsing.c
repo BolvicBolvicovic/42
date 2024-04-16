@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:33:31 by vcornill          #+#    #+#             */
-/*   Updated: 2024/03/13 18:22:10 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:17:43 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ void	fill_tabs(t_game **game, char *file_name)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (is_map(line))
+		if (is_map(*game, line))
 		{
-			(*game)->map = add_line((*game)->map, line);
-			flag = 1;
+			if (!only_w_spaces(line))
+				flag = 1;
+			if (flag)
+				(*game)->map = add_line((*game)->map, line);
 		}
 		else if (!flag && !only_w_spaces(line))
 			(*game)->instructions = add_line((*game)->instructions, line);
-		else
-			free(line);
+		free(line);
 	}
 	close(fd);
 }

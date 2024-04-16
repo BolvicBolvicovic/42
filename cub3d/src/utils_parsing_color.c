@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:56:02 by vcornill          #+#    #+#             */
-/*   Updated: 2024/03/14 13:01:06 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:44:24 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	valid_color_setting(char *setting)
 
 	coma_flag = 0;
 	i = 0;
-	
 	while (setting[i] && setting[i] != '\n')
 	{
 		while (setting[i] && setting[i] == ' ')
@@ -85,7 +84,7 @@ void	valid_color(t_game **game, char *line)
 			break ;
 	}
 	if (i == 2)
-		ft_free_exit(*game, "Color ID invalid/ wrong parameter.");
+		ft_free_exit(*game, "Color ID invalid/ Wrong parameter.");
 	if (!valid_color_setting(&line[k]))
 		ft_free_exit(*game, "Color instruction invalid.");
 	update_bool(game, id[i]);

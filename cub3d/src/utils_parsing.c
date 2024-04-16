@@ -6,7 +6,7 @@
 /*   By: vcornill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 10:38:10 by vcornill          #+#    #+#             */
-/*   Updated: 2024/02/27 11:02:36 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:49:28 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,30 @@ int	check_format(char *str, char *cmp)
 	return (0);
 }
 
-int	is_map(char *line)
+int	is_map(t_game *game, char *line)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (!line[i] || line[i] == 'N' || line[i] == 'E'
+		|| line[i] == 'S' || line[i] == 'W'
+		|| line[i] == 'C' || line[i] == 'F')
+		return (0);
+	line--;
 	while (line[++i])
 	{
-		if (line[i + 1] && line[i + 1] == '\n')
-			line[i + 1] = '\0';
 		if (line[i] != '0' && line[i] != '1'
+			&& line[i] != '\n'
 			&& line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W'
-			&& line[i] != ' ' && line[i] != '\t')
-			return (0);
+			&& line[i] != ' ' && line[i] != '\t'){
+			free(line);
+			ft_free_exit(game, "Forbidden char in map.");
+		}
+		if (line[i + 1] && line[i + 1] == '\n')
+			line[i + 1] = '\0';
 	}
 	return (1);
 }
@@ -71,6 +81,5 @@ char	**add_line(char **tab, char *line)
 	newtab[i] = ft_strdup(line);
 	newtab[++i] = NULL;
 	ft_free_tab(tab);
-	free(line);
 	return (newtab);
 }

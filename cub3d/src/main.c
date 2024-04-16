@@ -6,13 +6,14 @@
 /*   By: acasamit <acasamit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 01:34:38 by acasamit          #+#    #+#             */
-/*   Updated: 2024/03/13 17:27:32 by vcornill         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:57:05 by vcornill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	escape(void *param) {
+void	escape(void *param)
+{
 	t_game	*game;
 
 	game = (t_game *) param;
@@ -20,7 +21,7 @@ void	escape(void *param) {
 		mlx_close_window(game->mlx);
 }
 
-int		main(int argc, char **argv )
+int	main(int argc, char **argv)
 {
 	t_game	*game;
 

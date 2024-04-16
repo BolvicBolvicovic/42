@@ -1,21 +1,16 @@
-NO ./textures/N.png
-SO ./textures/S.png
+NO ./textures/N.png     
+SO ./textures/S.png   
 
-      F      42,42,42
-   WE            ./textures/W.png
-EA ./textures/E.png
-
-
-C 225,         30,0
+      F      181,158,65   
+   WE            ./textures/W.png 
+EA  ./textures/E.png         
 
 
+C    181  ,         158   ,    65
 
 
-
-
-
-                    11111111
-                      101
+                   11111111
+            111       101
         111110111111111011111111
         1000000000110000000000001
         1011000001110000000000001
