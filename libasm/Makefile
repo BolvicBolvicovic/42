@@ -1,18 +1,31 @@
 NAME	= libasm.a
+TESTS	= tests
 CC		= nasm
 AR		= ar rcs
-FILES	=
+FILES	= ft_strlen.asm
 FLAGS	= -f elf64
+CFLAGS	= -Wall -Wextra -Werror -L. -Iinc
 SOURCE	= $(addprefix src/, $(FILES))
-OBJ		= $(SOURCE:.c=.o)
+OBJ		= $(SOURCE:.asm=.o)
 
 all		: $(NAME)
 
 $(NAME)	: $(OBJ)
 	$(AR) $@ $(OBJ)
+
+%.o: %.asm
+	$(CC) $(FLAGS) -o $@ $<
+
+$(TESTS): $(NAME)
+	cc $(CFLAGS) src/main.c -o $@ ./$(NAME)
+
 clean	:
+	rm -f $(OBJ)
 	rm -f $(NAME)
 
-re		: clean all
+fclean	: clean
+	rm -f $(TESTS)
+
+re		: fclean all
 
 .PHONY	: re clean
