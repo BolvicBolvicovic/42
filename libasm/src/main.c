@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 int main() {
 
@@ -20,5 +21,16 @@ int main() {
 	assert(strcmp("hey", "hoe") < 0);
 	assert(ft_strcmp("hey", "hoe") < 0);
 	printf("\e[0;32mft_strcmp: Success\n\e[0;31m");
+
+	assert(ft_write(-1, "Success\n", 8) == -1);
+	assert(ft_write(1, "ft_write : Success\n", 11) == 11);
+	assert(ft_write(1, "Success\n", 8) == 8);
+
+	int fd = open("test.txt", O_RDONLY);
+	assert(ft_read(fd, cpy, 5) == 5);
+	cpy[5] = '\0';
+	assert(ft_strcmp(cpy, "tests") == 0);
+	assert(ft_read(-1, "Success\n", 8) == -1);
+	printf("\e[0;32mft_read  : Success\n\e[0;31m");
 	return 0;
 }

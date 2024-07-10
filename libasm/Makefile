@@ -1,31 +1,31 @@
-NAME	= libasm.a
-TESTS	= tests
-CC		= nasm
-AR		= ar rcs
-FILES	= ft_strlen.asm ft_strcpy.asm ft_strcmp.asm
-FLAGS	= -f elf64
-CFLAGS	= -Wall -Wextra -Werror -L. -Iinc
-SOURCE	= $(addprefix src/, $(FILES))
-OBJ		= $(SOURCE:.asm=.o)
+NAME    = libasm.a
+TESTS   = tests
+CC      = nasm
+AR      = ar rcs
+FILES   = ft_strlen.asm ft_strcpy.asm ft_strcmp.asm ft_write.asm ft_read.asm
+FLAGS   = -felf64
+CFLAGS  = -Wall -Wextra -Werror -Iinc
+SOURCE  = $(addprefix src/, $(FILES))
+OBJ     = $(SOURCE:.asm=.o)
 
-all		: $(NAME)
+all     : $(NAME)
 
-$(NAME)	: $(OBJ)
+$(NAME) : $(OBJ)
 	$(AR) $@ $(OBJ)
 
 %.o: %.asm
 	$(CC) $(FLAGS) -o $@ $<
 
 $(TESTS): $(NAME)
-	cc $(CFLAGS) src/main.c -o $@ ./$(NAME)
+	cc $(CFLAGS) -o $@ src/main.c ./$(NAME)
 
-clean	:
+clean   :
 	rm -f $(OBJ)
 	rm -f $(NAME)
 
-fclean	: clean
+fclean  : clean
 	rm -f $(TESTS)
 
-re		: fclean all
+re      : fclean all
 
-.PHONY	: re clean
+.PHONY  : re clean
