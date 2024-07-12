@@ -2,11 +2,8 @@
 			section		.text
 ft_strcpy:
 			mov			rax, rdi
-loop:
-			mov			cl, byte [rsi]
-			mov			byte [rdi], cl
-			inc			rdi
-			inc			rsi
-			test		cl, cl
-			jnz			loop
+	.loop:
+			movsb
+			cmp			byte [rsi - 1], 0
+			jnz			.loop
 			ret

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 int main() {
 
@@ -32,5 +33,11 @@ int main() {
 	assert(ft_strcmp(cpy, "tests") == 0);
 	assert(ft_read(-1, "Success\n", 8) == -1);
 	printf("\e[0;32mft_read  : Success\n\e[0;31m");
+
+	char	*dup = ft_strdup("ft_strdup: Success\n");
+	assert(ft_strcmp("ft_strdup: Success\n", dup) == 0);
+	printf("\e[0;32m%s", dup);
+	free(dup);
+
 	return 0;
 }

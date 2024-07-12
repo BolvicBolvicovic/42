@@ -3,8 +3,8 @@
 ft_strcmp:
 	.loop:
 			mov		al, byte [rdi]
-			mov		cl, byte [rsi]
-			cmp		al, cl
+			mov		bl, byte [rsi]
+			cmp		al, bl
 			jnz		.done
 			test	al, al
 			je		.done
@@ -12,6 +12,6 @@ ft_strcmp:
 			inc		rsi
 			jmp		.loop
 	.done:
-			sub		al, cl
+			sub		al, bl
 			movsx	rax, al
 			ret
