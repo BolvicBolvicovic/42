@@ -4,7 +4,7 @@ CC      = nasm
 AR      = ar rcs
 FILES   = ft_strlen.asm ft_strcpy.asm ft_strcmp.asm ft_write.asm ft_read.asm ft_strdup.asm
 FLAGS   = -felf64
-CFLAGS  = -g -Wall -Wextra -Werror -Iinc
+CFLAGS  = -Wall -Wextra -Werror -Iinc
 SOURCE  = $(addprefix src/, $(FILES))
 OBJ     = $(SOURCE:.asm=.o)
 
