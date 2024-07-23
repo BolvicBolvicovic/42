@@ -1,26 +1,34 @@
-FROM		alpine:3.18
+FROM		debian:bullseye
 
-RUN			apk update && apk upgrade && apk add		\
-				wget									\
-				php7.4 php-fpm php-mysql				\
-				mariadb	mariadb-client					\
-				vim									
+RUN apt-get update && apt-get -y install \
+	wget \
+	sudo \
+	curl \
+	netcat \
+	bash \
+	php7.4 \
+	php-cgi \
+	php-mysql \
+	php-fpm \
+	php-pdo \
+	php-gd php-cli \
+	php-mbstring \
+	&& rm -rf /var/lib/apt/lists/*
 
-RUN			wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www
-RUN			cd /var/www && tar -xvf wordpress-6.0-fr_FR.tar.gz && rm wordpress-6.0-fr_FR.tar.gz
-RUN			chown -R root:root /var/www/wordpress
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+  && chmod +x wp-cli.phar \
+  && mv wp-cli.phar /usr/local/bin/wp
 
-COPY		./conf/www.config /etc/php/7.4/fpm/pool.d
-COPY		./conf/auto_config.sh ./conf auto_config.sh
-RUN			chmod +x ./conf/auto_config.sh
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 
-RUN			wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN mkdir /run/php
 
-RUN			chmod +x wp-cli.phar
-RUN			mv wp-cli.phar /usr/local/bin/wp
+COPY ./tools/create_wordpress.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/create_wordpress.sh
+ENTRYPOINT ["sh", "/usr/local/bin/create_wordpress.sh"]
 
-EXPOSE		9000
+WORKDIR /var/www/wordpress/
 
-ENTRYPOINT	["./conf/auto_config.sh"]
+EXPOSE 9000
 
-CMD         ["/usr/sbin/php-fpm7.4", "--nodaemonize"]
+CMD ["/usr/sbin/php-fpm7.4", "-F"]
