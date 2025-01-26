@@ -14,10 +14,8 @@
 
 int	valid_path(char *path, t_game **game, int indexText)
 {
-	int		i;
 	char	*str;
 
-	i = -1;
 	str = ft_strtrim(path, "\n ");
 	(*game)->tab_texture[indexText] = mlx_load_png(str);
 	free(str);
